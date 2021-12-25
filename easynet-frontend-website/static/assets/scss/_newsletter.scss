@@ -1,0 +1,131 @@
+/*======================================
+    Newsletter CSS
+========================================*/
+.newsletter-area {
+
+    background-color: $gray;
+
+    .subscribe-text {
+        background-color: $theme-color;
+        color: $white;
+        padding: 40px;
+        height: 100%;
+        border-radius: 5px;
+        box-shadow: 0 10px 30px rgba(111, 111, 111, 0.1);
+
+        h6 {
+            color: $white;
+            font-size: 24px;
+            line-height: 40px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: $white;
+            margin-bottom: 40px;
+        }
+
+        input {
+            height: 53px;
+            width: 400px;
+            border: none;
+            background-color: $white;
+            color: $black;
+            border-radius: 30px;
+            padding: 0px 30px;
+            display: inline-block;
+        }
+
+        .button {
+            display: inline-block;
+            margin-left: 10px;
+
+            .btn {
+                background-color: transparent;
+                color: $white;
+                border: 1px solid #eee;
+                height: 53px;
+
+                &:hover {
+                    background-color: $white;
+                    color: $theme-color;
+                    border-color: transparent;
+                }
+            }
+        }
+    }
+
+    .mini-call-action {
+        background-color: $white;
+        height: 100%;
+        width: 100%;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(111, 111, 111, 0.1);
+        border-radius: 5px;
+
+        h4 {
+            color: $black;
+            margin-bottom: 20px;
+            display: block;
+            font-size: 18px;
+            line-height: 28px;
+        }
+
+        p {
+            font-size: 13px;
+        }
+
+        .button {
+            margin-top: 25px;
+        }
+    }
+
+
+
+    .mini-call-action.index2 {
+
+        .button {
+            .btn {
+                position: relative;
+                padding-left: 45px;
+                text-align: left;
+                width: 100%;
+                padding: 10px 10px 10px 65px;
+                margin-bottom: 10px;
+                font-size: 14px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                span {
+                    display: block;
+                    font-size: 9px;
+                    text-transform: uppercase;
+                    margin-bottom: 2px;
+                }
+
+                i {
+                    font-size: 25px;
+                    position: absolute;
+                    left: 25px;
+                    top: 15px;
+                    display: inline-block;
+                }
+            }
+        }
+    }
+
+    .mini-call-action.index3 {
+        .button {
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

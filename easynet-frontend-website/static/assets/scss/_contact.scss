@@ -1,0 +1,241 @@
+/*======================================
+	Contact CSS
+========================================*/
+.contact-us {
+    position: relative;
+    background-color: $white;
+    padding-bottom: 0;
+}
+
+.contact-us .contact-head {
+    background: #fff;
+    border-radius: 7px;
+    overflow: hidden;
+    -webkit-box-shadow: 0 10px 30px rgba(111, 111, 111, 0.1);
+    box-shadow: 0 10px 30px rgba(111, 111, 111, 0.1);
+    position: relative;
+    z-index: 5;
+}
+
+.contact-us .title {
+    margin-bottom: 30px;
+}
+
+.contact-us .contant-inner-title {
+    margin-bottom: 45px;
+}
+
+.contact-us .contant-inner-title h4 {
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #fff;
+    text-transform: capitalize;
+}
+
+.contact-us .contant-inner-title p {
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 23px;
+    margin-top: 10px;
+    display: block;
+}
+
+.contact-us .single-head {
+    padding: 50px;
+    height: 100%;
+    background: $theme-color;
+    position: relative;
+    z-index: 5;
+    overflow: hidden
+}
+
+.contact-us .single-info {
+    text-align: left;
+    margin-bottom: 16px;
+    padding-left: 40px;
+    position: relative;
+}
+
+.contact-us .single-info i {
+    color: #fff;
+    font-size: 18px;
+    display: inline-block;
+    margin-right: 20px;
+    position: absolute;
+    left: 0;
+    top: 2px;
+}
+
+.contact-us .single-info ul {
+    display: inline-block;
+}
+
+.contact-us .single-info ul li:last-child {
+    margin-bottom: 0;
+}
+
+.contact-us .single-info ul li {
+    color: #fff;
+    font-weight: 500;
+    display: inline-block;
+    font-size: 13px;
+}
+
+.contact-us .single-info ul li a {
+    font-weight: 500;
+    color: #fff;
+    display: inline-block;
+    font-size: 13px;
+}
+
+.contact-us .single-info ul li a:hover {
+    color: #fff;
+}
+
+.contact-us .contact-social {
+    display: block;
+    margin-top: 65px;
+}
+
+.contact-us .contact-social h5 {
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.contact-us .contact-social ul {
+    display: inline-block;
+    position: relative;
+    left: -9px;
+    margin-top: 15px;
+}
+
+.contact-us .contact-social ul li {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.contact-us .contact-social ul li:last-child {
+    margin-right: 0;
+}
+
+.contact-us .contact-social ul li a {
+    color: #fff;
+    font-size: 17px;
+    position: relative;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    text-align: center;
+    display: block;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    overflow: hidden;
+}
+
+.contact-us .contact-social ul li a span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -15px;
+    margin-top: -15px;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    display: block;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+
+.contact-us .contact-social ul li a:hover .icon-1 {
+    top: -15px;
+}
+
+.contact-us .contact-social ul li a .icon-2 {
+    top: 50px;
+}
+
+.contact-us .contact-social ul li a:hover .icon-2 {
+    top: 15px;
+}
+
+.contact-us .contact-social ul li a:hover {
+    color: #fff;
+}
+
+.contact-us .single-info .title {
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #fff;
+    font-size: 18px;
+}
+
+.contact-us .single-info .title span {
+    display: block;
+    font-size: 14px;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+.contact-us .form-main {
+    padding: 50px 50px 50px 30px;
+}
+
+.contact-us .form .form-group {
+    margin-bottom: 15px;
+    display: block;
+}
+
+.contact-us .form .form-group input {
+    height: 55px;
+    line-height: 55px;
+    width: 100%;
+    border: 1px solid #e6e2f5;
+    padding: 0px 20px;
+    color: #333;
+    border-radius: 0px;
+    font-weight: 400;
+    border-radius: 5px;
+}
+
+.contact-us .form .form-group textarea {
+    height: 180px;
+    width: 100%;
+    border: 1px solid #e6e2f5;
+    padding: 15px 20px;
+    color: #333;
+    border-radius: 0px;
+    resize: none;
+    font-weight: 400;
+    border-radius: 5px;
+}
+
+.contact-us .form .button {
+    margin: 0;
+}
+
+.contact-us .form .button .btn {
+    height: 50px;
+    border: none;
+}
+
+.map-section {
+    background-color: $white;
+    margin-top: 50px;
+    padding-bottom: 100px;
+
+    .map-container {
+        box-shadow: 0 10px 30px rgba(111, 111, 111, 0.1);
+        padding: 20px;
+        border-radius: 7px;
+    }
+}
+
+/*======================================
+	End Contact CSS
+========================================*/

@@ -1,0 +1,46 @@
+.free-version-banner {
+    position: relative;
+    background: #333;
+    background-image: url('../images/free-version/free-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    text-align: center;
+
+    &::before {
+        position: absolute;
+        content: "";
+        height: 100%;
+        width: 100%;
+        background-color: $theme-color;
+        left: 0;
+        top: 0;
+        opacity: 0.9;
+    }
+}
+
+.free-version-banner .section-title {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+
+    h2 {
+        padding-bottom: 15px;
+
+        &::before {
+            background-color: $white;
+        }
+    }
+
+
+}
+
+.free-version-banner .button {
+    z-index: 5;
+    margin-top: 40px;
+
+    .btn {
+        background-color: $white;
+        color: $theme-color;
+    }
+}

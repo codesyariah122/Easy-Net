@@ -1,0 +1,76 @@
+/*======================================
+	Error 404 CSS
+========================================*/
+.error-page {
+    text-align: center;
+    background: #fff;
+    border-top: 1px solid #eee;
+}
+
+.error-page .error-text {
+    display: inline-block;
+    text-align: left;
+    margin-top: 80px;
+    padding-left: 50px;
+}
+
+.error-page .error-text h2 {
+    font-size: 30px;
+    display: block;
+    margin-bottom: 30px;
+    color: $black;
+    font-weight: 700;
+
+    span {
+        color: $theme-color;
+        display: block;
+        margin-bottom: 10px;
+        font-size: 25px;
+    }
+}
+
+.error-page .error-text p {
+    display: block;
+    margin-bottom: 30px;
+}
+
+.error-page .search-form {
+    width: 100%;
+    position: relative;
+}
+
+.error-page .search-form input {
+    width: 400px;
+    height: 50px;
+    padding: 0px 78px 0 30px;
+    border: none;
+    background: #f6f6f6;
+    border-radius: 5px;
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.error-page .search-form input:hover {
+    padding-left: 35px;
+}
+
+.error-page .search-form .btn {
+    width: 80px;
+    height: 50px;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #4353ff;
+    display: inline-block;
+    position: relative;
+    top: -2px;
+}
+
+.error-page .search-form .btn i {
+    font-size: 16px;
+}
+
+.error-page .search-form .btn:hover {
+    background: #333;
+}

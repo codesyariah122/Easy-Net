@@ -1,0 +1,271 @@
+/*======================================
+    Hero Area CSS
+========================================*/
+.hero-area {
+    position: relative;
+    background: $gray;
+    overflow: hidden;
+}
+
+.hero-area .hero-inner {
+    height: 700px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    z-index: 3;
+}
+
+.hero-area .hero-inner::before {
+    position: absolute;
+    content: "";
+    right: 0;
+    width: 50%;
+    background-image: url(../images/hero/hero-image.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 0;
+    height: 100%;
+    top: -100px;
+    z-index: 1;
+    border-radius: 0;
+    border-radius: 100%;
+    height: 800px;
+    width: 800px;
+    right: -135px;
+    z-index: -1;
+}
+
+.hero-area .hero-text {
+    float: none;
+    margin-top: 220px;
+
+    h1 {
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 55px;
+        margin-bottom: 25px;
+
+        span {
+            font-weight: 300;
+        }
+    }
+
+    p {
+        font-size: 14px;
+    }
+}
+
+.hero-area .hero-text .button {
+    margin-top: 35px;
+}
+
+.hero-area .hero-text .button .btn {
+    margin-right: 10px;
+}
+
+.hero-area .hero-text .button .btn:hover {
+    color: #fff;
+}
+
+.hero-area .hero-text .button .btn:last-child {
+    margin-right: 0px;
+}
+
+.hero-area .hero-image {
+    margin-top: 175px;
+}
+
+.hero-area.index2 {
+    background-color: $theme-color;
+    position: relative;
+
+    .shape {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 500px;
+    }
+
+    .hero-inner {
+        height: 800px;
+    }
+
+    .hero-inner::before {
+        display: none;
+    }
+
+
+    .hero-text {
+        margin-top: 220px;
+
+        h1 {
+            color: $white;
+        }
+
+        p {
+            color: $white;
+        }
+
+        .button {
+            .btn {
+                background-color: $white;
+                color: $theme-color;
+
+                &:hover {
+                    color: $theme-color;
+                }
+            }
+        }
+    }
+
+
+    .mobile-screen {
+        text-align: center;
+
+        img {
+            margin-top: 145px;
+        }
+    }
+}
+
+/* Index 3*/
+.hero-area.index3 {
+    background: linear-gradient($theme-color, $theme-color, #3763ebb3, transparent);
+    position: relative;
+    overflow: visible;
+
+
+    .hero-inner {
+        height: 1000px;
+    }
+
+    .hero-inner::before {
+        display: none;
+    }
+
+    .hero-text {
+        margin-top: 180px;
+        text-align: center;
+        padding: 0px 50px;
+
+        h1 {
+            color: $white;
+            text-transform: capitalize;
+        }
+
+        p {
+            color: $white;
+        }
+
+        .button {
+            .btn {
+                background-color: $white;
+                color: $theme-color;
+
+                &:hover {
+                    color: $theme-color;
+                }
+            }
+        }
+    }
+
+
+    .desktop-screen {
+        text-align: center;
+
+        img {
+            margin-top: 45px;
+        }
+    }
+}
+
+/* Index 4*/
+.hero-area.index4 {
+    background-color: $theme-color;
+
+    .hero-inner {
+        height: 700px;
+    }
+
+    .hero-inner::before {
+        background-image: none;
+        background-color: $theme-color;
+        z-index: -1;
+
+    }
+
+    .hero-text {
+        margin-top: 200px;
+
+        .small {
+            color: $white;
+            display: block;
+            margin-bottom: 20px;
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        h1 {
+            color: $white;
+
+            span {
+                font-size: 40px;
+                font-weight: 700;
+                line-height: 30px;
+                display: block;
+                margin-bottom: 12px;
+            }
+        }
+
+        p {
+            color: $white;
+        }
+
+        ul {
+            display: block;
+            margin-bottom: 20px;
+
+            li {
+                display: inline-block;
+                color: $white;
+                margin-right: 10px;
+                font-size: 13px;
+                position: relative;
+                padding-left: 15px;
+                line-height: 26px;
+
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                &::before {
+                    position: absolute;
+                    content: "";
+                    left: 0;
+                    top: 50%;
+                    height: 6px;
+                    width: 6px;
+                    background-color: $white;
+                    border-radius: 50%;
+                    margin-top: -4px;
+                }
+            }
+        }
+
+        .button {
+            .btn {
+                background-color: $white;
+                color: $theme-color;
+            }
+        }
+
+    }
+
+    .personal-image {
+        margin-top: 110px;
+        text-align: center;
+    }
+
+}

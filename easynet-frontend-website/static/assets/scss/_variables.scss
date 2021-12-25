@@ -1,0 +1,38 @@
+/*======================================
+    Variables
+========================================*/
+// Font Family
+$font: 'Spartan',
+sans-serif;
+
+
+// Colors ---------------
+$white: #fff;
+$black: #081828;
+$gray: #f6f9fc;
+
+
+// Theme Color
+$theme-color: #3763EB;
+
+$border-color: #F4EEFB;
+
+//Body Color
+$body-color: #6e657e;
+
+
+// Heading Color
+$heading-color: #081828;
+
+//Border Radius
+$borderRadius:10px;
+
+
+
+// Responsive Variables
+$desktop: 'only screen and (min-width: 1400px)';
+$laptop: 'only screen and (min-width: 1200px) and (max-width: 1399px)';
+$lg : 'only screen and (min-width: 992px) and (max-width: 1199px)';
+$md:'only screen and (min-width: 768px) and (max-width: 991px)';
+$xs:'(max-width: 767px)';
+$sm: 'only screen and (min-width: 480px) and (max-width: 767px)';

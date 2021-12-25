@@ -1,0 +1,155 @@
+/*======================================
+    About Us CSS
+========================================*/
+.about-us {
+    background-color: $gray;
+}
+
+.about-us .about-left {
+    .section-title {
+        padding: 0;
+        margin-bottom: 40px;
+    }
+
+    .about-tab .nav {
+        margin-bottom: 40px;
+        background: transform;
+        position: relative;
+    }
+
+    .about-tab .nav-tabs {
+        border: none;
+    }
+
+    .about-tab .nav li {
+        text-align: center;
+        margin-right: 10px;
+    }
+
+    .about-tab .nav li a {
+        color: $black;
+        border: none;
+        padding: 0;
+        padding: 10px 25px;
+        border-radius: 4px;
+        font-size: 13px;
+        background-color: $white;
+        box-shadow: 0px 0px 20px 0px rgba(52, 49, 75, 0.1);
+    }
+
+    .about-tab .nav li a.active {
+        background: $theme-color;
+        color: #fff;
+    }
+
+    .tab-content {
+        .content-heading {
+            font-size: 16px;
+            color: $black;
+            display: block;
+            margin-bottom: 25px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        p:last-child {
+            margin: 0;
+        }
+
+        ul {
+            margin-top: 20px;
+
+            li {
+                display: block;
+                margin-bottom: 10px;
+
+                i {
+                    display: inline-block;
+                    margin-right: 5px;
+                    color: $theme-color;
+                }
+            }
+
+            li:last-child {
+                margin: 0;
+            }
+        }
+    }
+}
+
+.about-us.index2 .about-right {
+    text-align: center;
+}
+
+/* Index 3 */
+
+.about-us.index3 {
+    background-color: $white;
+
+    .about-left.pr {
+        padding-right: 50px;
+    }
+
+    .about-left.pl {
+        padding-left: 50px;
+    }
+
+    .about-right {
+        text-align: center;
+
+        img {
+            width: 100%;
+            transition: all 0.4s ease;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(111, 111, 111, 0.1);
+
+        }
+    }
+
+    .first-overview {
+        background-color: $gray;
+    }
+
+}
+
+/* Index 4 */
+
+.about-us.index-4 {
+    .tab-content {
+        h3 {
+            font-size: 15px;
+            color: #081828;
+            display: block;
+            margin-bottom: 20px;
+
+            span {
+                font-size: 12px;
+                color: inherit;
+                display: block;
+                font-weight: 400;
+                margin-top: 7px;
+            }
+        }
+
+        p {
+            margin-bottom: 30px;
+
+            &:last-child {
+                margin: 0;
+            }
+        }
+
+        ul {
+            li {
+                span {
+                    display: inline-block;
+                    margin-right: 5px;
+                    color: $black;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}

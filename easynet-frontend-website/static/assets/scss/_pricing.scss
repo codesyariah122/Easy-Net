@@ -1,0 +1,76 @@
+/*=============================
+	Pricing Table CSS
+===============================*/
+.pricing-table {
+    background: $gray;
+    position: relative;
+}
+
+.pricing-table .single-table {
+    background: #fff;
+    text-align: center;
+    position: relative;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    padding: 60px 20px;
+    box-shadow: 0 10px 30px rgba(111, 111, 111, 0.1);
+    overflow: hidden;
+    border-radius: 5px;
+
+    .title {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 26px;
+        text-transform: capitalize;
+    }
+
+    .amount {
+        position: relative;
+        color: #333;
+        font-size: 35px;
+        display: block;
+        margin: 35px 0 40px 0;
+        font-weight: 600;
+        padding-bottom: 35px;
+
+        &::before {
+            content: '';
+            display: block;
+            width: 80%;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            margin-left: -40%;
+            height: 1px;
+            background: radial-gradient(ellipse at center, #d1dbe7 0, rgba(255, 255, 255, 0) 75%);
+        }
+    }
+
+    .duration {
+        color: #888;
+        font-size: 14px;
+        font-weight: 400;
+        display: block;
+
+    }
+
+    .table-list li {
+        color: #444;
+        margin-bottom: 20px;
+        font-size: 14px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .button {
+        margin-top: 40px;
+
+        .btn {
+            font-size: 13px;
+        }
+    }
+
+}

@@ -1,0 +1,47 @@
+// const chat = JSON.parse(localStorage.getItem('chat_aktif'))
+				// if(chat){
+				// 	$crisp.push(['do', 'chat:open'])
+				// }else{
+				// 	let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'))
+
+				// 	myModal.show()
+
+				// 	const close = document.querySelector('.btn-close')
+				// 	close.addEventListener('click', () => {
+				// 		myModal.hide()
+				// 	})
+					
+				// }
+
+
+				tns({
+					container: '.testimonial-slider',
+					items: 7,
+					slideBy: 'page',
+					autoplay: false,
+					mouseDrag: true,
+					// mode: "gallery",
+					gutter: 2,
+					nav: true,
+					controls: false,
+					swipeAngle: false,
+					startIndex: this.$device.isMobile ? 0 : 1,
+					controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
+					responsive: {
+						0: {
+							items: 1,
+						},
+						540: {
+							items: 1,
+						},
+						768: {
+							items: 3,
+						},
+						992: {
+							items: 3,
+						},
+						1170: {
+							items: 4,
+						}
+					}
+				})

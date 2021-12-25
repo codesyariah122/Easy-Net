@@ -1,0 +1,44 @@
+{
+  "name": "EasyNet-Official",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/onesignal": "^3.0.0-beta.16",
+    "@nuxtjs/pwa": "^3.3.5",
+    "@nuxtjs/svg": "^0.3.0",
+    "core-js": "^3.15.1",
+    "dotenv": "^10.0.0",
+    "laravel-echo": "^1.11.3",
+    "laravel-vue-pagination": "^2.3.1",
+    "leaflet": "^1.7.1",
+    "nuxt": "^2.15.7",
+    "postcss": "^8.4.5",
+    "pusher-js": "^7.0.3",
+    "pwa-asset-generator": "^6.0.2",
+    "vue-sweetalert2": "^5.0.2",
+    "vue-tel-input": "^5.8.0",
+    "vue-tinymce-editor": "^1.6.2",
+    "vue-toastification": "^1.7.14",
+    "vue2-leaflet": "^2.7.1",
+    "vue2-leaflet-markercluster": "^3.1.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/color-mode": "^2.1.1",
+    "@nuxtjs/device": "^2.1.0",
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/moment": "^1.6.1",
+    "@vue/test-utils": "^1.2.1",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^27.0.5",
+    "jest": "^27.0.5",
+    "vue-jest": "^3.0.4"
+  }
+}

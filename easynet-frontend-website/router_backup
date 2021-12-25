@@ -1,0 +1,50 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+
+// Pages
+import Home from '@/pages/index'
+import Register from '@/pages/Auth/Register'
+import Login from '@/pages/Auth/Login'
+import Admin from '@/pages/Dashboard/Admin/index'
+import Staff from '@/pages/Dashboard/Staff/index'
+import Member from '@/pages/Dashboard/Member/index'
+
+Vue.use(Router)
+
+export function createRouter() {
+	return new Router({
+		mode: 'spa',
+		routes: [
+			{
+				path: '/',
+				name: 'home',
+				component: Home
+			},
+			{
+				path: '/auth/register',
+				name: 'register',
+				component: Register
+			},
+			{
+				path: '/auth/login',
+				name: 'login',
+				component: Login
+			},
+			{
+				path: '/dashboard/admin',
+				name: 'admin',
+				component: Admin
+			},
+			{
+				path: '/dashboard/staff',
+				name: 'admin',
+				component: Staff
+			},
+			{
+				path: '/dashboard/member/:username',
+				name: 'member',
+				component: Member
+			}
+		]
+	})
+}
