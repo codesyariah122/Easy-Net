@@ -55,7 +55,7 @@
 				url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
 				attribution:
 				'&copy; <a target="_blank" href="http://osm.org/copyright">EasyNetMap</a> contributors',
-				zoom: this.$device.isMobile ? 13 : 14,
+				zoom: this.$device.isMobile ? 14 : 15,
 				center: {
 					lat: '',
 					lng: ''

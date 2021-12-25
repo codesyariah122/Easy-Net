@@ -492,4 +492,35 @@ class DataCenterController extends Controller
         }
     }
 
+    public function WeatherCity($city,$apiKey)
+    {
+        $api_weather=env('WEATHER_API');
+        $token = ApiKeys::join('users', 'api_keys.user_id', '=', 'users.id')->get();
+        try{
+            if($token[0]['token'] === $apiKey){
+
+                // $response = Http::get('https://api.ipify.org/?format=json');
+                // $ip = $response->json();
+                $fetchs = Http::get("https://api.openweathermap.org/data/2.5/weather?q={$city}&units=imperial&appid={$api_weather}");
+                $weather = $fetchs->json();
+                
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Fetch Weather',
+                    'data' => $weather
+                ], 201);
+
+            }else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Error Fetch Weather'
+                ]);
+            }
+        }catch(Exception $e){
+            return response()->json([
+                'message' => 'Error fetch data if no token'.$e->getMessage()
+            ], 401);
+        }
+    }
+
 }

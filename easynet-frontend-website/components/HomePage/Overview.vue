@@ -34,8 +34,6 @@
 									<div class="tab-pane fade" id="t-tab3" role="tabpanel">
 										<div class="tab-content">
 											
-											<Locator :location="location"/>
-
 			
 											<h3 class="content-heading mt-5">Your Location</h3>
 											<!-- <pre>
@@ -63,6 +61,12 @@
 												<li class="list-group-item">
 													Your ISP : {{location.data.org}}
 												</li>
+												<li class="list-group-item">
+													<Weather :city="location.data.city"/>
+												</li>
+												<li class="list-group-item">
+													<Locator :location="location"/>
+												</li>
 											</ul>
 
 										</div>
@@ -85,12 +89,14 @@
 <script>
 	import Area from '@/components/Molecules/Covereges/Area'
 	import Locator from '@/components/Molecules/Covereges/Locator'
+	import Weather from '@/components/Molecules/Covereges/Weather'
 
 	export default{
 		props:['location'],
 		components:{
 			Area,
-			Locator
+			Locator,
+			Weather
 		},
 		data(){
 			return {

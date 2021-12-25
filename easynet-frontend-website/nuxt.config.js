@@ -285,6 +285,7 @@ export default {
   },
   moment: {
     timezone: true,
+    defaultTimezone: 'Asias/Jakarta',
     locales: ['id']
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build

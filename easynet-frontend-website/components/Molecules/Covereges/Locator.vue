@@ -2,7 +2,7 @@
   <div>
     <client-only>
 
-        <l-map :style="`${isMobile ? 'height:350px; width: 100%;' : 'height:450px; width: 900px;'}`" :zoom="zoom" :center="center">
+        <l-map :style="`${isMobile ? 'height:350px; width: 100%;' : 'height:350px; width: 600px;'}`" :zoom="zoom" :center="center">
             <l-marker :lat-lng="server">
               <l-icon
               :icon-size="iconServer.iconSize"
@@ -67,7 +67,7 @@ export default {
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
         '&copy; <a target="_blank" href="http://osm.org/copyright">EasyNetMap</a> contributors',
-      zoom: this.$device.isMobile ? 10 : 12,
+      zoom: this.$device.isMobile ? 10 : 10,
       center: [this.location.data.latitude, this.location.data.longitude],
       markerLatLng: [this.location.data.latitude, this.location.data.longitude],
       isMobile: this.$device.isMobile,

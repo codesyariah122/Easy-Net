@@ -47,6 +47,8 @@ Route::get('/covereges/{apikey}', [DataCenterController::class, 'CoveregeArea'])
 Route::get('/locator/{ip}/{apiKey}', [DataCenterController::class, 'IpLocator']);
 Route::get('/contact-categories/{apiKey}', [DataCenterController::class, 'CategoryMessage']);
 
+// Weather api
+Route::get('/weather-city/{city}/{apiKey}', [DataCenterController::class, 'WeatherCity']);
 
 //Event Broadcast Testing
 // Route::get('/test-event/{apiKey}', [DataCenterController::class, 'TestBroadcast']);
