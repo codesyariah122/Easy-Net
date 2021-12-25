@@ -121,6 +121,7 @@ class RegisterController extends Controller
           $event_context = [
             "notif"  => true,
             "message" => $user->name." berhasil registrai",
+            "name" => "registrasi",
             "route" => "/users"
           ];
 

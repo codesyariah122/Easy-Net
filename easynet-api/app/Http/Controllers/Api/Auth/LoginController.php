@@ -82,6 +82,7 @@ class LoginController extends Controller
                     $event_context = [
                         "notif"  => true,
                         "message" => $user->name." sedang login",
+                        "name" => "login",
                         "route" => "/logs"
                     ];
 
@@ -145,6 +146,7 @@ class LoginController extends Controller
             $event_context = [
                 "notif"  => true,
                 "message" => $user->name." telah logout",
+                "name" => "logout",
                 "route" => "/logs"
             ];
 

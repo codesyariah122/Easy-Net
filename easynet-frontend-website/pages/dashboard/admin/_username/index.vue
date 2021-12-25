@@ -36,6 +36,7 @@ export default {
   },
   mounted() {
     this.notification(),
+    this.AllNotification(),
     this.checkToken(this.auth.token),
     this.dataUser(),
     this.UserLogin()
@@ -47,7 +48,12 @@ export default {
         this.notifdata=e[0]
         // console.log(e)
         this.UserLogin()
-        this.$toast(e[0])
+        this.NotifLatest()
+        this.$toast(e[0].message)
+        // if(e[0].name === "login"){
+          
+        // }
+        
       })
     },
 
@@ -83,6 +89,35 @@ export default {
     },
     dataUser() {
       this.$store.dispatch("auths/storeUser", process.env.BASEURL)
+    },
+
+    NotifLatest(){
+      const config = {
+        baseurl: process.env.BASEURL 
+      }
+      this.$axios.defaults.headers.common.Authorization = `Bearer ${this.auth.token}`;
+      this.$axios.get(`${config.baseurl}/notification`)
+      .then(res => {
+        this.latests = res.data.data[0]
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
+    },
+
+    AllNotification(){
+      const config = {
+        baseurl: process.env.BASEURL 
+      }
+      this.$axios.defaults.headers.common.Authorization = `Bearer ${this.auth.token}`;
+      this.$axios.get(`${config.baseurl}/all-notifs`)
+      .then(res => {
+        this.allnotifs.show = true
+        this.allnotifs.data = res.data.data.data
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
     }
     
   },

@@ -123,6 +123,7 @@ class ContactMessageController extends Controller
             $event_context = [
                 "notif"  => true,
                 "message" => "Pesan baru dari ".$new_message->fullname." terkirim ke ".$roles." easynet !",
+                "name" => "contacts",
                 "route" => "/contact"
             ];
 
@@ -140,14 +141,14 @@ class ContactMessageController extends Controller
               'title' => 'Pesan baru dari easynet website',
               'url' => 'https://easynet.id',
               'roles' => $roles,
-              'route' => $admin[0]->username,
+              'route' => $admin[1]->username,
               'fullname' => $new_message->fullname,
               'email' => $new_message->email,
               'phone' => $new_message->phone,
               'message'=> $new_message->message
             ];
             try{
-                Mail::to($admin[0]->email)->send(new SendContactEmail($details));
+                Mail::to($admin[1]->email)->send(new SendContactEmail($details));
                 Mail::to($new_message->email)->send(new ReplyContactMessageToEmail($details));
                 return response()->json([
                     'success' => true,
