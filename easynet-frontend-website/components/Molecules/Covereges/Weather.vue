@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<!-- <pre>
-			{{weather}}
+			{{temp}}
 		</pre> -->
 		<div v-if="loading" class="d-flex justify-content-center">
 			<div class="spinner-grow text-danger" role="status">
@@ -10,7 +10,7 @@
 		</div>
 		<div v-else>
 			{{dt}} <span class="badge rounded-pill bg-primary mt-3">
-				{{weather.main}} / {{weather.description}} <img :src="`http://openweathermap.org/img/wn/${weather.icon}@2x.png`" width="30">
+				{{weather.main}} / {{weather.description}} <cite>{{temp}} <sup>°C</sup></cite> <img :src="`http://openweathermap.org/img/wn/${weather.icon}@2x.png`" width="50">
 			</span>
 		</div>
 		
@@ -29,7 +29,7 @@
 			}
 		},
 
-		mounted(){
+		beforeMount(){
 			this.WeatherCity(this.city)
 		},
 
@@ -38,8 +38,10 @@
 				this.loading=true
 				this.$axios.get(`${process.env.BASEURL}/weather-city/${city}/${process.env.APITOKEN}`)
 				.then(res=>{
+					// console.log(res.data)
 					setTimeout(() => {
 						this.loading=false
+						this.temp=res.data.data.main.temp
 						this.weather=res.data.data.weather[0]
 						const date = new Date(res.data.data.dt*1000).toLocaleString()
 						this.dt = this.$moment(date).format("LLLL")
