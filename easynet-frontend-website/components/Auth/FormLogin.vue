@@ -62,7 +62,7 @@
 
                   <label for="email"><i class="zmdi zmdi-email"></i></label>
                   <input @mousedown="ResetForm"
-                    type="email"
+                    type="text"
                     name="email"
                     id="email"
                     placeholder="Your Email"
