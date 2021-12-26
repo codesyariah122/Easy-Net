@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\LogLogin;
 use Auth;
 
 class UserManageController extends Controller
@@ -82,6 +83,7 @@ class UserManageController extends Controller
         $user = User::with('profiles')
                 ->with('product_users')
                 ->with('package_users')
+                ->with('log_logins')
                 ->findOrFail($id);
         try{
             return response()->json([

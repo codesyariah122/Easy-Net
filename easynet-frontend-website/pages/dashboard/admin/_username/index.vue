@@ -23,7 +23,8 @@ export default {
     return {
       params: this.$route.path,
       userlogins:[],
-      messagecount: ''
+      messagecount: '',
+      allnotifs:[]
     }
   },
 
@@ -64,7 +65,7 @@ export default {
       }
       this.$axios.get(`${config.baseurl}/count-online/${config.token}`)
       .then(res => {
-        this.messagecount = res.data.message 
+        this.messagecount = "User Online"
         this.userlogins = res.data.data
       })
       .catch(err => {

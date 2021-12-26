@@ -43,8 +43,8 @@
 						this.loading=false
 						this.temp=res.data.data.main.temp
 						this.weather=res.data.data.weather[0]
-						const date = new Date(res.data.data.dt*1000).toLocaleString()
-						this.dt = this.$moment(date).format("LLLL")
+						// const date = new Date(res.data.data.dt*1000).toLocaleString()
+						this.dt = this.$moment(res.data.data.dt*1000).format("LLLL")
 					}, 1500)
 				})
 			}

@@ -132,6 +132,7 @@
 				window.Echo.channel('notification')
 				.listen('NotificationEvent', (e) => {
 					this.NotifLatest()
+					this.AllNotification()
 					this.notifdata.show=true
 					this.notifdata.msg=e[0]
 					this.$toast(e[0].message,{

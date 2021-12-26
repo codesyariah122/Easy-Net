@@ -13,6 +13,11 @@
 			</div>
 		</div>
 		<div v-else class="row justify-content-center">
+
+      <!-- <pre>
+        {{user}}
+      </pre>
+ -->
 			<div class="col-lg-12 col-xs-12 col-sm-12">
 				<h3>Detail User</h3>
 			</div>
@@ -21,7 +26,7 @@
 					<div class="card-body">
 						<ul class="list-group">
 							<li class="list-group-item">
-								Name : {{user.name}}
+								Name : {{user.name}} <span v-if="user.login % 2 == 1" class="badge bg-success">online</span>
 							</li>
 							<li class="list-group-item">
 								Email : {{user.email}}

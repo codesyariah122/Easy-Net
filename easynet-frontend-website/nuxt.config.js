@@ -17,6 +17,12 @@ export default {
       ]
     }
   },
+  // env: {
+  //   CTF_SPACE_ID: ctf.CTF_SPACE_ID,
+  //   CTF_CDA_ACCESS_TOKEN: ctf.CTF_CDA_ACCESS_TOKEN,
+  //   CTF_PERSON_ID: ctf.CTF_PERSON_ID,
+  //   CTF_BLOG_POST_TYPE_ID: ctf.CTF_BLOG_POST_TYPE_ID,
+  // },
   body: true,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -116,7 +122,7 @@ export default {
     { src: '~/plugins/LaravelEcho', mode: 'client', ssr: false },
     { src: '~/plugins/vue-toastification', mode: 'client', ssr: false },
     { src: '~/plugins/vue-tiny-mce', mode: 'client', ssr: false },
-    { src: '~/plugins/laravel-vue-pagination', mode: 'client', ssr: false}
+    { src: '~/plugins/laravel-vue-pagination', mode: 'client', ssr: false},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -126,7 +132,6 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     // '@nuxtjs/tailwindcss',
-    '@nuxtjs/dotenv',
     '@nuxtjs/color-mode',
     '@nuxtjs/svg',
     '@nuxtjs/device',
@@ -137,11 +142,16 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
+    '@nuxtjs/dotenv',
     '@nuxtjs/axios',
     '@nuxtjs/onesignal',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxtjs/markdownit'
   ],
+  markdownit: {
+    injected: true
+  },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: false,
@@ -290,6 +300,7 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
   vue: {
     config: {
       productionTip: false,
