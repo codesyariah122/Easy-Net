@@ -48,10 +48,16 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('category-message', function($user){
             return count(array_intersect(["ADMIN", "STAFF"], json_decode($user->roles))) ? true :  false;
         });
+        Gate::define('contact-message', function($user){
+            return count(array_intersect(["ADMIN", "STAFF"], json_decode($user->roles))) ? true :  false;
+        });
         Gate::define('notification', function($user){
             return count(array_intersect(["ADMIN", "SALES", "SUPPORT", "CUSTOMER"], json_decode($user->roles))) ? true :  false;
         });
         Gate::define('logs', function($user){
+            return count(array_intersect(["ADMIN"], json_decode($user->roles))) ? true :  false;
+        });
+        Gate::define('router-os', function($user){
             return count(array_intersect(["ADMIN"], json_decode($user->roles))) ? true :  false;
         });
     }

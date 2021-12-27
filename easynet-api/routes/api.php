@@ -15,7 +15,7 @@ use App\Http\Controllers\Api\Contacts\ContactMessageController;
 use App\Http\Controllers\Api\Contacts\ContactCategoryMessage;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\LogLoginUserController;
-
+use App\Http\Controllers\Api\MyMikrotikRouterController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -47,6 +47,11 @@ Route::get('/covereges/{apikey}', [DataCenterController::class, 'CoveregeArea'])
 Route::get('/locator/{ip}/{apiKey}', [DataCenterController::class, 'IpLocator']);
 Route::get('/contact-categories/{apiKey}', [DataCenterController::class, 'CategoryMessage']);
 
+// My Helper Api
+Route::get('/test-helper', [DataCenterController::class, 'test_helper']);
+
+
+
 // Weather api
 Route::get('/weather-city/{city}/{apiKey}', [DataCenterController::class, 'WeatherCity']);
 
@@ -74,3 +79,7 @@ Route::middleware('auth:api')->resource('/category-message', ContactCategoryMess
 Route::middleware('auth:api')->resource('/notification', NotificationController::class);
 Route::middleware('auth:api')->get('/all-notifs', [NotificationController::class, 'AllNotif']);
 Route::middleware('auth:api')->resource('/logs', LogLoginUserController::class);
+
+// Mikrotik Router
+Route::middleware('auth:api')->post('/connect-routeros', [MyMikrotikRouterController::class, 'connecting_router']);
+Route::middleware('auth:api')->post('/routeros-data', [MyMikrotikRouterController::class, 'get_router_data']);

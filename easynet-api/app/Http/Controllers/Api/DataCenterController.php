@@ -18,14 +18,24 @@ use App\Models\MapCategory;
 use App\Models\Contact;
 use App\Models\ContactCategory;
 use App\Models\LogLogin;
+use App\Models\MikrotikRouter;
 use App\Events\TestingEvent;
 use App\Events\ContactMessageEvent;
 use App\Events\NotificationWeb;
+use App\MyMethod\MyHelper;
 
 
 
 class DataCenterController extends Controller
 {
+
+    
+
+    public function test_helper()
+    {
+        $path = new MyHelper("test aja");
+        echo $path->GetMyContext();
+    }
 
     public function CategoryMessage($apiKey)
     {
