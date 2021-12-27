@@ -80,21 +80,28 @@ class MyMikrotikRouterController extends Controller
     }
 
     public function get_router_data(Request $request){
-        $request_check = $request->request_check;
+    	$connect = MikrotikRouter::where('connect', 1)->get();
+
+    	if(count($connect) > 0){
+    		$request_check = $request->request_check;
+
+    		$API = new RouterosAPI();
+    		$API->connect($connect[0]->ip, $connect[0]->user, $connect[0]->password  ? $connect[0]->password : '');
+    		$result = $API->comm($request_check);
+
+    		return response()->json([
+    			'success' => true,
+    			'message' => 'Fetch interface data',
+    			'data' => $result
+    		]);
+
+    		$API->disconnect();
+    	}else{
+    		return response()->json([
+                'success' => false,
+                'message' => 'Router not connect'
+            ]);
+    	}
         
-        $API = new RouterosAPI();
-        $interface = $API->comm('/system/identity/print');
-        if ($API->connect('192.168.1.7', 'admin', '')) {
-
-        }
-        $result = json_decode($interface);
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Fetch interface data',
-            'data' => $result
-        ]);
-
-        $API->disconnect();
     }
 }
