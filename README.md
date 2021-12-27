@@ -60,6 +60,8 @@ User::factory()->count(20)->create()
 ##### By Request  
 <img src="/ss/RoterosAPI3.jpg">  
 <img src="/ss/RoterosAPI4.jpg">
+<img src="/ss/RoterosAPI5.jpg">
+<img src="/ss/RoterosAPI6.jpg">
 
 <img src="/ss/login-notif1.jpg">
 <img src="/ss/login-notif2.jpg">
