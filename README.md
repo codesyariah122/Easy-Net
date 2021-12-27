@@ -53,9 +53,9 @@ php artisan tinker
 User::factory()->count(20)->create()
 ```  
 #### Mikrotik RouterosAPI
-<img src="/ss/RouterosAPI.jpg">
-<img src="/ss/RouterosAPI1.jpg">  
-<img src="/ss/RouterosAPI2.jpg">  
+<img src="/ss/RoterosAPI.jpg">
+<img src="/ss/RoterosAPI1.jpg">  
+<img src="/ss/RoterosAPI2.jpg">  
 
 <img src="/ss/login-notif1.jpg">
 <img src="/ss/login-notif2.jpg">
