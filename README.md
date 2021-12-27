@@ -52,7 +52,8 @@ composer dump-autoload
 php artisan tinker
 User::factory()->count(20)->create()
 ```  
-#### Mikrotik RouterosAPI
+#### Mikrotik RouterosAPI  
+<img src="/ss/RoterosAPI6.jpg">
 <img src="/ss/RoterosAPI.jpg">
 <img src="/ss/RoterosAPI1.jpg">  
 <img src="/ss/RoterosAPI2.jpg">   

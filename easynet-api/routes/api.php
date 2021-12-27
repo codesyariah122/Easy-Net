@@ -83,3 +83,4 @@ Route::middleware('auth:api')->resource('/logs', LogLoginUserController::class);
 // Mikrotik Router
 Route::middleware('auth:api')->post('/connect-routeros', [MyMikrotikRouterController::class, 'connecting_router']);
 Route::middleware('auth:api')->post('/routeros-data', [MyMikrotikRouterController::class, 'get_router_data']);
+Route::middleware('auth:api')->post('/routeros-ping', [MyMikrotikRouterController::class, 'ping']);

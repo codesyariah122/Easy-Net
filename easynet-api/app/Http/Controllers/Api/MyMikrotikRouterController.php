@@ -46,16 +46,28 @@ class MyMikrotikRouterController extends Controller
             // echo count($check_router);
             // var_dump($check_router); die;
             if(count($check_router) % 2 == 1) {
-            	if($check_router[0]->connect === 0){
-            		$new_connect = MikrotikRouter::findOrFail($check_router[0]->id);;
+            	echo  $check_router[0]->identity;
+            	if($check_router[0]->connect == 0){
+            		$new_connect = MikrotikRouter::findOrFail($check_router[0]->id);
+            		$new_connect->identity = $identity[0]['name'];
+            		$new_connect->ip = $ip;
+            		$new_connect->user = $user;
+            		$new_connect->password = $password;
             		$new_connect->connect = 1;
             		$new_connect->save();
+
+            		return response()->json([
+            			'success' => true,
+            			'message' => 'Router has been connect',
+            			'data' => $new_connect
+            		]);
             	}
             	return response()->json([
             		'success' => true,
             		'message' => 'Router has been connect',
-            		'data' => $new_connect
+            		'data' => $check_router
             	]);
+            	
             }else{
             	$my_mikrotik=new MikrotikRouter;
             	$my_mikrotik->identity = $identity[0]['name'];
@@ -79,6 +91,33 @@ class MyMikrotikRouterController extends Controller
         }
     }
 
+    public function ping(Request $request)
+    {
+    	$connect = MikrotikRouter::where('connect', 1)->get();
+
+    	if(count($connect) > 0){
+    		$API = new RouterosAPI();
+    		$API->connect($connect[0]->ip, $connect[0]->user, $connect[0]->password  ? $connect[0]->password : '');
+    		$address = $request->address;
+    		$result = $API->comm("/ping", [ 
+    			"address" => $address,
+    			"count" => "5"
+    		]);
+    		return response()->json([
+    			'success' => true,
+    			'message' => 'Fetch interface data',
+    			'data' => $result
+    		]);
+
+    		$API->disconnect();
+    	}else{
+    		return response()->json([
+                'success' => false,
+                'message' => 'Router not connect'
+            ]);
+    	}
+    }
+
     public function get_router_data(Request $request){
     	$connect = MikrotikRouter::where('connect', 1)->get();
 
@@ -88,7 +127,6 @@ class MyMikrotikRouterController extends Controller
     		$API = new RouterosAPI();
     		$API->connect($connect[0]->ip, $connect[0]->user, $connect[0]->password  ? $connect[0]->password : '');
     		$result = $API->comm($request_check);
-
     		return response()->json([
     			'success' => true,
     			'message' => 'Fetch interface data',
