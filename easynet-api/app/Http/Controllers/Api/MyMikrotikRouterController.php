@@ -110,7 +110,7 @@ class MyMikrotikRouterController extends Controller
         			$my_mikrotik->save();
         			return response()->json([
         				'success' => true,
-        				'message' => 'Fetch interface data',
+        				'message' => 'Router has been connecting ...',
         				'data' => $my_mikrotik
         			]);
         		}

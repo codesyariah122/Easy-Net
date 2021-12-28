@@ -5,6 +5,11 @@
 				{{message}}
 			</div>
 		</div>
+
+		<!-- <pre>
+			{{router_ready}}
+		</pre> -->
+
 		<div v-for="router in router_ready" class="col-lg-12 col-xs-12 col-sm-12 mb-3">
 			<div class="card" style="width: 18rem;">
 				<div class="card-body">

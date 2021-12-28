@@ -62,6 +62,6 @@
 
 <script>
 	export default{
-		props: ['mikrotik', 'ConnectRouter', 'loading', 'success', 'message', 'not_found']
+		props: ['mikrotik', 'ConnectRouter', 'loading', 'success', 'message', 'not_found', 'show']
 	}
 </script>

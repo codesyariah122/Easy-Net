@@ -6,18 +6,18 @@
 					<div class="card bg-light-100 border-0 shadow">
 						<h1>Mikrotik Routeros</h1>
 						
-						<div v-if="router_ready" class="row justify-content-center">
+						<div v-if="router_ready_message === 'Router connected'" class="row justify-content-center">
 							<RouterReady :router_ready="router_ready" :message="router_ready_message"/>
 						</div>
 
 						<div v-else class="row justify-content-center mb-5">
 							
-							<FromConnect :mikrotik="mikrotik" :ConnectRouter="ConnectRouter" :loading="loading" :success="success" :message="message" :not_found="not_found"/>
+							<FromConnect :mikrotik="mikrotik" :ConnectRouter="ConnectRouter" :loading="loading" :success="success" :message="message" :not_found="not_found" :show="show"/>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div v-if="router_ready" class="row">
+			<div v-if="router_ready_message === 'Router connected'" class="row">
 				<div class="col-lg-12 mb-4">
 					<div class="card bg-light-100 border-0 shadow">
 						<div class="row justify-content-cente">
@@ -75,16 +75,19 @@
 			CheckingRouter(){
 				this.loading_storage=true
 				const routers = localStorage.getItem("routeros") ? JSON.parse(localStorage.getItem('routeros')) : ''
-				routers.map(d => {
-					this.router_storage.identity = d.identity
-					this.router_storage.ip = d.ip
-				})
+				// console.log(routers.identity)
+				this.router_storage.identity = routers.identity
+				this.router_storage.ip = routers.ip
+				// routers.map(d => {
+				// 	this.router_storage.identity = d.identity
+				// 	this.router_storage.ip = d.ip
+				// })
 				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.auth.token}`
 				this.$axios.post(`${process.env.BASEURL}/check-router`,{
 					ip: this.router_storage.ip
 				})
 				.then(res => {
-					console.log(res.data)
+					// console.log(res.data)
 					if(res.data.success){
 						this.loading_storage=false
 						this.router_ready=res.data.data
@@ -111,6 +114,14 @@
 						this.message=res.data.message
 						this.routeros=res.data.data
 						localStorage.setItem("routeros", JSON.stringify(this.routeros))
+						this.$swal(
+							'Connect Success!',
+							this.message,
+							'success'
+							)
+						setTimeout(() => {
+							location.reload()
+						}, 1500)
 					}else{
 						this.show=true
 						this.success=false
