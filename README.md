@@ -55,8 +55,9 @@ User::factory()->count(20)->create()
 #### Mikrotik RouterosAPI  
 <img src="/ss/RoterosAPI7.jpg">
 <img src="/ss/RoterosAPI8.jpg">
-<img src="/ss/RoterosAP9.jpg">
+<img src="/ss/RoterosAPI9.jpg">
 <img src="/ss/RoterosAPI10.jpg">
+<img src="/ss/RoterosAPI6.jpg">
 <img src="/ss/RoterosAPI.jpg">
 <img src="/ss/RoterosAPI1.jpg">  
 <img src="/ss/RoterosAPI2.jpg">   
