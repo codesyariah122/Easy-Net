@@ -60,10 +60,11 @@ class LoginController extends Controller
 
                     // log logins
                     $check_log = LogLogin::where('name', $user->username)->get();
+                    // echo count($check_log);
                     // var_dump($check_log);
-                    // echo count($check_log); die;
+                    // die;
                     if(count($check_log) % 2 == 1){
-                       $log_login = LogLogin::findOrFail($check_log[0]->id);
+                        $log_login = LogLogin::findOrFail($check_log[0]->id);
                         $log_login->login = 1;
                         $log_login->save();
                     }else{

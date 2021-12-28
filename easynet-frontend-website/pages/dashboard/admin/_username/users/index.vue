@@ -14,6 +14,7 @@
                 <tr>
                   <th>Name</th>
                   <th>Email</th>
+                  <th>Status</th>
                   <th>Options</th>
                 </tr>
               </thead>
@@ -28,6 +29,14 @@
                 <tr v-else v-for="user in users.data">
                   <td style="text-transform: capitalize;"> {{user.name}} </td>
                   <td style="text-transform: lowercase;"> {{user.email}} </td>
+                  <td style="text-transform: lowercase;">
+                    <span v-if="user.status === 'INACTIVE'" class="badge bg-danger">
+                      {{user.status}} 
+                    </span>
+                    <span v-else class="badge bg-success">
+                      {{user.status}} 
+                    </span>
+                  </td>
                   <td>
                     <nuxt-link :to="`/dashboard/admin/${userdata.username}/users/${user.id}`" class="btn btn-success rounded-pill btn-sm">
                       <i class="lni lni-eye"></i>
@@ -37,11 +46,11 @@
                       <i class="lni lni-pencil-alt"></i>
                     </nuxt-link>
 
-                    <button v-if="!user.roles.includes('ADMIN')" class="btn btn-danger rounded-pill btn-sm">
+                    <button v-if="!user.roles.includes('ADMIN')" class="btn btn-danger rounded-pill btn-sm" @click.prevent="DeleteUser(user.id)">
                       <i class="lni lni-eraser"></i>
                     </button>
 
-                    <button @click.prevent="isLogin" v-else class="btn btn-danger rounded-pill btn-sm"><i class="lni lni-coffee-cup"></i></button>
+                    <button @click.prevent="isAdmin" v-else class="btn btn-danger rounded-pill btn-sm"><i class="lni lni-coffee-cup"></i></button>
                   </td>
                 </tr>
               </tbody>
@@ -92,11 +101,11 @@
       this.UserList()
     },
     methods: {
-      isLogin(){
+      isAdmin(){
         this.$swal({
           icon: 'error',
           title: 'Oops...',
-          text: 'you are logged in',
+          text: 'this is admin role',
         })
       },
       UserList(page = 1){
@@ -145,46 +154,37 @@
         this.$store.dispatch("auths/storeUser", process.env.BASEURL)
       },
 
-      logout() {
+      DeleteUser(id){
         this.$swal({
           title: 'Are you sure?',
-          text: "You won't be able to logout this page.",
+          text: "You won't be able to delete this user permanently.",
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, logout!'
+          confirmButtonText: 'Yes, delete!'
         }).then((result) => {
           if (result.isConfirmed) {
-            this.$axios.defaults.headers.common.Authorization = `Bearer ${this.auth.token}`
-            this.$axios.post(`${process.env.BASEURL}/logout`,{
-              id: this.auth.id
-            })
-            .then(response => {
-
-              if(response.data.success) {
-               this.$swal(
-                'Logout Success!',
-                `Bye ${this.userdata.username}`,
-                'success'
+            console.log(id)
+            // this.$axios.defaults.headers.common.Authorization = `Bearer ${this.auth.token}`
+            this.$axios.delete(`${process.env.BASEURL}/user-manage/${id}`)
+            .then(res => {
+              console.log(res.data)
+              if(res.data.success){
+                this.UserList()
+                this.$swal(
+                  'Delete Success!',
+                  res.data.message,
+                  'success'
                 )
-                  //remove localStorage
-                  localStorage.removeItem('checked')
-
-                  //redirect ke halaman login
-                  return this.$router.push({
-                    path: '/auth/login'
-                  })
-                }
-
-              })
+              }
+            })
             .catch(error => {
               console.log(error.message)
             })
-
           }
         })
-      },
+      }
     },
     computed: {
       auth() {

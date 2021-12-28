@@ -68,7 +68,14 @@
 					<span class="sidebar-text">Order</span>
 				</nuxt-link>
 			</li>
-			
+			<li v-if='userdata.roles != "[\"SALES\"]" && userdata.roles != "[\"SUPPORT\"]"' :class="`nav-item ${($route.path === `/dashboard/admin/${userdata.username}/mikrotik`) ? 'active' : ''}`">
+				<nuxt-link :to="`/dashboard/admin/${userdata.username}/mikrotik`" class="nav-link">
+					<span class="sidebar-icon">
+						<i class="lni lni-android"></i>
+					</span>
+					<span class="sidebar-text">Mikrotik</span>
+				</nuxt-link>
+			</li>
 		</ul>
 	</div>
 </nav>

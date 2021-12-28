@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         Passport::routes();
         //
         Gate::define('user-manage', function($user){
-            return count(array_intersect(["ADMIN", "SALES", "SUPPORT", "CUSTOMER"], json_decode($user->roles))) ? true :  false;
+            return count(array_intersect(["ADMIN"], json_decode($user->roles))) ? true :  false;
         });
         Gate::define('category-product', function($user){
             return count(array_intersect(["ADMIN", "STAFF"], json_decode($user->roles))) ? true :  false;

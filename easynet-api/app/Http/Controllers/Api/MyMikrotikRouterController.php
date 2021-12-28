@@ -24,6 +24,38 @@ class MyMikrotikRouterController extends Controller
         });
     }
 
+    public function check_router_db(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'ip' => 'required'
+        ]);
+        if($validator->fails()){
+            return response()->json($validator->errors(), 400);
+        }
+        $ip = $request->ip;
+        try{
+            $router = MikrotikRouter::where('ip', $ip)->get();
+            // var_dump($router);
+            if(count($router) % 2 == 1){
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Router connected',
+                    'data' => $router
+                ]);
+            }else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Router not found'
+                ]);
+            }
+
+        }catch(Exception $e){
+             return response()->json([
+                'success' => false,
+                'message' => 'Router not connect '.$e->getMessage()
+            ]);
+        }
+    }
 
     public function connecting_router(Request $request)
     {
@@ -34,59 +66,65 @@ class MyMikrotikRouterController extends Controller
         if($validator->fails()){
             return response()->json($validator->errors(), 400);
         }
-
-        $API = new RouterosAPI();
-        $ip = $request->ip;
-        $user = $request->user;
-        $password = $request->password;
-        if ($API->connect($ip, $user, $password)) {
-            $identity = $API->comm('/system/identity/print');
-            $check_router = MikrotikRouter::where('identity', $identity[0]['name'])->get();
+        try{
+        	$API = new RouterosAPI();
+        	$ip = $request->ip;
+        	$user = $request->user;
+        	$password = $request->password;
+        	if ($API->connect($ip, $user, $password)) {
+        		$identity = $API->comm('/system/identity/print');
+        		$check_router = MikrotikRouter::where('identity', $identity[0]['name'])->get();
             // echo $check_router[0]->connect;
             // echo count($check_router);
             // var_dump($check_router); die;
-            if(count($check_router) % 2 == 1) {
-            	echo  $check_router[0]->identity;
-            	if($check_router[0]->connect == 0){
-            		$new_connect = MikrotikRouter::findOrFail($check_router[0]->id);
-            		$new_connect->identity = $identity[0]['name'];
-            		$new_connect->ip = $ip;
-            		$new_connect->user = $user;
-            		$new_connect->password = $password;
-            		$new_connect->connect = 1;
-            		$new_connect->save();
+        		if(count($check_router) % 2 == 1) {
+        			// echo  $check_router[0]->identity;
+        			if($check_router[0]->connect == 0){
+        				$new_connect = MikrotikRouter::findOrFail($check_router[0]->id);
+        				$new_connect->identity = $identity[0]['name'];
+        				$new_connect->ip = $ip;
+        				$new_connect->user = $user;
+        				$new_connect->password = $password;
+        				$new_connect->connect = 1;
+        				$new_connect->save();
 
-            		return response()->json([
-            			'success' => true,
-            			'message' => 'Router has been connect',
-            			'data' => $new_connect
-            		]);
-            	}
-            	return response()->json([
-            		'success' => true,
-            		'message' => 'Router has been connect',
-            		'data' => $check_router
-            	]);
-            	
-            }else{
-            	$my_mikrotik=new MikrotikRouter;
-            	$my_mikrotik->identity = $identity[0]['name'];
-            	$my_mikrotik->ip = $ip;
-            	$my_mikrotik->user = $user;
-            	$my_mikrotik->password = $password;
-            	$my_mikrotik->connect = 1;
-            	$my_mikrotik->save();
-            	return response()->json([
-            		'success' => true,
-            		'message' => 'Fetch interface data',
-            		'data' => $my_mikrotik
-            	]);
-            }
-            
-        }else{
-            return response()->json([
+        				return response()->json([
+        					'success' => true,
+        					'message' => 'Router has been connect',
+        					'data' => $new_connect
+        				]);
+        			}
+        			return response()->json([
+        				'success' => true,
+        				'message' => 'Router has been connect',
+        				'data' => $check_router
+        			]);
+        			
+        		}else{
+        			$my_mikrotik=new MikrotikRouter;
+        			$my_mikrotik->identity = $identity[0]['name'];
+        			$my_mikrotik->ip = $ip;
+        			$my_mikrotik->user = $user;
+        			$my_mikrotik->password = $password;
+        			$my_mikrotik->connect = 1;
+        			$my_mikrotik->save();
+        			return response()->json([
+        				'success' => true,
+        				'message' => 'Fetch interface data',
+        				'data' => $my_mikrotik
+        			]);
+        		}
+        		
+        	}else{
+        		return response()->json([
+        			'success' => false,
+        			'message' => 'Router not connect'
+        		]);
+        	}
+        }catch(Exception $e){
+        	 return response()->json([
                 'success' => false,
-                'message' => 'Router not connect'
+                'message' => 'Router not connect '.$e->getMessage()
             ]);
         }
     }
@@ -122,11 +160,11 @@ class MyMikrotikRouterController extends Controller
     	$connect = MikrotikRouter::where('connect', 1)->get();
 
     	if(count($connect) > 0){
-    		$request_check = $request->request_check;
+    		$command = $request->command;
 
     		$API = new RouterosAPI();
     		$API->connect($connect[0]->ip, $connect[0]->user, $connect[0]->password  ? $connect[0]->password : '');
-    		$result = $API->comm($request_check);
+    		$result = $API->comm($command);
     		return response()->json([
     			'success' => true,
     			'message' => 'Fetch interface data',

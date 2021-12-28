@@ -382,6 +382,7 @@ export default {
             title: 'Oops...',
             text: 'Something went wrong!'
           })
+          console.log(err.message)
           this.loading = false;
           this.loginFailed = false;
           this.error_login = false;
