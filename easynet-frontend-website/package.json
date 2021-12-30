@@ -18,6 +18,7 @@
     "contentful": "^9.1.5",
     "core-js": "^3.15.1",
     "dotenv": "^10.0.0",
+    "fs": "^0.0.1-security",
     "laravel-echo": "^1.11.3",
     "laravel-vue-pagination": "^2.3.1",
     "leaflet": "^1.7.1",
