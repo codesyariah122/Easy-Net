@@ -9,6 +9,7 @@
 
 	export default{
 		layout: 'auth',
+		name: 'register',
 		components:{
 			FormRegister
 		},

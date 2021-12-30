@@ -21,6 +21,10 @@
             <div class="signup-form">
               <h2 class="form-title">Login</h2>
               
+              <!-- <pre>
+                {{ip}}
+              </pre> -->
+
               <div v-if="register.message" class="alert alert-success" v-html="register.message"></div>
               
               <div v-if="error_login">
@@ -204,10 +208,6 @@ export default {
   },
 
   beforeMount(){
-    this.checkAuth()
-  },
-
-  mounted(){
     this.$axios('https://api.ipify.org/?format=json')
     .then(res => {
       this.ip = res.data.ip
@@ -215,6 +215,10 @@ export default {
     .catch(err => {
       console.log(err.message)
     }),
+    this.checkAuth()
+  },
+
+  mounted(){
     this.Location(),
     this.CheckRegister(),
     this.checkToken(this.auth.token),

@@ -12,7 +12,7 @@
 			<div v-else>		
 				<Header/>
 
-				<Hero :herodata="herodata" @open-chat="CheckUserChatDB"/>
+				<Hero :herodata="herodata" @open-chat="CheckUserChatDB" />
 
 				<Nuxt/>
 				
@@ -175,7 +175,8 @@
 			},
 
 			methods: {
-				getHeroData(){
+			
+			getHeroData(){
 					this.loading=true
 					
 					this.$axios.get(`${this.config.apiUrl}/webdata/${this.config.apiToken}`)
@@ -191,7 +192,15 @@
 					})
 			},
 
+			checkAuth() {
+				this.$store.commit("auths/CHECK_AUTH", "checked")
+			},
+			dataUser() {
+				this.$store.dispatch("auths/storeUser", process.env.BASEURL)
+			},
+
 			CheckUserChatDB(){
+				
 				const data_user = JSON.parse(localStorage.getItem('data_chat')) ? JSON.parse(localStorage.getItem('data_chat')) :  0
 				if(data_user == 0){
 					this.OpenChat(data_user)
@@ -264,7 +273,7 @@
 							const chat_data = {
 								id: this.readys[0].user_id,
 								username: this.readys[0].users[0].username,
-								fullname: this.readys[0].users[0].name,
+								name: this.readys[0].users[0].name,
 								email: this.readys[0].users[0].email 
 							}
 							this.SettingCrispChat(chat_data)
@@ -308,16 +317,17 @@
 			SettingCrispChat(chat_data){
 				localStorage.setItem('chat_aktif', true)
 				localStorage.setItem("data_chat", JSON.stringify(chat_data))
+				$crisp.push(['do', 'chat:open'])
 				$crisp.push(["set", "user:email", chat_data.email])
-				$crisp.push(["set", "user:nickname", chat_data.fullname])
-				$crisp.push(["set", "session:data", [
-					[
-					["user_id", chat_data.id],
-					["username", chat_data.username],
-					["fullname", chat_data.fullname],
-					["email", chat_data.email]
-					]
-				]])
+				$crisp.push(["set", "user:nickname", chat_data.name])
+				// $crisp.push(["set", "session:data", [
+				// 	[
+				// 	["user_id", chat_data.id],
+				// 	["username", chat_data.username],
+				// 	["fullname", chat_data.name],
+				// 	["email", chat_data.email]
+				// 	]
+				// ]])
 				this.$swal({
 					position: 'top-end',
 					icon: 'success',
@@ -325,7 +335,6 @@
 					showConfirmButton: false,
 					timer: 1500
 				})
-				$crisp.push(['do', 'chat:open'])
 
 				setTimeout(function(){
 					let myModal = document.getElementById('staticBackdrop')
@@ -333,6 +342,14 @@
 					document.body.classList.remove('modal-open')
 					location.reload()
 				},2500)
+			}
+		},
+		computed: {
+			auth() {
+				return this.$store.getters["auths/getAuth"];
+			},
+			userdata() {
+				return this.$store.getters["auths/getUser"];
 			}
 		}
 	}

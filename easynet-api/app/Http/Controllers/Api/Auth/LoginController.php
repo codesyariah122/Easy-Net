@@ -87,13 +87,17 @@ class LoginController extends Controller
                         "route" => "/logs"
                     ];
 
-                    $new_notification = new Notification;
-                    $new_notification->name = $user->name. "  sedang login";
-                    $new_notification->content = $event_context['message'];
-                    $new_notification->route = $event_context['route'];
-                    $new_notification->save();
+                    // var_dump($user->roles); die;
 
-                    $data_event = broadcast(new NotificationEvent($event_context));
+                    if(!in_array("ADMIN", json_decode($user->roles)) && !in_array("SALES", json_decode($user->roles)) && !in_array("SUPPORT", json_decode($user->roles))){
+                        $new_notification = new Notification;
+                        $new_notification->name = $user->name. "  sedang login";
+                        $new_notification->content = $event_context['message'];
+                        $new_notification->route = $event_context['route'];
+                        $new_notification->save();
+
+                        $data_event = broadcast(new NotificationEvent($event_context));
+                    }
 
                     return response()->json([
                         'success' => true,
@@ -150,15 +154,15 @@ class LoginController extends Controller
                 "name" => "logout",
                 "route" => "/logs"
             ];
+            if(!in_array("ADMIN", json_decode($user->roles)) && !in_array("SALES", json_decode($user->roles)) && !in_array("SUPPORT", json_decode($user->roles))){
+                $new_notification = new Notification;
+                $new_notification->name = $user->name. " telah logout";
+                $new_notification->content = $event_context['message'];
+                $new_notification->route = $event_context['route'];
+                $new_notification->save();
 
-            $new_notification = new Notification;
-            $new_notification->name = $user->name. " telah logout";
-            $new_notification->content = $event_context['message'];
-            $new_notification->route = $event_context['route'];
-            $new_notification->save();
-
-            $data_event = broadcast(new NotificationEvent($event_context));
-
+                $data_event = broadcast(new NotificationEvent($event_context));
+            }
             return response()->json([
                 'success' => true,
                 'message' => 'Logout Success!',

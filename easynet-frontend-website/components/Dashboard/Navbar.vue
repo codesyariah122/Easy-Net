@@ -131,19 +131,22 @@
 			NotificationPusher(){
 				window.Echo.channel('notification')
 				.listen('NotificationEvent', (e) => {
+					console.log(e)
 					this.NotifLatest()
 					this.AllNotification()
 					this.notifdata.show=true
 					this.notifdata.msg=e[0]
-					this.$toast(e[0].message,{
-						position: "top-right",
-						timeout: 7000,
-						pauseOnFocusLoss: true,
-						pauseOnHover: true,
-						closeOnClick: true,
-						closeButton: "button",
-						icon: true,
-					})
+					if(e[0].name !== "logout" || e[0].name !== "login"){
+						this.$toast(e[0].message,{
+							position: "top-right",
+							timeout: 7000,
+							pauseOnFocusLoss: true,
+							pauseOnHover: true,
+							closeOnClick: true,
+							closeButton: "button",
+							icon: true,
+						})
+					}
 				})
 			},
 

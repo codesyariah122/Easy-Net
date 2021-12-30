@@ -9,6 +9,7 @@
 
 	export default{
 		layout: 'auth',
+		name: 'login',
 		components:{
 			FormLogin
 		},

@@ -18,25 +18,22 @@
 
 <script>
   import Home from '@/components/Customer/home'
-
   export default {
     layout: "profile",
     name: "profile",
     head:{
       titleTemplate: 'EasyNet - Customer'
     },
-
     components:{
       Home
     },
-
     data(){
       return {
         path: this.$route.path
       }
     },
-
     beforeMount(){
+      $crisp.push(['do', 'chat:open']),
       this.checkAuth(),
       this.dataUser()
     },
@@ -65,7 +62,6 @@
       dataUser() {
         this.$store.dispatch("auths/storeUser", process.env.BASEURL)
       },
-
       logout() {
         this.$swal({
           title: 'Are you sure?',
@@ -83,7 +79,6 @@
               log_id: this.userdata.log_logins[0].id
             })
             .then(response => {
-
               if(response.data.success) {
                this.$swal(
                 'Logout Success!',
@@ -92,37 +87,31 @@
                 )
                   //remove localStorage
                   localStorage.removeItem('checked')
-
                   //redirect ke halaman login
                   return this.$router.push({
                     path: '/auth/login'
                   })
                 }
-
               })
             .catch(error => {
               console.log(error.message)
             })
-
           }
         })
       },
-
       ChatOpen(user){
         $crisp.push(["set", "user:email", user.email])
         $crisp.push(["set", "user:nickname", user.name])
-        $crisp.push(["set", "session:data", [
-          [
-          ["user_id", user.id],
-          ["username", user.username],
-          ["fullname", user.fullname],
-          ["email", user.email]
-          ]
-        ]])
-
+        // $crisp.push(["set", "session:data", [
+        //   [
+        //   ["user_id", user.id],
+        //   ["username", user.username],
+        //   ["fullname", user.fullname],
+        //   ["email", user.email]
+        //   ]
+        // ]])
         $crisp.push(['do', 'chat:open'])
       }
-
     },
     computed: {
       auth() {

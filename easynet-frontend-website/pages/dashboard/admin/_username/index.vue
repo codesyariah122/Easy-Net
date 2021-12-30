@@ -1,7 +1,7 @@
 <template>
   <div v-if="auth.token">
     
-    <HomeContent :userdata="userdata" :userlogins="userlogins" :messagecount="messagecount"/>
+    <HomeContent :userdata="userdata" :userlogins="userlogins" :messagecount="messagecount" :loading="loading"/>
 
   </div>
 </template>
@@ -24,7 +24,8 @@ export default {
       params: this.$route.path,
       userlogins:[],
       messagecount: '',
-      allnotifs:[]
+      allnotifs:[],
+      loading: null
     }
   },
 
@@ -50,7 +51,7 @@ export default {
         // console.log(e)
         this.UserLogin()
         this.NotifLatest()
-        this.$toast(e[0].message)
+        // this.$toast(e[0].message)
         // if(e[0].name === "login"){
           
         // }
@@ -59,17 +60,22 @@ export default {
     },
 
     UserLogin(){
+      this.loading=true
       const config = {
         baseurl: process.env.BASEURL,
         token:  process.env.APITOKEN
       }
       this.$axios.get(`${config.baseurl}/count-online/${config.token}`)
       .then(res => {
-        this.messagecount = "User Online"
-        this.userlogins = res.data.data
+        if(res.data.success){
+          this.loading=false
+          this.messagecount = "User Online"
+          this.userlogins = res.data.data
+        }
+        
       })
       .catch(err => {
-        console.log(err.response)
+        console.log(err.message)
       })
     },
 

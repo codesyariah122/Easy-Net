@@ -9,8 +9,8 @@
 			</div>
 		</div>
 		<div v-else>
-			{{dt}} <span class="badge rounded-pill bg-primary mt-3">
-				{{weather.main}} / {{weather.description}} <cite>{{temp}} <sup>°C</sup></cite> <img :src="`http://openweathermap.org/img/wn/${weather.icon}@2x.png`" width="50">
+			{{dt}}  <br> {{weather.main}} / {{weather.description}} <cite>{{temp}} <sup>°C</sup></cite>  <span class="badge rounded-pill bg-success mt-3">
+				<img :src="`http://openweathermap.org/img/wn/${weather.icon}@2x.png`" width="50">
 			</span>
 		</div>
 		

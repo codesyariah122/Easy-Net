@@ -134,7 +134,8 @@ export default {
   },
 
   mounted() {
-    this.Center(), this.Coverege();
+    this.Center(),
+    this.Coverege()
   },
 
   methods: {

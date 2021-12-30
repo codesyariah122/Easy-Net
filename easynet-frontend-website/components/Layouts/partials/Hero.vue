@@ -2,7 +2,9 @@
 	<div>
         <section id="home" class="hero-area index2">
             <img class="shape" src="/assets/images/hero/img-wave.png" alt="#">
-
+            <!-- <pre>
+                {{userdata}}
+            </pre> -->
             <div class="hero-inner">
                 <div class="container">
                     <div class="row ">
@@ -12,6 +14,7 @@
                                     <h1 class="wow fadeInUp" data-wow-delay=".3s"  v-html="herodata.headerText"></h1>
                                     <p class="wow fadeInUp mt-2" data-wow-delay=".5s" v-html="herodata.headerParagraph"></p>
                                     <div class="button wow fadeInUp" data-wow-delay=".7s">
+                    
                                         <a href="#" @click="$emit('open-chat')" class="btn btn-chat btn-scroll">
                                             <i class="display-2 lni lni-support"></i> Live Chat Support
                                         </a>

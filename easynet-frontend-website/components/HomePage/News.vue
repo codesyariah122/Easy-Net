@@ -1,9 +1,6 @@
 <template>
 	<div>
 
-		<h2>Latest posts</h2>
-        
-
 		<div id="blog" class="latest-news-area section mt-5">
 			<div class="container">
 				<div class="row">
