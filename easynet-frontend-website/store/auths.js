@@ -22,10 +22,11 @@ export const actions = {
     axios
     .get(`${url}/user`)
     .then((res) => {
+      // console.log(res.data)
       commit('USER_DATA', res.data.data[0])
     })
     .catch((err) => {
-      console.error(err.message);
+      console.error(err.response);
     });
     
   }

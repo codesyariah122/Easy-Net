@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Nuxt/>
+		<Nuxt :key="$route.fullPath"/>
 
 		<!-- <Footer/> -->
 	</div>
@@ -32,6 +32,10 @@
 					defer: true
 				}
 			]
+		},
+
+		mounted(){
+			$crisp.push(['do', 'chat:show']);
 		},
 
 	}

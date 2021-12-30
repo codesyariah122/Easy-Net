@@ -33,14 +33,12 @@
       }
     },
     beforeMount(){
-      $crisp.push(['do', 'chat:open']),
       this.checkAuth(),
       this.dataUser()
     },
     mounted() {
       this.checkToken(this.auth.token),
-      this.checkAuth(),
-      this.ChatOpen(this.userdata)
+      this.checkAuth()
     },
     methods: {
       checkToken(token){
@@ -98,19 +96,6 @@
             })
           }
         })
-      },
-      ChatOpen(user){
-        $crisp.push(["set", "user:email", user.email])
-        $crisp.push(["set", "user:nickname", user.name])
-        // $crisp.push(["set", "session:data", [
-        //   [
-        //   ["user_id", user.id],
-        //   ["username", user.username],
-        //   ["fullname", user.fullname],
-        //   ["email", user.email]
-        //   ]
-        // ]])
-        $crisp.push(['do', 'chat:open'])
       }
     },
     computed: {

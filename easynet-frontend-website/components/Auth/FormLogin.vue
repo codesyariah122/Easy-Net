@@ -358,7 +358,7 @@ export default {
               } else if (this.checked.roles === "CUSTOMER") {
                 this.$router.push({
                   path: `/profile/customer/${this.checked.username}`,
-                  // name: 'member',
+                  // name: 'profile',
                   // params: {username: this.checked.username}
                 });
               } else if(this.checked.roles === "SALES"){

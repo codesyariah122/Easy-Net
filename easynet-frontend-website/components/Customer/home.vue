@@ -53,12 +53,29 @@
 	export default{
 		props: ['userdata', 'auth', 'path'],
 
+		beforeMount(){
+			$crisp.push(['do', 'chat:open'])
+		},
+		mounted(){
+			this.ChatOpen(this.userdata)
+		},
+
 		methods: {
-			EditProfile(id){
-				this.$router.push({
-					path: `${this.path}/edit/${id}`
-				})
-			}
+			ChatOpen(user){
+				$crisp.push(["set", "user:email", user.email])
+				$crisp.push(["set", "user:nickname", user.name])
+				// $crisp.push(["set", "session:data", [
+				// 	["user_id", user.id]
+				// 	// ["username", user.username],
+				// 	// ["fullname", user.fullname]
+				// 	// ["email", user.email]
+				// ]])
+		    },
+		    EditProfile(id){
+		    	this.$router.push({
+		    		path: `${this.path}/edit/${id}`
+		    	})
+		    }
 		},
 
 		filters: {
