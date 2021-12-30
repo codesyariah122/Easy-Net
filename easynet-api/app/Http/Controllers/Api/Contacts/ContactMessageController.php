@@ -24,15 +24,15 @@ class ContactMessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware(function($request, $next){
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    //     $this->middleware(function($request, $next){
 
-        if(Gate::allows('contact-message')) return $next($request);
-            abort(403, 'Anda tidak memiliki cukup hak akses');
-        });
-    }
+    //     if(Gate::allows('contact-message')) return $next($request);
+    //         abort(403, 'Anda tidak memiliki cukup hak akses');
+    //     });
+    // }
     
     public function format_phone($nohp) {
          // kadang ada penulisan no hp 0811 239 345

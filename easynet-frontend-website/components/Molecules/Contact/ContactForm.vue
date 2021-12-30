@@ -175,7 +175,7 @@
 					contact_categories: category_id
 				})
 				.then((data) => {
-					// console.log(data)
+					console.log(data)
 					if(data.data.success){
 						this.success=true
 						this.error=false
@@ -192,7 +192,7 @@
 					}
 				})
 				.catch(err => {
-					// console.log(err.response.data)
+					console.log(err.response.data)
 					this.loading=false
 					this.error=true
 					this.$swal({
