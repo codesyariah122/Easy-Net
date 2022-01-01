@@ -16,9 +16,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
-
-					<div v-for="(item, index) in blogs" class="col-lg-4 col-md-6 col-12">
+				<div class="row  mb-5">
+					<div v-for="(item, index) in blogs" class="col-lg-6 col-md-6 col-12 mb-5">
 						<div class="single-news wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
 								<div class="image">
 									<img class="thumb" :src="require(`~/assets/blog/images/${item.slug}/${item.img}`)" alt="#">
@@ -27,16 +26,15 @@
 									</div>
 								</div>
 								<div class="content-body">
-									<h4 class="title"><a href="blog-single-sidebar.html">
-										{{item.title}}
-									</a></h4>
+									<h4 class="title">
+										<nuxt-link :to="{name: `blog-slug`, params: {slug: item.slug}}">{{item.title}}</nuxt-link>
+									</h4>
 									<p>{{item.description}}</p>
 								</div>
 							</div>
 						</div>
-
 					</div>
-
+					<br><br>
 					<div class="row justify-content-center mt-5 mb-2">
 						<div class="col-lg-12 col-xs-12 col-sm-12">
 							<div class="d-grid gap-2">

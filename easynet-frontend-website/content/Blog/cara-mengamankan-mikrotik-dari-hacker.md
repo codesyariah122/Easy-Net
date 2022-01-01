@@ -13,6 +13,8 @@ author:
 categories: blog
 createdAt: DateTime
 updatedAt: DateTime
+tags:
+  - EasyNet Tips
 ---  
 
 Anda perlu tau penyebab dan cara hacker masuk/ngehack mikrotik anda lalu melakukan pencegahan agar mikrotik tidak bia dihack.

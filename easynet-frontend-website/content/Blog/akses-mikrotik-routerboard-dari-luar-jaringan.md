@@ -13,6 +13,8 @@ author:
 categories: blog
 createdAt: DateTime
 updatedAt: DateTime
+tags:
+  - EasyNet Tips
 ---
 
 ### Cara Remote Mikrotik Online Dengan IP Public  

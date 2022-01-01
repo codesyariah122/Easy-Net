@@ -99,7 +99,7 @@
 			TnsSlider(){
 				tns({
 					container: '.testimonial-slider',
-					items: this.packages.data.length,
+					items: this.packages ? this.packages.data.length : '',
 					slideBy: 'page',
 					autoplay: false,
 					mouseDrag: true,
