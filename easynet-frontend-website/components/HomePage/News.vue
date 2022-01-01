@@ -1,6 +1,10 @@
 <template>
 	<div>
 
+		<!-- <pre>
+			{{blogs}}
+		</pre> -->
+
 		<div id="blog" class="latest-news-area section mt-5">
 			<div class="container">
 				<div class="row">
@@ -8,68 +12,48 @@
 						<div class="section-title">
 							<span class="wow fadeInDown" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;">latest news</span>
 							<h2 class="wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Latest News &amp; Blog</h2>
-							<p class="wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">There are many variations of passages of Lorem
-							Ipsum available, but the majority have suffered alteration in some form.</p>
+							<p class="wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">Kumpulan article, tips and trick dan berbagai informasi terupdate seputar informasi teknologi dan jaringan internet.</p>
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4 col-md-6 col-12">
 
+					<div v-for="(item, index) in blogs" class="col-lg-4 col-md-6 col-12">
 						<div class="single-news wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-							<div class="image">
-								<img class="thumb" src="assets/images/blog/blog-grid1.jpg" alt="#">
-								<div class="meta-details">
-									<img src="assets/images/blog/author.jpg" alt="#"> <span>BY TIM NORTON</span>
+								<div class="image">
+									<img class="thumb" :src="require(`~/assets/blog/images/${item.slug}/${item.img}`)" alt="#">
+									<div class="meta-details">
+										<img :src="item.author.img" alt="#"> <span>BY {{item.author.name}}</span>
+									</div>
 								</div>
-							</div>
-							<div class="content-body">
-								<h4 class="title"><a href="blog-single-sidebar.html">Make your team a Design driven
-								company</a></h4>
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-								has been the industry's standard.</p>
+								<div class="content-body">
+									<h4 class="title"><a href="blog-single-sidebar.html">
+										{{item.title}}
+									</a></h4>
+									<p>{{item.description}}</p>
+								</div>
 							</div>
 						</div>
 
 					</div>
-					<div class="col-lg-4 col-md-6 col-12">
 
-						<div class="single-news wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
-							<div class="image">
-								<img class="thumb" src="assets/images/blog/blog-grid2.jpg" alt="#">
-								<div class="meta-details">
-									<img src="assets/images/blog/author.jpg" alt="#"> <span>BY TIM NORTON</span>
-								</div>
-							</div>
-							<div class="content-body">
-								<h4 class="title"><a href="blog-single-sidebar.html">The newest web framework that changed
-								the world</a></h4>
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-								has been the industry's standard.</p>
+					<div class="row justify-content-center mt-5 mb-2">
+						<div class="col-lg-12 col-xs-12 col-sm-12">
+							<div class="d-grid gap-2">
+								<button class="btn btn-primary rounded-pill btn-sm" type="button">Load More</button>
 							</div>
 						</div>
-
 					</div>
-					<div class="col-lg-4 col-md-6 col-12">
 
-						<div class="single-news wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
-							<div class="image">
-								<img class="thumb" src="assets/images/blog/blog-grid3.jpg" alt="#">
-								<div class="meta-details">
-									<img src="assets/images/blog/author.jpg" alt="#"> <span>BY TIM NORTON</span>
-								</div>
-							</div>
-							<div class="content-body">
-								<h4 class="title"><a href="blog-single-sidebar.html">5 ways to improve user retention for
-								your startup</a></h4>
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-								has been the industry's standard.</p>
-							</div>
-						</div>
-
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </template>
+
+
+<script>
+	export default{
+		props: ['blogs']
+	}
+</script>

@@ -9,9 +9,15 @@
 			</div>
 		</div>
 		<div v-else>
-			{{dt}}  <br> {{weather.main}} / {{weather.description}} <cite>{{temp}} <sup>°C</sup></cite>  <span class="badge rounded-pill bg-success mt-3">
-				<img :src="`http://openweathermap.org/img/wn/${weather.icon}@2x.png`" width="50">
-			</span>
+			<picture>
+				<p><strong>Weather : </strong></p>
+
+				<p>
+					{{dt}}  <br> <span class="badge rounded-pill bg-primary mt-3">{{city}}  - {{weather.main}} / {{weather.description}} <cite>{{getCelcius(temp)}} <sup>°C</sup></cite>  
+						<img :src="`http://openweathermap.org/img/wn/${weather.icon}@2x.png`" width="50">
+					</span>
+				</p>
+			</picture>
 		</div>
 		
 	</div>
@@ -47,6 +53,10 @@
 						this.dt = this.$moment(res.data.data.dt*1000).format("LLLL")
 					}, 1500)
 				})
+			},
+			getCelcius(num){
+				num = parseFloat(num)
+				return Math.ceil((num - 32) / 1.8)
 			}
 		}
 	}

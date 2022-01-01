@@ -9,7 +9,7 @@
 
     <Packages :packages="data_packages"/>
 
-    <News/>
+    <News :blogs="blogs"/>
 
     <Contact/>
     
@@ -48,16 +48,24 @@
     },
 
 
-    async asyncData({$axios,$config}){ 
+    async asyncData({$axios,$config,$content,params}){ 
       const token = process.env.APITOKEN
       const baseurl = process.env.BASEURL
       const data_packages = await $axios.$get(`${baseurl}/product/${token}`)
       const ip = await $axios.$get('https://api.ipify.org/?format=json')
       const location = await $axios.$get(`${baseurl}/locator/${ip.ip}/${token}`)
+      const blogs = await $content('Blog', params.slug)
+      .only(['title', 'description', 'img', 'slug', 'categories', 'createdAt', 'author'])
+      .sortBy('createdAt', 'desc')
+      .where({categories: 'blog'})
+      .fetch();
+
+      console.log(blogs)
 
       return {
         data_packages,
-        location
+        location,
+        blogs
       }
     },
 

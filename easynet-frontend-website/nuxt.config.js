@@ -147,11 +147,13 @@ export default {
     '@nuxtjs/onesignal',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    '@nuxtjs/markdownit'
+    '@nuxtjs/markdownit',
+    '@nuxt/content'
   ],
-  markdownit: {
-    injected: true
-  },
+  // markdownit: {
+  //   injected: true
+  // },
+  
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: false,
@@ -300,7 +302,14 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
-
+  content: {
+    markdown: {
+      prism: {
+        theme: 'prism-themes/themes/prism-material-oceanic.css'
+      }
+    },
+    nestedProperties: ['author.name']
+  },
   vue: {
     config: {
       productionTip: false,

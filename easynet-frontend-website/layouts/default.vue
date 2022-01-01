@@ -178,18 +178,24 @@
 			
 			getHeroData(){
 					this.loading=true
-					
-					this.$axios.get(`${this.config.apiUrl}/webdata/${this.config.apiToken}`)
-					.then(res => {
-				          // console.log(res.data.data)
-				          setTimeout(() => {
-				          	this.loading=false
-				          	this.herodata = res.data.data
-				          }, 1000)
-			      	})
-					.catch(err => {
-						console.log(err.message)
-					})
+					setTimeout(() => {
+						this.loading=false
+						this.herodata = {
+							headerText: `Nikmati layanan <span class='text-warning'>High Performance Internet</span><span class='text-info text-justify'>Unlimited Bandwidth</span> Bersama <span class='text-info fw-bold'>Easy Net</span>`,
+							headerParagraph: `Melalui infrastruktur High Performance internet kami. Kami siap memenuhi kebutuhan aktifitas anda mulai dari aktifitas Multimedia, Mailing, Study, Streaming hingga , Gaming`
+						}
+					}, 1000)
+					// this.$axios.get(`${this.config.apiUrl}/webdata/${this.config.apiToken}`)
+					// .then(res => {
+				 //          // console.log(res.data.data)
+				 //          setTimeout(() => {
+				 //          	this.loading=false
+				 //          	this.herodata = res.data.data
+				 //          }, 1000)
+			  //     	})
+					// .catch(err => {
+					// 	console.log(err.message)
+					// })
 			},
 
 			checkAuth() {
@@ -331,7 +337,7 @@
 				this.$swal({
 					position: 'top-end',
 					icon: 'success',
-					title: `Halo ! ${chat_data.fullname}, silahkan memulai fitur live chat EasyNet`,
+					title: `Halo ! ${chat_data.name}, silahkan memulai fitur live chat EasyNet`,
 					showConfirmButton: false,
 					timer: 1500
 				})

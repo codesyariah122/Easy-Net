@@ -17,7 +17,7 @@
 
     <client-only>
       <l-map
-        :style="`${isMobile ? 'height:400px; width: 100%;' : 'height:450px; width: 900px;'}`"
+        :style="`${isMobile ? 'height:400px; width: 100%;' : 'height:450px; width: 900px;'} z-index: 0;`"
         :zoom="zoom"
         :center="central.center"
       >
@@ -110,7 +110,7 @@ export default {
       },
       circle: {
         center: [],
-        radius: this.$device.isMobile ? 50000 : 70000,
+        radius: this.$device.isMobile ? 50000 : 50000,
         color: ["green"],
       },
       polyline: {
