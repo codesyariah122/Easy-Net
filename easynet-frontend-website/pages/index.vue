@@ -69,35 +69,5 @@
       }
     },
 
-    mounted(){
-      this.getHeroData()
-      // window.Echo.channel('contacted')
-      // .listen('ContactMessageEvent', (e) => {
-      //   console.log(e)
-      // })
-    },
-
-    methods: {
-      getHeroData(){
-        this.loading=true
-        const data = {
-          token:  process.env.APITOKEN,
-          baseurl: process.env.BASEURL 
-        }
-        this.$axios.get(`${data.baseurl}/webdata/${data.token}`)
-        .then(res => {
-                // console.log(res.data.data)
-                setTimeout(() => {
-                  this.loading=false
-                  this.herodata = res.data.data
-                }, 2500)
-            })
-        .catch(err => {
-          console.log(err.response)
-        })
-      },
-
-
-    }
   }
 </script>

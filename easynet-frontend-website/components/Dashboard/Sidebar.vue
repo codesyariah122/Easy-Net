@@ -60,7 +60,7 @@
 					<span class="sidebar-text">Contacts</span>
 				</nuxt-link>
 			</li>
-			<li v-if='userdata.roles != "[\"SALES\"]" && userdata.roles != "[\"SUPPORT\"]"' :class="`nav-item ${($route.path === `/dashboard/admin/${userdata.username}/order`) ? 'active' : ''}`">
+			<li v-if='userdata.roles !== "[\"SALES\"]" && userdata.roles !== "[\"SUPPORT\"]"' :class="`nav-item ${($route.path === `/dashboard/admin/${userdata.username}/order`) ? 'active' : ''}`">
 				<nuxt-link :to="`/dashboard/admin/${userdata.username}/order`" class="nav-link">
 					<span class="sidebar-icon">
 						<i class="lni lni-cart-full"></i>
@@ -68,7 +68,7 @@
 					<span class="sidebar-text">Order</span>
 				</nuxt-link>
 			</li>
-			<li v-if='userdata.roles != "[\"SALES\"]" && userdata.roles != "[\"SUPPORT\"]"' :class="`nav-item ${($route.path === `/dashboard/admin/${userdata.username}/mikrotik`) ? 'active' : ''}`">
+			<li v-if='userdata.roles !== "[\"SALES\"]" && userdata.roles !== "[\"SUPPORT\"]"' :class="`nav-item ${($route.path === `/dashboard/admin/${userdata.username}/mikrotik`) ? 'active' : ''}`">
 				<nuxt-link :to="`/dashboard/admin/${userdata.username}/mikrotik`" class="nav-link">
 					<span class="sidebar-icon">
 						<i class="lni lni-android"></i>

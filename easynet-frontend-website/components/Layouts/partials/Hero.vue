@@ -40,7 +40,3 @@
 		props: ['loading','herodata']
     }
 </script>
-
-<style>
-
-</style>
