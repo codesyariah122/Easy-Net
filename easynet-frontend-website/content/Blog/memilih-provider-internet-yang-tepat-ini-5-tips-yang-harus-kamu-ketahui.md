@@ -16,6 +16,7 @@ updatedAt: DateTime
 tags:
   - EasyNet Article
 ---  
+
 Hampir setiap aktivitas kita pasti membutuhkan internet. Apalagi di masa pandemic, semua kegiatan dilakukan dari rumah dan menggunakan jaringan internet. Mulai dari aktivitas sekolah anak, perkuliahan, pekerjaan baik kantoran maupun usaha-usaha kecil yang membutuhkan jaringan internet.
 
 Bahkan jika kamu bosan dan membutuhkan hiburan seperti menonton drama atau film, juga membutuhkan jaringan internet yang cepat dan tidak lemot.

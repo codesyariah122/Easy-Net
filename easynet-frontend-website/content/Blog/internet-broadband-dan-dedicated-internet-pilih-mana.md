@@ -22,6 +22,7 @@ Pernahkah kamu mendengar 2 istilah “Internet Broadband” dan “Dedicated Int
 Berikut penjelasan perbedaan “Internet Broadband” dan “Dedicated Internet”.  
 
 ##### Apa itu “Internet Broadband”?  
+
 <a href="/packages/bwa/broadband-wireless-access">Internet Broadband</a> adalah koneksi internet yang biasanya digunakan di rumah, dimana kecepatan dan performance-nya dibagi ke setiap pengguna / perangkat. Jika penggunaan internet ini “ringan”, maka pengguna akan merasakan kecepatan dan performance yang lebih cepat. Sebaliknya, jika masing-masing pengguna melakukan aktivitas yang “berat” maka kecepatan internetnya pun akan berkurang. Biasanya Internet Broadband ini direkomendasikan untuk rumah, apartemen atau usaha kecil dengan penggunaan internet yang terbatas.  
 
 ##### Apa itu “Dedicated Internet”?  

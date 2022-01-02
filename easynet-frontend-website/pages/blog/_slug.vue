@@ -54,7 +54,7 @@
 							</ul>
 							<p>{{blog.detail}}</p>
 
-							<div class="post-image">
+							<!-- <div class="post-image">
 								<div class="row">
 									<div class="col-lg-6 col-md-6 col-12">
 										<a href="#">
@@ -70,7 +70,8 @@
 										</a>
 									</div>
 								</div>
-							</div>
+							</div> -->
+							
 							<nuxt-content :document="blog" style="text-align: justify; font-size: 18px;"/>
 
 							<div class="post-tags-media mt-5 mb-5">
@@ -110,7 +111,9 @@
 
 						<div class="post-comments  mt-3 mb-5">
 							<h3 class="comment-title">Post comments</h3>
-							
+							<client-only>
+								<Disqus/>
+							</client-only>
 						</div>
 						<!-- <div class="comment-form">
 							<h3 class="comment-reply-title">Leave a comment</h3>

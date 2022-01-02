@@ -28,6 +28,7 @@
     "prism-themes": "^1.9.0",
     "pusher-js": "^7.0.3",
     "pwa-asset-generator": "^6.0.2",
+    "vue-disqus": "^4.0.1",
     "vue-sweetalert2": "^5.0.2",
     "vue-tel-input": "^5.8.0",
     "vue-tinymce-editor": "^1.6.2",

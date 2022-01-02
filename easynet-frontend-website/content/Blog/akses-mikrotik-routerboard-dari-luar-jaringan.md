@@ -14,10 +14,10 @@ categories: blog
 createdAt: DateTime
 updatedAt: DateTime
 tags:
-  - EasyNet Tips
+  - EasyNet Tips  
 ---
 
-### Cara Remote Mikrotik Online Dengan IP Public  
+#### Cara Remote Mikrotik Online Dengan IP Public  
 Jika anda mendapat IP public dari ISP, maka anda bisa langsung meremote mikrotik dari jarak jauh (luar jaringan) menggunakan internet.
 
 IP public yang nempel di interface WAN bisa anda ketikan langsung di aplikasi remote SSH, Winbox ataupun mikhmon, maka anda akan bisa diakses langsung lewat internet. 

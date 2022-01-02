@@ -123,6 +123,7 @@ export default {
     { src: '~/plugins/vue-toastification', mode: 'client', ssr: false },
     { src: '~/plugins/vue-tiny-mce', mode: 'client', ssr: false },
     { src: '~/plugins/laravel-vue-pagination', mode: 'client', ssr: false},
+    { src: '~/plugins/disqus', mode: 'client', ssr: false}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
