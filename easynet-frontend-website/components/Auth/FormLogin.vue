@@ -206,7 +206,10 @@ export default {
       }
     };
   },
-
+  // beforeRouteEnter(to, from, next) {
+  //   console.log(from)
+  //   next()
+  // },
   beforeMount(){
     this.$axios('https://api.ipify.org/?format=json')
     .then(res => {

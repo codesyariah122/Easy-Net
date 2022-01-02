@@ -53,7 +53,7 @@
 				</nuxt-link>
 			</li>
 			<li :class="`nav-item ${($route.path === `/dashboard/admin/${userdata.username}/contact`) ? 'active' : ''}`">
-				<nuxt-link :to="`/dashboard/${roles}/${userdata.username}/contacts`" class="nav-link">
+				<nuxt-link :to="`/dashboard/${roles}/${userdata.username}/contact`" class="nav-link">
 					<span class="sidebar-icon">
 						<i class="lni lni-book"></i>
 					</span>
