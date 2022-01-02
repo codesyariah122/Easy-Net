@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendContactEmail;
+use App\Mail\ReplyContactMessageToEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -21,8 +24,10 @@ use App\Models\LogLogin;
 use App\Models\MikrotikRouter;
 use App\Events\TestingEvent;
 use App\Events\ContactMessageEvent;
-use App\Events\NotificationWeb;
+use App\Models\Notification;
+use App\Events\NotificationEvent;
 use App\MyMethod\MyHelper;
+
 
 
 
@@ -87,17 +92,24 @@ class DataCenterController extends Controller
             $category_contact = ContactCategory::where('id', $contact_categories[0])->get();
             // echo $category_contact[0]['category_contact_name'];
             if($category_contact[0]['category_contact_name'] === "pertanyaan umum" || $category_contact[0]['category_contact_name'] === "tanya easynet admin"){
-                $admin = User::where('roles', json_encode(["ADMIN"]))->where('status', 'ACTIVE')->get();
+                $admin = User::where('roles', json_encode(["ADMIN"]))
+                        ->where('email', 'admin@easynet.id')
+                        ->where('status', 'ACTIVE')
+                        ->get();
                 $roles = 'admin';
+                // echo $roles; die;
             }elseif($category_contact[0]['category_contact_name'] === "tanya easynet sales"){
                 $admin = User::where('roles', json_encode(["SALES"]))->where('status', 'ACTIVE')->get();
                 $roles = 'sales';
+                // echo $roles; die;
             }else{
                 $admin = User::where('roles', json_encode(["SUPPORT"]))->where('status', 'ACTIVE')->get();
                 $roles = 'support';
+                // echo $roles; die;
             }
             // var_dump($admin[0]->email);die;
-            $new_message->phone=$this->format_phone($request->phone);
+            $format_telp = new MyHelper;
+            $new_message->phone=$format_telp->format_phone($request->phone);
             $new_message->message=$request->message;
             $new_message->address=$request->address;
             $new_message->ip=$request->ip;
@@ -127,14 +139,15 @@ class DataCenterController extends Controller
               'title' => 'Pesan baru dari easynet website',
               'url' => 'https://easynet.id',
               'roles' => $roles,
-              'route' => $admin[1]->username,
+              'route' => $admin[0]->username,
               'fullname' => $new_message->fullname,
               'email' => $new_message->email,
               'phone' => $new_message->phone,
               'message'=> $new_message->message
             ];
             try{
-                Mail::to($admin[1]->email)->send(new SendContactEmail($details));
+                // echo $admin[0]->email; die;
+                Mail::to($admin[0]->email)->send(new SendContactEmail($details));
                 Mail::to($new_message->email)->send(new ReplyContactMessageToEmail($details));
                 return response()->json([
                     'success' => true,
