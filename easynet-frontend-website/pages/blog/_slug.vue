@@ -14,9 +14,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-8 offset-lg-2 col-12">
-					<div class="post-thumbnils">
-						<img :src="require(`~/assets/blog/images/${blog.slug}/${blog.img}`)" alt="#" width="600">
+				<div class="col-lg-8 col-xs-12 col-sm-12">
+					<div :style="`${$isMobile ? 'margin-left: -3rem;' : ''}`" class="post-thumbnils">
+						<img :src="require(`~/assets/blog/images/${blog.slug}/${blog.img}`)" alt="#" :width="`${$isMobile ? '50' : '700'}`">
 						<div class="author">
 							<!-- <img :src="blog.author.img" alt="#">  -->
 							<span>
@@ -71,7 +71,7 @@
 									</div>
 								</div>
 							</div> -->
-							
+
 							<nuxt-content :document="blog" style="text-align: justify; font-size: 18px;"/>
 
 							<div class="post-tags-media mt-5 mb-5">
@@ -132,7 +132,7 @@
 		layout: 'blog',
 		data(){
 			return {
-				isDevice: this.$isMobile,
+				isDevice: this.$isMobile ? true : false,
 			}
 		},
 		async asyncData({ $content, params }) {
