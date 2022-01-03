@@ -8,7 +8,7 @@
 
 		<Hero :herodata="herodata" @open-chat="CheckUserChatDB" />
 
-		<Nuxt/>
+		<Nuxt />
 
 		<Footer />
 

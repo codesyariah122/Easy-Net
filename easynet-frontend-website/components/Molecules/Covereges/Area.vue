@@ -111,11 +111,11 @@ export default {
       circle: {
         center: [],
         radius: this.$device.isMobile ? 50000 : 50000,
-        color: ["green"],
+        color: "green",
       },
       polyline: {
         latlngs: [],
-        color: ["red"],
+        color: "red",
       },
       icons: {
         1: require("assets/marker-custom/easy-icon-2.png"),

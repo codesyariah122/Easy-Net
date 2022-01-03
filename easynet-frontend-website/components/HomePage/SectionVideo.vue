@@ -39,20 +39,20 @@
 
 <script>
 	export default{
-		props: ['herodata'],
 		data(){
 			return{
 				content:{
 					summary: 'High Speed Internet Services',
 					heading: 'Segera pasang easynet sebagai partner provider handal anda',
-					paragraph: 'Rasakan pengalaman  menakjubkan dengan berlangganan paket HighSpeed internet dari <span class="text-info">Easy Net</span>.'
+					paragraph: 'Rasakan pengalaman  menakjubkan dengan berlangganan paket HighSpeed internet dari <span class="text-info">Easy Net</span>.',
+					videoSection: `${process.env.APPURL}public/video/video2.mp4` 
 				}
 			}
 		},
 		methods:{
             LightBox(){
                 GLightbox({
-                    'href': this.herodata.videoHeader,
+                    'href': this.content.videoSection,
                     'type': 'video',
                     'source': 'local', //vimeo, youtube or local
                     'width': 800,

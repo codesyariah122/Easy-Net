@@ -206,14 +206,14 @@ export default {
       }
     };
   },
-  // beforeRouteEnter(to, from, next) {
-  //   console.log(from)
-  //   next()
-  // },
+  beforeRouteEnter(to, from, next) {
+    console.log(from)
+    next()
+  },
   beforeMount(){
-    this.$axios('https://api.ipify.org/?format=json')
+    this.$axios.get('https://api.ipify.org/?format=json')
     .then(res => {
-      // console.log(res.data.ip)
+      console.log(res.data.ip)
       this.ip = res.data.ip
     })
     .catch(err => {

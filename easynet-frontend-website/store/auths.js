@@ -18,15 +18,19 @@ export const actions = {
   storeUser({commit}, url){
     let data = localStorage.getItem('checked') ? JSON.parse(localStorage.getItem('checked')) :  '';
     // console.log(data)
-    axios.defaults.headers.common.Authorization = `Bearer ${data.token}`;
-    axios
-    .get(`${url}/user`)
-    .then((res) => {
-      commit('USER_DATA', res.data.data[0])
-    })
-    .catch((err) => {
-      console.error(err.message);
-    });
+    if(data){
+      axios.defaults.headers.common.Authorization = `Bearer ${data.token}`;
+      axios
+      .get(`${url}/user`)
+      .then((res) => {
+        commit('USER_DATA', res.data.data[0])
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
+    }else{
+      return false
+    }
     
   }
 };

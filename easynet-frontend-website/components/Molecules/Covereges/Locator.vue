@@ -35,7 +35,7 @@
             </l-popup>
           </l-marker>
 
-          <l-tile-layer :url="map.url" :attribution="attribution"></l-tile-layer>
+          <l-tile-layer :url="map.url" :attribution="map.attribution"></l-tile-layer>
           <l-layer-group ref="features">
             <l-popup >
               <center>

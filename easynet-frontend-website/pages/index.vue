@@ -1,7 +1,8 @@
 <template>
   <div>
     <!-- <ColorModePicker/> -->
-    <SectionVideo :herodata='herodata'/>
+    
+    <SectionVideo/>
 
     <Features/>
     
