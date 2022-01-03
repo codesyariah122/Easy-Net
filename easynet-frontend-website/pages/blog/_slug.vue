@@ -132,8 +132,11 @@
 		layout: 'blog',
 		data(){
 			return {
-				isDevice: this.$isMobile ? true : false,
+				isDevice: this.$isMobile ? true : false
 			}
+		},
+		head:{
+			titleTemplate: `EasyNet::Blog `
 		},
 		async asyncData({ $content, params }) {
 			const blog = await $content('Blog', params.slug).fetch();

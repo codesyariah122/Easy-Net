@@ -26,7 +26,7 @@
 		
 		<ul class="nav flex-column pt-3 pt-md-0">
 			<li class="nav-item">
-				<nuxt-link :to="`/dashboard/admin/${userdata.username}/`" class="nav-link d-flex align-items-center">
+				<nuxt-link :to="`/dashboard/admin/${auth.username}/`" class="nav-link d-flex align-items-center">
 					<span class="sidebar-icon">
 						<img src="/assets/dashboard/assets/img/brand/light.svg" height="20" width="20" alt="Volt Logo">
 					</span>
@@ -34,16 +34,16 @@
 				</nuxt-link>
 			</li>
 
-			<li :class="`nav-item ${($route.path === `/dashboard/admin/${userdata.username}/`) ? 'active' : ''}`">
-				<nuxt-link :to="`/dashboard/admin/${userdata.username}/`" class="nav-link">
+			<li :class="`nav-item ${($route.path === `/dashboard/admin/${auth.username}/`) ? 'active' : ''}`">
+				<nuxt-link :to="`/dashboard/admin/${auth.username}/`" class="nav-link">
 					<span class="sidebar-icon">
 						<i class="lni lni-dashboard"></i>
 					</span> 
 					<span class="sidebar-text">Dashboard</span>
 				</nuxt-link>
 			</li>
-			<li v-if='userdata.roles != "[\"SALES\"]" && userdata.roles != "[\"SUPPORT\"]"' :class="`nav-item ${($route.path === `/dashboard/admin/${userdata.username}/users`) ? 'active' : ''}`">
-				<nuxt-link :to="`/dashboard/admin/${userdata.username}/users`" class="nav-link d-flex justify-content-between">
+			<li v-if='auth.roles != "SALES" && auth.roles != "SUPPORT"' :class="`nav-item ${($route.path === `/dashboard/admin/${auth.username}/users`) ? 'active' : ''}`">
+				<nuxt-link :to="`/dashboard/admin/${auth.username}/users`" class="nav-link d-flex justify-content-between">
 					<span>
 						<span class="sidebar-icon">
 							<i class="lni lni-users"></i>
@@ -52,24 +52,24 @@
 					</span>
 				</nuxt-link>
 			</li>
-			<li :class="`nav-item ${($route.path === `/dashboard/admin/${userdata.username}/contact`) ? 'active' : ''}`">
-				<nuxt-link :to="`/dashboard/${roles}/${userdata.username}/contact`" class="nav-link">
+			<li  :class="`nav-item ${($route.path == `/dashboard/admin/${auth.username}/contact`) ? 'active' : ''}`">
+				<nuxt-link :to="`/dashboard/${roles}/${auth.username}/contact`" class="nav-link">
 					<span class="sidebar-icon">
 						<i class="lni lni-book"></i>
 					</span>
 					<span class="sidebar-text">Contacts</span>
 				</nuxt-link>
 			</li>
-			<li v-if='userdata.roles !== "[\"SALES\"]" && userdata.roles !== "[\"SUPPORT\"]"' :class="`nav-item ${($route.path === `/dashboard/admin/${userdata.username}/order`) ? 'active' : ''}`">
-				<nuxt-link :to="`/dashboard/admin/${userdata.username}/order`" class="nav-link">
+			<li v-if='auth.roles !== "SALES" && auth.roles !== "SUPPORT"' :class="`nav-item ${($route.path === `/dashboard/admin/${auth.username}/order`) ? 'active' : ''}`">
+				<nuxt-link :to="`/dashboard/admin/${auth.username}/order`" class="nav-link">
 					<span class="sidebar-icon">
 						<i class="lni lni-cart-full"></i>
 					</span>
 					<span class="sidebar-text">Order</span>
 				</nuxt-link>
 			</li>
-			<li v-if='userdata.roles !== "[\"SALES\"]" && userdata.roles !== "[\"SUPPORT\"]"' :class="`nav-item ${($route.path === `/dashboard/admin/${userdata.username}/mikrotik`) ? 'active' : ''}`">
-				<nuxt-link :to="`/dashboard/admin/${userdata.username}/mikrotik`" class="nav-link">
+			<li v-if='auth.roles !== "[\"SALES\"]" && auth.roles !== "[\"SUPPORT\"]"' :class="`nav-item ${($route.path === `/dashboard/admin/${auth.username}/mikrotik`) ? 'active' : ''}`">
+				<nuxt-link :to="`/dashboard/admin/${auth.username}/mikrotik`" class="nav-link">
 					<span class="sidebar-icon">
 						<i class="lni lni-android"></i>
 					</span>
@@ -83,10 +83,10 @@
 
 <script>
 	export default{
-		props: ['userdata', 'logout','route'],
+		props: ['auth', 'userdata', 'logout','route'],
 		data(){
 			return {
-				roles: this.userdata.roles === "[\"ADMIN\"]" ? "admin" : this.userdata.roles === "[\"SALES\"]" ? "sales" : this.userdata.roles === "[\"SUPPORT\"]" ? "Support" : "Customer"
+				roles: this.auth.roles.includes("ADMIN") ? "admin" : this.auth.roles.includes("SALES") ? "sales" : "support"
 			}
 		}
 	}

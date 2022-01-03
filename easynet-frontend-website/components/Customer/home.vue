@@ -31,7 +31,7 @@
 					</div>
 					
 					<div class=" px-2 rounded mt-4 date "> 
-						<span class="join">Join at {{$moment(userdata.created_at).tz("Asia/Jakarta").format("DD/MM/YYYY")}}</span> 
+						<span class="join">Join at {{$moment(userdata.created_at).tz("Asia/Jakarta").format("LLLL")}}</span> 
 					</div>
 				</div>
 				<div class="mt-5 mb-5 d-flex flex-row justify-content-center align-items-center mt-3">
@@ -57,23 +57,24 @@
 			$crisp.push(['do', 'chat:open'])
 		},
 		mounted(){
-			this.ChatOpen(this.userdata)
+			this.ChatOpen(this.auth)
 		},
 
 		methods: {
 			ChatOpen(user){
+				// console.log(user)
 				$crisp.push(["set", "user:email", user.email])
 				$crisp.push(["set", "user:nickname", user.name])
 				// $crisp.push(["set", "session:data", [
-				// 	["user_id", user.id]
-				// 	// ["username", user.username],
-				// 	// ["fullname", user.fullname]
-				// 	// ["email", user.email]
+				// 	["user_id", user.id],
+				// 	["username", user.username],
+				// 	["fullname", user.name],
+				// 	["email", user.email]
 				// ]])
 		    },
 		    EditProfile(id){
 		    	this.$router.push({
-		    		path: `${this.path}/edit/${id}`
+		    		path: `${this.$route.path}/edit/${id}`
 		    	})
 		    }
 		},

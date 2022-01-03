@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<header class="header index2">
+    <div>
+        <header class="header index2">
             <div id="navbar-scroll" class="navbar-area">
                 <div class="container">
                     <div class="row align-items-center">
@@ -32,24 +32,24 @@
                                 </div>
 
                                 <div class="button">
-                                    <div v-if="auth.token">
+                                    <div v-if="auth">
                                         <div class="dropdown">
                                             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                                {{userdata.username}}
+                                                {{auth.username}}
                                             </a>
 
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <li><nuxt-link v-if="userdata.roles.includes('CUSTOMER')" class="dropdown-item" to="#"><i class="lni lni-cart"></i>Cart</nuxt-link></li>
+                                                <li v-if="auth.roles === 'CUSTOMER'"><nuxt-link  class="dropdown-item" to="#"><i class="lni lni-cart"></i>Cart</nuxt-link></li>
                                                 <li>
-                                                    <a v-if="userdata.roles.includes('CUSTOMER')" class="dropdown-item" :href="`/profile/customer/${userdata.username}`">
+                                                    <a v-if="auth.roles === 'CUSTOMER'" class="dropdown-item" :href="`/profile/customer/${auth.username}`">
                                                         <i class="lni lni-user"></i>
                                                         Profile
                                                     </a>
-                                                    <nuxt-link v-else-if="userdata.roles.includes('ADMIN')" class="dropdown-item" :to="`/dashboard/admin/${userdata.username}`">
+                                                    <nuxt-link v-else-if="auth.roles === 'ADMIN'" class="dropdown-item" :to="`/dashboard/admin/${auth.username}`">
                                                         <i class="lni lni-dashboard"></i>
                                                         Dashboard
                                                     </nuxt-link>
-                                                    <nuxt-link v-else-if="userdata.roles.includes('SALES')" class="dropdown-item" to="/dashboard/sales">
+                                                    <nuxt-link v-else-if="auth.roles === 'SALES'" class="dropdown-item" to="/dashboard/sales">
                                                         <i class="lni lni-dashboard"></i>
                                                         Dashboard
                                                     </nuxt-link>
@@ -68,7 +68,7 @@
                                             </a>
 
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <li><nuxt-link to="/auth/login" class="dropdown-item"><i class="lni lni-cart"></i>Cart</nuxt-link></li>
+                                                <li><nuxt-link to="/auth/login" class="dropdown-item"><i class="lni lni-cart"></i>Customer</nuxt-link></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -88,72 +88,12 @@
                 {{auth}}
             </pre> -->
 
-        </header>
+        </header>   
     </div>
 </template>
 
 <script>
     export default{
-
-        data(){
-            return{
-                btn_auth: ''
-            }
-        },
-
-        mounted(){
-            this.NavbarToggler(),
-            this.buttonAuth(),
-            this.checkAuth(),
-            this.dataUser()
-        },
-        
-        methods: {
-            checkAuth() {
-              this.$store.commit("auths/CHECK_AUTH", "checked")
-            },
-            dataUser() {
-              this.$store.dispatch("auths/storeUser", process.env.BASEURL)
-            },
-            buttonAuth(){
-                this.btn_auth = this.$device.isMobile ? 'btn-auth' : ''
-            },
-            NavbarToggler(){
-				 // header-2  toggler-icon
-                let navbarToggler2 = document.querySelector(".header .navbar-toggler");
-                var navbarCollapse2 = document.querySelector(".header .navbar-collapse");
-
-                document.querySelectorAll(".header-2 .page-scroll").forEach(e =>
-                  e.addEventListener("click", () => {
-                     navbarToggler2.classList.remove("active");
-                     navbarCollapse2.classList.remove('show')
-                 })
-                  );
-                navbarToggler2.addEventListener('click', function() {
-                  navbarToggler2.classList.toggle("active");
-              })
-            },
-        },
-
-        computed: {
-            auth() {
-              return this.$store.getters["auths/getAuth"];
-            },
-            userdata() {
-              return this.$store.getters["auths/getUser"];
-            },
-        },
+        props: ['auth']
     }
 </script>
-
-<style>
-    
-    @media (min-width: 992px) {
-        .navbar-collapse{
-            margin-left: 7rem;
-        }
-    }
-    .header .button .btn .btn-auth{
-        width: 50px!important;
-    }
-</style>

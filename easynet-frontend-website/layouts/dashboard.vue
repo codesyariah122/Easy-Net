@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<Header/>
-		<Sidebar :userdata="userdata" :logout="logout" :route="route"/>
+		<Sidebar :auth="auth" :userdata="userdata" :logout="logout" :route="route"/>
 		<main class="content">
 			<NavMain :auth="auth" :userdata="userdata" :logout="logout"/>
 			<Nuxt/>

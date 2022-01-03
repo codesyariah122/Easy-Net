@@ -213,6 +213,7 @@ export default {
   beforeMount(){
     this.$axios('https://api.ipify.org/?format=json')
     .then(res => {
+      // console.log(res.data.ip)
       this.ip = res.data.ip
     })
     .catch(err => {
@@ -341,7 +342,9 @@ export default {
               this.loginFailed = false;
               this.checked = {
                 token: res.data.token,
+                name: res.data.data.name,
                 username: res.data.data.username,
+                email: res.data.data.email,
                 roles: res.data.data.roles.includes("ADMIN")
                   ? "ADMIN"
                   : res.data.data.roles.includes("CUSTOMER")
@@ -349,7 +352,7 @@ export default {
                   : res.data.data.roles.includes("SALES")
                   ? "SALES"
                   : "SUPPORT",
-                id: res.data.data.id,
+                id: res.data.data.id
               };
               localStorage.setItem("checked", JSON.stringify(this.checked));
 

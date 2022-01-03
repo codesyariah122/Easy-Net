@@ -1,105 +1,99 @@
 <template>
-	<div>
-		<div v-if="loading">
-			<div class="row justify-content-center mt-50">
-				<div class="col-lg-8 col-xs-8 col-sm-8">
-					<center>
-						<img src="/assets/images/animated/anim5.gif" class="img-fluid">
-						</center>
+	<div>		
+		<Header :auth="auth"/>
+
+		<!-- <pre>
+			{{userdata.roles}}
+		</pre> -->
+
+		<Hero :herodata="herodata" @open-chat="CheckUserChatDB" />
+
+		<Nuxt/>
+
+		<Footer />
+
+		<a href="#" class="scroll-top btn-hover">
+			<i class="lni lni-chevron-up"></i>
+		</a>
+
+		<!-- Modal -->
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">Open chat Support</h5>
+
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
-				</div>
-			</div>
-			<div v-else>		
-				<Header/>
+					<div class="modal-body">
+						<div class="container">
+							<div class="row justify-content-center">
+								<div class="col-lg-12 col-xs-12 col-sm-12">
+									<blockquote class="blockquote-footer bg-info text-danger">
+										Masukan alamat email anda yang telah terdaftar pada website easynet.id.
+									</blockquote>
+									<p class="mt-2 mb-3">
+										Belum punya akun easynet  ? <br> 
 
-				<Hero :herodata="herodata" @open-chat="CheckUserChatDB" />
+										<a href='/auth/register' class="btn btn-link">Create New Account </a>
+									</p>
+								</div>
 
-				<Nuxt/>
-				
-				<Footer />
-				
-				<a href="#" class="scroll-top btn-hover">
-					<i class="lni lni-chevron-up"></i>
-				</a>
-
-				<!-- Modal -->
-				<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="staticBackdropLabel">Open chat Support</h5>
-								
-								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
-							<div class="modal-body">
-								<div class="container">
-									<div class="row justify-content-center">
-										<div class="col-lg-12 col-xs-12 col-sm-12">
-											<blockquote class="blockquote-footer bg-info text-danger">
-												Masukan alamat email anda yang telah terdaftar pada website easynet.id.
-											</blockquote>
-											<p class="mt-2 mb-3">
-												Belum punya akun easynet  ? <br> 
+							<div class="row justify-content-center">
+								<div class="col-lg-12 col-xs-12 col-sm-12">
+									<form @submit.prevent="CheckEmail">
+										<div class="form-group">
+											<label for="email" class="form-label">Email address</label>
+											<input type="text" class="form-control" id="email" placeholder="name@example.com" v-model="user.email" autofocus>
+											<div v-if="error">
+												<div v-if="validation" class="alert alert-danger mt-2 mb-2">
+													{{validation.email[0]}}
+												</div>
+											</div>
+											<div v-else>
+												<div v-if="message.ready" class="alert alert-warning mt-3" role="alert">
+													{{
+														message.ready
+													}}
+													<br>
+													<button type="button" class="btn btn-primary rounded-pill mt-2" @click="RefreshPage">Refresh Halaman</button>
+												</div>
+												<div v-else>
+													<div v-if="notFound" class="alert alert-danger mt-2 mb-2">
+														<!-- {{notFound}} -->
+														<p class="mt-2">
+															{{message.not_found}}<br> 
 
-												<a href='/auth/register' class="btn btn-link">Create New Account </a>
-											</p>
-										</div>
-
-									</div>
-									<div class="row justify-content-center">
-										<div class="col-lg-12 col-xs-12 col-sm-12">
-											<form @submit.prevent="CheckEmail">
-												<div class="form-group">
-													<label for="email" class="form-label">Email address</label>
-													<input type="text" class="form-control" id="email" placeholder="name@example.com" v-model="user.email" autofocus>
-													<div v-if="error">
-														<div v-if="validation" class="alert alert-danger mt-2 mb-2">
-															{{validation.email[0]}}
-														</div>
+															<!-- <a href='/auth/register' class="btn btn-link">Create New Account </a> -->
+														</p>
 													</div>
-													<div v-else>
-														<div v-if="message.ready" class="alert alert-warning mt-3" role="alert">
-															{{
-																message.ready
-															}}
-															<br>
-															<button type="button" class="btn btn-primary rounded-pill mt-2" @click="RefreshPage">Refresh Halaman</button>
-														</div>
-														<div v-else>
-															<div v-if="notFound" class="alert alert-danger mt-2 mb-2">
-																<!-- {{notFound}} -->
-																<p class="mt-2">
-																	{{message.not_found}}<br> 
 
-																	<!-- <a href='/auth/register' class="btn btn-link">Create New Account </a> -->
-																</p>
-															</div>
+													<div v-if="dataFound" class="alert alert-success mt-3" role="alert">
+														{{
+															dataFound
+														}}
+														<br>
+														<button type="button" class="btn btn-primary rounded-pill mt-2" @click="RefreshPage">Refresh Halaman</button>
+													</div>
+												</div>
 
-															<div v-if="dataFound" class="alert alert-success mt-3" role="alert">
-																{{
-																	dataFound
-																}}
-																<br>
-																<button type="button" class="btn btn-primary rounded-pill mt-2" @click="RefreshPage">Refresh Halaman</button>
-															</div>
-														</div>
-														
 														<!-- <pre v-if='data_user'>
 															{{data_user}}
 														</pre> -->
 													</div>
 												</div>
 												<div class="d-grid gap-2 mt-5">
-														<button type="submit" class="btn btn-primary rounded-pill btn-block">
-															<div v-if="loadingForm">
-																<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-																Loading...
-															</div>
-															<div v-else>
-																Submit
-															</div>
-														</button>
-													</div>
+													<button type="submit" class="btn btn-primary rounded-pill btn-block">
+														<div v-if="loadingForm">
+															<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+															Loading...
+														</div>
+														<div v-else>
+															Submit
+														</div>
+													</button>
+												</div>
 												<div class="modal-footer">
 													
 												</div>
@@ -111,7 +105,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
 		</div>
 	</template>
 
@@ -170,32 +163,20 @@
 					readys: []
 				}
 			},
-			mounted(){
-				this.getHeroData()
+			beforeMount(){
+				this.getHeroData(),
+				this.checkAuth(),
+				this.dataUser()
 			},
 
 			methods: {
 			
 			getHeroData(){
-					this.loading=true
-					setTimeout(() => {
-						this.loading=false
-						this.herodata = {
-							headerText: `Nikmati Layanan Internet <span class='text-warning'>High Performance </span><span class='text-info text-justify'>Unlimited Bandwidth</span> Bersama <span class='text-info fw-bold'>Easy Net</span>`,
-							headerParagraph: `Melalui infrastruktur High Performance internet kami. Kami siap memenuhi kebutuhan aktifitas anda mulai dari aktifitas Multimedia, Mailing, Study, Streaming hingga , Gaming`
-						}
-					}, 1000)
-					// this.$axios.get(`${this.config.apiUrl}/webdata/${this.config.apiToken}`)
-					// .then(res => {
-				 //          // console.log(res.data.data)
-				 //          setTimeout(() => {
-				 //          	this.loading=false
-				 //          	this.herodata = res.data.data
-				 //          }, 1000)
-			  //     	})
-					// .catch(err => {
-					// 	console.log(err.message)
-					// })
+				this.herodata = {
+					headerText: `Nikmati Layanan Internet <span class='text-warning'>High Performance </span><span class='text-info text-justify'>Unlimited Bandwidth</span> Bersama <span class='text-info fw-bold'>Easy Net</span>`,
+					headerParagraph: `Melalui infrastruktur High Performance internet kami. Kami siap memenuhi kebutuhan aktifitas anda mulai dari aktifitas Multimedia, Mailing, Study, Streaming hingga , Gaming`
+				}
+				
 			},
 
 			checkAuth() {

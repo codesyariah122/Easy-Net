@@ -107,7 +107,7 @@
 					url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 					attribution:
 					'&copy; <a target="_blank" href="http://osm.org/copyright">EasyNetMap</a> contributors',
-					zoom: this.$device.isMobile ? 11 : 10,
+					zoom: this.$device.isMobile ? 11 : 11.5,
 					center: [this.location.data.latitude, this.location.data.longitude],
 					markerLatLng: [this.location.data.latitude, this.location.data.longitude],
 					isMobile: this.$device.isMobile,
