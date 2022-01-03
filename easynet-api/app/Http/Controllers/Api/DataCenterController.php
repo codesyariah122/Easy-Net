@@ -34,7 +34,6 @@ use App\MyMethod\MyHelper;
 class DataCenterController extends Controller
 {
 
-
     public function test_helper()
     {
         $path = new MyHelper("test aja");
@@ -126,7 +125,7 @@ class DataCenterController extends Controller
             ];
 
             $new_notification = new Notification;
-            $new_notification->name = "message from ".$roles." EasyNet";
+            $new_notification->name = "contact";
             $new_notification->content = $event_context['message'];
             $new_notification->route = $event_context['route'];
             $new_notification->save();
@@ -169,75 +168,75 @@ class DataCenterController extends Controller
         }
     }
 
-    public function HeloEvent()
-    {
-        try{
-            $context="Broadcasting Events using web sockets";
-            $data = broadcast(new NotificationWeb($context));
-            return response()->json([
-                'message'=>"New event broadcast !",
-                'data'=>$context
-            ]);
-        }catch(Exception $e){
-            return response()->json([
-                'message' => 'Error fetch data if no token'
-            ], 401);
-        }
+    // public function HeloEvent()
+    // {
+    //     try{
+    //         $context="Broadcasting Events using web sockets";
+    //         $data = broadcast(new NotificationWeb($context));
+    //         return response()->json([
+    //             'message'=>"New event broadcast !",
+    //             'data'=>$context
+    //         ]);
+    //     }catch(Exception $e){
+    //         return response()->json([
+    //             'message' => 'Error fetch data if no token'
+    //         ], 401);
+    //     }
 
-    }
+    // }
 
-    public  function ContactMessage($apiKey){
-        $token = ApiKeys::join('users', 'api_keys.user_id', '=', 'users.id')->get();
+    // public  function ContactMessage($apiKey){
+    //     $token = ApiKeys::join('users', 'api_keys.user_id', '=', 'users.id')->get();
         
-        try{
-           if($token[0]['token'] === $apiKey){
-                $new_contact=Contact::with('contact_categories')->latest()->get();
-                // var_dump($new_contact);  die;
-                $data = broadcast(new ContactMessageEvent(count($new_contact)." pesan baru dari ".$new_contact[0]['fullname']." terkirim ke admin easynet !"));
-                return response()->json([
-                    'message'=>count($new_contact)." pesan baru dari ".$new_contact[0]['fullname']."di kirim ke admin easynet !",
-                    'data'=>$new_contact
-                ]);
-            }else{
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Api token not registration'
-                ]);
-            }
-        }catch(Exception $e){
-            return response()->json([
-                'message' => 'Error fetch data if no token'
-            ], 401);
-        }
-    }
+    //     try{
+    //        if($token[0]['token'] === $apiKey){
+    //             $new_contact=Contact::with('contact_categories')->latest()->get();
+    //             // var_dump($new_contact);  die;
+    //             $data = broadcast(new ContactMessageEvent(count($new_contact)." pesan baru dari ".$new_contact[0]['fullname']." terkirim ke admin easynet !"));
+    //             return response()->json([
+    //                 'message'=>count($new_contact)." pesan baru dari ".$new_contact[0]['fullname']."di kirim ke admin easynet !",
+    //                 'data'=>$new_contact
+    //             ]);
+    //         }else{
+    //             return response()->json([
+    //                 'success' => false,
+    //                 'message' => 'Api token not registration'
+    //             ]);
+    //         }
+    //     }catch(Exception $e){
+    //         return response()->json([
+    //             'message' => 'Error fetch data if no token'
+    //         ], 401);
+    //     }
+    // }
 
-    public function TestBroadcast($apiKey)
-    {
-        $token = ApiKeys::join('users', 'api_keys.user_id', '=', 'users.id')->get();
-        try{
-            if($token[0]['token'] === $apiKey){
-                // $data = TestingEvent::dispatch('TestingEvent maang nya')
-                $userlogin = User::latest()->where('login', 1)->get();
-                // echo count($userlogin);die;
-                $data = broadcast(new TestingEvent($userlogin[0]['username']." user sedang online !"));
+    // public function TestBroadcast($apiKey)
+    // {
+    //     $token = ApiKeys::join('users', 'api_keys.user_id', '=', 'users.id')->get();
+    //     try{
+    //         if($token[0]['token'] === $apiKey){
+    //             // $data = TestingEvent::dispatch('TestingEvent maang nya')
+    //             $userlogin = User::latest()->where('login', 1)->get();
+    //             // echo count($userlogin);die;
+    //             $data = broadcast(new TestingEvent($userlogin[0]['username']." user sedang online !"));
 
-                return response()->json([
-                    'message'=>$userlogin[0]['username']." user sedang online !",
-                    'data'=>$userlogin
-                ]);
-            }else{
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Api token not registration'
-                ]);
-            }
-        }catch(Exception $e){
-            return response()->json([
-                'message' => 'Error fetch data if no token'
-            ], 401);
-        }
+    //             return response()->json([
+    //                 'message'=>$userlogin[0]['username']." user sedang online !",
+    //                 'data'=>$userlogin
+    //             ]);
+    //         }else{
+    //             return response()->json([
+    //                 'success' => false,
+    //                 'message' => 'Api token not registration'
+    //             ]);
+    //         }
+    //     }catch(Exception $e){
+    //         return response()->json([
+    //             'message' => 'Error fetch data if no token'
+    //         ], 401);
+    //     }
         
-    }
+    // }
 
     public function IpLocator($ip,$apiKey)
     {
@@ -641,6 +640,31 @@ class DataCenterController extends Controller
                 'message' => 'Error fetch data if no token'.$e->getMessage()
             ], 401);
         }
+    }
+
+    public function CheckActiveUser($email, $apiKey)
+    {
+        $token = ApiKeys::join('users', 'api_keys.user_id', '=', 'users.id')->get();
+        try{
+            if($token[0]['token'] === $apiKey){
+                $check_user = User::whereEmail($email)->pluck('status');
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Fetch Check User',
+                    'data' => $check_user
+                ]);
+            }else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Error Fetch Check User'
+                ]);
+            }
+        }catch(Exception $e){
+            return response()->json([
+                'message' => 'Error fetch data '.$e->getMessage()
+            ], 401);
+        }
+
     }
 
 }

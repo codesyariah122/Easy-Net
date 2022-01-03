@@ -104,7 +104,7 @@ class RegisterController extends Controller
           ];
 
           $new_notification = new Notification;
-          $new_notification->name = $user->name. "  telah registrasi";
+          $new_notification->name = "register";
           $new_notification->content = $event_context['message'];
           $new_notification->route = $event_context['route'];
           $new_notification->save();

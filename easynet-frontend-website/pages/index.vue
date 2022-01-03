@@ -61,8 +61,6 @@
       .where({categories: 'blog'})
       .fetch();
 
-      // console.log(blogs)
-
       return {
         data_packages,
         location,

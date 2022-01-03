@@ -256,7 +256,7 @@ export default {
       field: {},
       hidden: {
         login: 0,
-        roles: ["MEMBER"],
+        roles: ["CUSTOMER"],
         status: "INACTIVE"
       },
       show_package: null,
@@ -350,7 +350,7 @@ export default {
                 showConfirmButton: true,
                 timer: 3000,
               });
-              localStorage.setItem('register_success', res.data.message)
+              localStorage.setItem('register_success', JSON.stringify(res.data))
               setTimeout(() => {
                 this.$router.push({
                   path: "/auth/login",

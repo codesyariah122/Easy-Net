@@ -25,7 +25,8 @@
                 {{ip}}
               </pre> -->
 
-              <div v-if="register.message" class="alert alert-success" v-html="register.message"></div>
+              <div v-if="register.message" class="alert alert-success" v-html="register.message">s
+              </div>
               
               <div v-if="error_login">
                 <div class="alert alert-danger" role="alert">
@@ -213,7 +214,7 @@ export default {
   beforeMount(){
     this.$axios.get('https://api.ipify.org/?format=json')
     .then(res => {
-      console.log(res.data.ip)
+      // console.log(res.data.ip)
       this.ip = res.data.ip
     })
     .catch(err => {
@@ -257,9 +258,24 @@ export default {
       this.$store.dispatch("auths/storeUser", process.env.BASEURL)
     },
     CheckRegister(){
-      const checked=localStorage.getItem('register_success')
-      this.register.success=true
-      this.register.message=checked
+      const checked=localStorage.getItem('register_success') ? JSON.parse(localStorage.getItem('register_success')) : ''
+      if(checked){
+        this.$axios.get(`${process.env.BASEURL}/check-user/${checked.data.email}/${process.env.APITOKEN}`)
+        .then(res => {
+          console.log(res.data.data[0])
+          if(res.data.data[0] === "INACTIVE"){
+            this.register.success=true
+            this.register.message=checked.message
+          }else{
+            localStorage.removeItem('register_success')
+          }
+        })
+        .catch(err => {
+          console.log(err.message)
+        })
+      }
+      
+      
     },
     ResetForm(){
       this.error=false

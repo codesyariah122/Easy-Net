@@ -68,6 +68,7 @@ Route::prefix('v1')->group(function () {
 // Aktivasi  User
 	Route::get('/check-activated/{id}/{apiKey}', [DataCenterController::class, 'CheckBeforeActivated']);
 	Route::put('/activated/{id}/{apiKey}', [DataCenterController::class, 'UserActivation']);
+	Route::get('/check-user/{email}/{apikey}', [DataCenterController::class, 'CheckActiveUser']);
 
 // Count User Online
 	Route::get('/count-online/{apiKey}', [DataCenterController::class, 'CountUserLogin']);
