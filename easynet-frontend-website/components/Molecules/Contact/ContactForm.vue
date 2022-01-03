@@ -53,13 +53,11 @@
 				<div class="col-lg-12 col-12">
 					<div class="form-group">
 						<!-- <input @mousedown="ResetForm" name="phone" type="text" placeholder="format: 0811-xxx-12xx" v-model="field.phone"> -->
-						<vue-tel-input @mousedown="ResetForm"
-						type="text"
-						v-model="field.phone"
-						id="phone"
-						name="phone"
-						></vue-tel-input>
-
+						<client-only>
+							<vue-tel-input
+							v-model="field.phone"
+							></vue-tel-input>
+						</client-only>
 						<div v-if="validation.phone" class="alert alert-danger mt-2 mb-2 text-capitalize fw-bolder">
 							{{validation.phone[0]}}
 						</div>
@@ -188,7 +186,7 @@
 							timer: 3000
 						})
 						this.datasuccess=data.data.data
-						this.field=''
+						this.field={}
 					}
 				})
 				.catch(err => {
