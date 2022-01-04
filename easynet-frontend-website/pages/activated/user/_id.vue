@@ -65,7 +65,7 @@ export default {
         .get(`${config.baseurl}/check-activated/${id}/${config.token}`)
         .then((res) => {
           this.loading = true;
-          // console.log(res.data);
+          console.log(res.data);
           if (res.data.ready) {
             this.$swal({
               position: "center",
@@ -90,7 +90,18 @@ export default {
         })
         .catch((err) => {
           this.loading = false;
-          console.log(err.response.data);
+          // console.log(err.response.data)
+          if(err.response.data.message  === "No query results for model [App\\Models\\User] 27"){
+            this.$swal({
+              icon: 'error',
+              title: 'Oops...',
+              text: err.response.data.message.slice(0,17),
+              footer: ''
+            })
+            setTimeout(() => {
+              this.$router.push({ path: "/" });
+            }, 1500);
+          }
         });
     },
 
@@ -105,7 +116,7 @@ export default {
           status: status,
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data)
           if (res.data.success) {
             this.$swal({
               position: "center",
