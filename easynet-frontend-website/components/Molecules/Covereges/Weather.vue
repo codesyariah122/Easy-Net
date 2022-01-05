@@ -45,7 +45,7 @@
 				this.loading=true
 				this.$axios.get(`${process.env.BASEURL}/weather-city/${city}/${process.env.APITOKEN}`)
 				.then(res=>{
-					console.log(res.data)
+					// console.log(res.data)
 					setTimeout(() => {
 						this.loading=false
 						this.temp=res.data.data.main.temp

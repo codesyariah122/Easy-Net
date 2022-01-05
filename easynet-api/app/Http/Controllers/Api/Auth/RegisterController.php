@@ -5,14 +5,18 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Mail\SendEmailNotification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Package;
 use App\Models\ProductUser;
 use App\Models\PackageUser;
 use App\Models\Notification;
+use App\Models\Order;
+use App\Models\OrderUser;
 use App\Events\NotificationEvent;
 use App\MyMethod\MyHelper;
 
@@ -86,6 +90,25 @@ class RegisterController extends Controller
         $package_user->save();
         $package_user_id = $package_user->id;
         $user->package_users()->sync($package_user_id);
+
+        $order_price = Package::findOrFail($package_user->package_id);
+        $order = new Order;
+        $order->user_id = $user->id;
+        $order->product_id = $product_user->product_id;
+        $order->package_id = $package_user->package_id;
+        $order->total_price = $order_price->price;
+        $order->invoice_number = Str::random(10);
+        $order->status = $request->order_status;
+        $order->save();
+        $order->products()->sync($product_user->product_id);
+        $order->packages()->sync($package_user->package_id);
+
+        $order_user = new OrderUser;
+        $order_user->name = 'order-'.$user->username;
+        $order_user->user_id = $order->user_id;
+        $order_user->order_id = $order->id;
+        $order_user->save();
+        $user->order_users()->sync($order_user->id);
 
         $details = [
           'title' => 'Kamu Telah Berhasil Registrasi Di Website easynet.id',

@@ -104,7 +104,7 @@
 				}
 				this.$axios.get(`${config.baseurl}/product/detail/${slug}/${config.token}`)
 				.then(response => {
-					console.log(response)
+					// console.log(response)
 					this.details = response.data.data
 				})
 				.catch(err => console.log(err.message))

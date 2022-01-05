@@ -15,6 +15,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Package;
+use App\Models\Order;
 use App\Models\Chat;
 use App\Models\Map;
 use App\Models\MapCategory;
@@ -530,14 +531,18 @@ class DataCenterController extends Controller
 
     public function CheckBeforeActivated($id)
     {
-       $user =  User::findOrFail($id);
+       $user =  User::with('order_users')->findOrFail($id);
+       $order = Order::with('products')
+                ->with('packages')
+                ->findOrFail($user->order_users[0]->id);
        if($user->status === "INACTIVE"):
             try{
                 return response()->json([
                     'success' => true,
                     'message' => "Halo ! {$user->name} lanjutkan aktivasi akunmu",
                     'target' => "Layanan internet dengan infrastruktur yang paling mutakhir dari EasyNet, sehingga jaringan internet yang menggunakan layanan EasyNet high perfomance akan merasakan pengalaman baru dalam menggunakan layanan fiber maupun broadband wireless dengan infrastruktur teknologi paling terkini. So tidak ada lagi koneksi yang lag ataupun ghosting, ngebuttt terrusss bersama EasyNet.",
-                    'data' => $user
+                    'data' => $user,
+                    'order' => $order
                 ]); 
             }catch(Exception $e){
                 return response()->json([
@@ -547,7 +552,8 @@ class DataCenterController extends Controller
             }
         else:
             return response()->json([
-                'ready' => true
+                'ready' => true,
+                'data' => $user
             ]);
         endif;
     }
