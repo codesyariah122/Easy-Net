@@ -31,7 +31,7 @@
             <div class="signin-form">
               <h2 class="form-title">Sign up</h2>
 
-              <div v-if="error" class="mt-2 mb-3 col-lg-6 col-12">
+              <div v-if="error" class="mt-2 mb-3 col-lg-12 col-xs-12 col-sm-12">
                 <div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Ooops!</strong> Periksa kembali kolom form register dengan lengkap / benar
                 </div>
               </div>

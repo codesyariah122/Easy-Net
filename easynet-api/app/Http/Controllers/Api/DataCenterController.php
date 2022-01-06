@@ -270,38 +270,7 @@ class DataCenterController extends Controller
         }
     }
 
-    public function WebData($apiKey)
-    {
-        $token = ApiKeys::join('users', 'api_keys.user_id', '=', 'users.id')->get();
-        try{
-            if($token[0]['token'] === $apiKey){
-                $data = [
-                    'title' => 'EasyNet :: Website',
-                    'headerLogo' => '',
-                    'headerText' => "Nikmati layanan <span class='text-warning'>High Performance Internet</span><span class='text-info text-justify'>Unlimited Bandwidth</span> Bersama <span class='text-info fw-bold'>Easy Net</span>",
-                    'headerParagraph' => "Melalui infrastruktur High Speed internet kami. Kami siap memenuhi kebutuhan aktifitas anda mulai dari aktifitas Multimedia, Mailing, Study, Streaming hingga , Gaming",
-                    'headerContent' => 'Menyambut era revolusioner internet dalam spektrum gelombang Meta Universe dan internet 5G. Dengan akses internet cepat tentunya kami siap menjadi partner terdepan anda dalam menyongsong meta universe dan internet 5G di era internet masa mendatang. Untuk anda kami akan hadirkan pengalaman menggunakan internet yang stabil dan ramah bagi lingkup bisnis, keluarga dan entertainment.',
-                    'headerCaution' => 'Masih mendapati masalah seperti ini !! Buruan pasang EasyNet.',
-                    'imageHero' => url('image/data-center.jpg'),
-                    'videoHeader' => url('video/video2.mp4')
-                ];
-
-                return response()->json([
-                    'message' => 'Fetch Data Website',
-                    'data' => $data
-                ], 201);
-
-            }else{
-                return response()->json([
-                    'message' => 'Api token not registration'
-                ]);
-            }
-        }catch(Exception $e){
-            return response()->json([
-                'message' => 'Error fetch data if no token'.$e->getMessage()
-            ], 401);
-        }
-    }
+    
 
     public function PackageProduct($apiKey)
     {
@@ -529,33 +498,41 @@ class DataCenterController extends Controller
         }
     }
 
-    public function CheckBeforeActivated($id)
+    public function CheckBeforeActivated($id,$apiKey)
     {
-       $user =  User::with('order_users')->findOrFail($id);
-       $order = Order::with('products')
-                ->with('packages')
-                ->findOrFail($user->order_users[0]->id);
-       if($user->status === "INACTIVE"):
-            try{
+        $token = ApiKeys::join('users', 'api_keys.user_id', '=', 'users.id')->get();
+        if($token[0]['token'] === $apiKey){
+            $user =  User::with('order_users')->findOrFail($id);
+            $order = Order::with('products')
+            ->with('packages')
+            ->findOrFail($user->order_users[0]->id);
+            if($user->status === "INACTIVE"):
+                try{
+                    return response()->json([
+                        'success' => true,
+                        'message' => "Halo ! {$user->name} lanjutkan aktivasi akunmu",
+                        'target' => "Layanan internet dengan infrastruktur yang paling mutakhir dari EasyNet, sehingga jaringan internet yang menggunakan layanan EasyNet high perfomance akan merasakan pengalaman baru dalam menggunakan layanan fiber maupun broadband wireless dengan infrastruktur teknologi paling terkini. So tidak ada lagi koneksi yang lag ataupun ghosting, ngebuttt terrusss bersama EasyNet.",
+                        'data' => $user,
+                        'order' => $order
+                    ]); 
+                }catch(Exception $e){
+                    return response()->json([
+                        'success' => false,
+                        'message' => "Activation Failed ".$e->getMessage()
+                    ]);
+                }
+            else:
                 return response()->json([
-                    'success' => true,
-                    'message' => "Halo ! {$user->name} lanjutkan aktivasi akunmu",
-                    'target' => "Layanan internet dengan infrastruktur yang paling mutakhir dari EasyNet, sehingga jaringan internet yang menggunakan layanan EasyNet high perfomance akan merasakan pengalaman baru dalam menggunakan layanan fiber maupun broadband wireless dengan infrastruktur teknologi paling terkini. So tidak ada lagi koneksi yang lag ataupun ghosting, ngebuttt terrusss bersama EasyNet.",
-                    'data' => $user,
-                    'order' => $order
-                ]); 
-            }catch(Exception $e){
-                return response()->json([
-                    'success' => false,
-                    'message' => "Activation Failed ".$e->getMessage()
+                    'ready' => true,
+                    'data' => $user
                 ]);
-            }
-        else:
+            endif;
+        }else{
             return response()->json([
-                'ready' => true,
-                'data' => $user
-            ]);
-        endif;
+                'message' => 'Error fetch data if no token'
+            ], 401);
+        }
+       
     }
 
     public function UserActivation(Request $request, $id)

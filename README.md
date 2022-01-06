@@ -1,4 +1,4 @@
-### For Data Center Easy Net (isp) - Bandung
+### EasyNet - Bandung
 ### Realtime Notification with  Websocket and Pusher  
 #### Setup
 ```
