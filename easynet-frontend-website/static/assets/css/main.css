@@ -3656,8 +3656,12 @@ ol {
   font-weight: 500;
 }
 
+.post-details{
+  width: 100%;
+}
+
 .post-details .detail-inner {
-  background-color: #fff;
+  background-color: #000;
   padding: 0;
   margin-top: 40px;
 }

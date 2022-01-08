@@ -1,13 +1,13 @@
-@tailwind base;
+/*@tailwind base;
 
 @tailwind components;
 
-@tailwind utilities;
+@tailwind utilities;*/
 
 :root {
   --color: #243746;
   --color-primary: #158876;
-  --color-secondary: #0e2233;
+  --color-secondary: #fff;
   --bg: #f3f5f4;
   --bg-secondary: #fff;
   --border-color: #ddd;
@@ -42,6 +42,38 @@ a {
   color: var(--color-primary);
 }
 
-.hero-section{
-  background-color: var(--bg);
+.post-content .post-details{
+  background: var(--bg);
+}
+
+.post-content .post-details .detail-inner{
+  background: var(--bg-secondary);
+  color: var(--color);
+}
+.post-content .post-details .detail-inner .post-title{
+  color: var(--color-primary);
+}
+
+.post-content .post-details .detail-inner .post-meta li a {
+  color: var(--color);
+}
+.post-content .post-details .detail-inner .tag-title {
+  color: var(--color-primary);
+}
+
+.post-content .post-details .detail-inner .tags a{
+  color: var(--color-primary);
+}
+
+
+.post-content .post-comments {
+  background: var(--bg-color);
+}
+
+.post-content .post-comments .comment-title {
+  color: var(--color-primary);
+}
+
+#reactions__container #reactions{
+  color: var(--color);
 }

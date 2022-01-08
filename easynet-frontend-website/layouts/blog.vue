@@ -22,7 +22,8 @@
 
 		head:{
 			link: [
-			{ rel: 'stylesheet', type: 'text/css', href: '/assets/css/blog.css'},
+			{ rel: 'stylesheet', type: 'text/css', href: require('~/assets/css/main.css')},
+			// { rel: 'stylesheet', type: 'text/css', href: '/assets/css/blog.css'},
 			{ rel: 'stylesheet', type: 'text/css', href: '/assets/css/main.css'},
 			{ rel: 'stylesheet', type: 'text/css', href: '/assets/css/new-style.css'}
 			],

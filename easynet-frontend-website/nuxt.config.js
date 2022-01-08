@@ -304,11 +304,11 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   content: {
-    markdown: {
-      prism: {
-        theme: 'prism-themes/themes/prism-material-oceanic.css'
-      }
-    },
+    // markdown: {
+    //   prism: {
+    //     theme: 'prism-themes/themes/prism-material-oceanic.css'
+    //   }
+    // },
     nestedProperties: ['author.name']
   },
   vue: {

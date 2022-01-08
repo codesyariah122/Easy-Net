@@ -92,7 +92,7 @@ export default {
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       attribution:
         '&copy; <a target="_blank" href="http://osm.org/copyright">EasyNetMap</a> contributors',
-      zoom: this.$device.isMobile ? 9 : 11,
+      zoom: this.$device.isMobile ? 17 : 17,
       isMobile: this.$device.isMobile,
       coordinates: [],
       servers: [],

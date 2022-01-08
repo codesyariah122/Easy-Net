@@ -5,120 +5,102 @@
 			{{blog}}
 		</pre> -->
 		
-		<div class="container mt-5">
-			<div class="row">
-				<div class="row justify-content-center">
-					<div :class="`col-lg-12 col-xs-12 col-sm-12 ${isDevice ? 'mb-0' : 'mb-5'}`">
-						<div class="d-grid gap-2">
-							<a href="/#blog" class="btn btn-primary rounded-pill" type="button">Back Homepage</a>
-						</div>
+		<div class="row justify-content-center mt-5">
+			<div :class="`col-lg-12 col-xs-12 col-sm-12 ${isDevice ? 'mb-0' : 'mb-5'}`">
+				<div class="d-grid gap-2">
+					<a href="/#blog" class="btn btn-primary rounded-pill" type="button">Back Homepage</a>
+				</div>
+			</div>
+			<div class="col-lg-12 col-xs-12 col-sm-12">
+				<div class="float-right">
+					<ColorModePicker/>
+				</div>
+			</div>
+		</div>
+
+		<div class="row justify-content-center">
+			<div class="col-lg-12 col-xs-12 col-sm-12">
+				<div :style="`${$isMobile ? 'margin-left: -.3rem;' : ''}`" class="post-thumbnils">
+					<img :src="require(`~/assets/blog/images/${blog.slug}/${blog.img}`)" alt="#">
+					<div class="author">
+						<!-- <img :src="blog.author.img" alt="#">  -->
+						<span>
+							By {{blog.author.name}}
+						</span>
 					</div>
 				</div>
-				<div class="col-lg-8 col-xs-12 col-sm-12">
-					<div :style="`${$isMobile ? 'margin-left: -3rem;' : ''}`" class="post-thumbnils">
-						<img :src="require(`~/assets/blog/images/${blog.slug}/${blog.img}`)" alt="#" :width="`${$isMobile ? '50' : '700'}`">
-						<div class="author">
-							<!-- <img :src="blog.author.img" alt="#">  -->
-							<span>
-								By {{blog.author.name}}
-							</span>
-						</div>
-					</div>
-					<div class="post-details">
-						<div class="detail-inner">
-							<h2 class="post-title">
-								<a href="#">
-									{{blog.title}}
-								</a>
-							</h2>
+			</div>
 
-							<ul class="custom-flex post-meta">
-								<li>
+			<div class="post-content col-lg-12 col-xs-12 col-sm-12">
+				<div class="post-details">
+					<div class="detail-inner">
+						<div class="row justify-content-center">
+							<div class="col-lg-12 col-xs-12 col-sm-12">
+								<h2 class="post-title text-center">
 									<a href="#">
-										<i class="lni lni-calendar"></i>
-										{{$moment(blog.createdAt).format("LLLL")}}
+										{{blog.title}}
 									</a>
-								</li>
-								<!-- <li>
-									<a href="#">
-										<i class="lni lni-comments"></i>
-										35 Comments
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="lni lni-eye"></i>
-										55 View
-									</a>
-								</li> -->
-							</ul>
-							<p>{{blog.detail}}</p>
+								</h2>
+							</div>
 
-							<!-- <div class="post-image">
-								<div class="row">
-									<div class="col-lg-6 col-md-6 col-12">
+							<div class="col-md-10 col-xs-10 col-sm-10">
+								<ul class="custom-flex post-meta">
+									<li>
 										<a href="#">
-											<img class="blog-inner-big-img" src="assets/images/blog/blog-single-left.jpg" alt="#">
+											<i class="lni lni-calendar"></i>
+											{{$moment(blog.createdAt).format("LLLL")}}
 										</a>
-									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<a href="#" class="mb-4">
-											<img src="assets/images/blog/blog-single2.jpeg" alt="#">
-										</a>
-										<a href="#">
-											<img src="assets/images/blog/blog-single3.jpeg" alt="#">
-										</a>
-									</div>
-								</div>
-							</div> -->
+									</li>
 
-							<nuxt-content :document="blog" style="text-align: justify; font-size: 18px;"/>
+								</ul>
+								<p>{{blog.detail}}</p>
 
-							<div class="post-tags-media mt-5 mb-5">
-								<div class="post-tags popular-tag-widget mb-xl-40">
-									<!-- <pre>
-										{{tags}}
-									</pre> -->
-									<h5 class="tag-title">Related Tags</h5>
-									<div v-for="(item,index) in tags" class="tags">
-										<a href="#">
-											{{item.name}}
-										</a>
+								<nuxt-content :document="blog" style="text-align: justify; font-size: 18px;"/>
+
+										<div class="post-tags-media mt-5 mb-5">
+											<div class="post-tags popular-tag-widget mb-xl-40">
+											<!-- <pre>
+												{{tags}}
+											</pre> -->
+											<h5 class="tag-title">Related Tags</h5>
+											<div v-for="(item,index) in tags" class="tags">
+												<a href="#" class="text-primary">
+													#{{item.name}}
+												</a>
+											</div>
+										</div>
+										<div class="post-social-media">
+											<h5 class="share-title">Social Share</h5>
+											<ul class="custom-flex">
+												<li>
+													<a href="#">
+														<i class="lni lni-twitter-original"></i>
+													</a>
+												</li>
+												<li>
+													<a href="#">
+														<i class="lni lni-facebook-oval"></i>
+													</a>
+												</li>
+												<li>
+													<a href="#">
+														<i class="lni lni-instagram"></i>
+													</a>
+												</li>
+											</ul>
+										</div>
 									</div>
 								</div>
-								<div class="post-social-media">
-									<h5 class="share-title">Social Share</h5>
-									<ul class="custom-flex">
-										<li>
-											<a href="#">
-												<i class="lni lni-twitter-original"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="lni lni-facebook-oval"></i>
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="lni lni-instagram"></i>
-											</a>
-										</li>
-									</ul>
+
+								<div class="post-comments  mt-3 mb-5">
+									<h3 class="comment-title">Post comments</h3>
+									<client-only>
+										<Disqus/>
+									</client-only>
 								</div>
 							</div>
-						</div>
 
-						<div class="post-comments  mt-3 mb-5">
-							<h3 class="comment-title">Post comments</h3>
-							<client-only>
-								<Disqus/>
-							</client-only>
 						</div>
-						<!-- <div class="comment-form">
-							<h3 class="comment-reply-title">Leave a comment</h3>
-
-						</div> -->
 					</div>
 				</div>
 			</div>
@@ -128,8 +110,13 @@
 </template>
 
 <script>
+	import ColorModePicker from '@/components/ColorModePicker'
+
 	export default{
 		layout: 'blog',
+		components: {
+			ColorModePicker
+		},
 		data(){
 			return {
 				isDevice: this.$isMobile ? true : false
