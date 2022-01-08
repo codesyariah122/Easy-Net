@@ -3,19 +3,18 @@
 
     <div class="row justify-content-center">
       <div class="col-lg-12 col-xs-12 col-sm-12">
-        <h3>Edit Profile  <span v-if="loading">
-          <div class="spinner-grow text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>    
-        </span>
-        <span v-else style="text-transform: capitalize;">
-          {{user.name}}
-        </span></h3>
+        <h3>Edit Profile </h3>
       </div>
       <div class="col-lg-12 col-xs-12 col-sm-12">
         <div class="card">
           <div class="card-body">
-            <FormEdit :id="$route.params.id"/>
+
+            <!-- <pre>
+              {{order_users}}
+            </pre> -->
+
+            <FormEdit :id="$route.params.id" :auth="auth"/>
+
           </div>
         </div>
       </div>
@@ -29,6 +28,7 @@
 
   export default {
     layout: "profile",
+    name: 'edit',
     components:{
       FormEdit
     },
@@ -39,8 +39,11 @@
       return {
         loading: null,
         params: this.$route.path,
-        user:{},
-        profile: {}
+        users: {},
+        profiles: {},
+        packages:{},
+        products: {},
+        order_users: {}
       }
     },
 
@@ -50,8 +53,7 @@
     mounted() {
       this.registered(),
       this.checkToken(this.auth.token),
-      this.dataUser(),
-      this.UserDetail(this.$route.params.id)
+      this.dataUser()
     },
     methods: {
       registered(){
@@ -63,25 +65,6 @@
         })
       },
 
-
-      UserDetail(id){
-        this.loading = true
-        const config = {
-          baseurl: process.env.BASEURL
-        }
-        this.$axios.defaults.headers.common.Authorization = `Bearer ${this.auth.token}`
-        this.$axios.get(`${config.baseurl}/user-manage/${id}`)
-        .then((res) => {
-          this.loading = false
-          this.user = res.data.data
-          this.profile = res.data.data.profiles[0]
-          this.product = res.data.data.products[0]
-          this.package = res.data.data.packages[0]
-        })
-        .catch(err => {
-          console.log(err.response)
-        })
-      },
 
       checkToken(token){
         if(!token){

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ReplyContactMessageToEmail extends Mailable
+class ForgotPasswordEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -29,7 +29,7 @@ class ReplyContactMessageToEmail extends Mailable
     public function build()
     {
         return $this->subject('EasyNet - Layanan Internet High Performance dan Stabils, bil bil... mantapzzz')
-                ->view('emails.reply-contact')
+                ->view('emails.forgot-password')
                 ->with('details', $this->details);
     }
 }

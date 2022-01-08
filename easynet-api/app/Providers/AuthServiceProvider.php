@@ -30,6 +30,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('user-manage', function($user){
             return count(array_intersect(["ADMIN"], json_decode($user->roles))) ? true :  false;
         });
+        Gate::define('edit-profile-customer', function($user){
+            return count(array_intersect(["CUSTOMER"], json_decode($user->roles))) ? true :  false;
+        });
         Gate::define('category-product', function($user){
             return count(array_intersect(["ADMIN", "STAFF"], json_decode($user->roles))) ? true :  false;
         });

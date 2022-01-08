@@ -5,6 +5,7 @@
 		</pre> -->
 		<div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
 			<div class="card p-4">
+				
 				<div class="image d-flex flex-column justify-content-center align-items-center"> 
 					<button class="btn btn-secondary"> 
 						<!-- <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" /> -->
@@ -21,7 +22,31 @@
 							{{auth.token}}
 						</span> <span><i class="fa fa-copy"></i></span> 
 					</div>
-					<div class="d-flex flex-row justify-content-center align-items-center mt-3"> <span class="number">0 <span class="follow">Orders</span></span> </div>
+
+					<div class="row justify-content-center align-items-center mt-3">
+						<div v-if="loading">
+							<div class="d-flex justify-content-center">
+								<div class="spinner-border" role="status">
+									<span class="visually-hidden">Loading...</span>
+								</div>
+							</div>
+						</div>
+						<div v-else>
+							<span v-if="user_order" class="number">
+								{{orders.length}} 
+								<span class="follow">Orders</span>
+							</span>
+							<span v-else class="number">
+								0
+								<span class="follow">Orders</span>
+							</span> 
+						</div>
+					</div>
+
+					<!-- <pre>
+						{{$route.path}}
+					</pre> -->
+
 					<div class=" d-flex mt-2">
 						<button @click.prevent="$emit('logout')" class="btn1 btn-dark">Logout</button>
 						<button @click.prevent="EditProfile(userdata.id)" class="btn1 btn-dark">Edit Profile</button> 
@@ -53,11 +78,20 @@
 	export default{
 		props: ['userdata', 'auth', 'path'],
 
+		data(){
+			return {
+				user_order:{},
+				orders: [],
+				loading: null
+			}
+		},
+
 		beforeMount(){
 			$crisp.push(['do', 'chat:open'])
 		},
 		mounted(){
-			this.ChatOpen(this.auth)
+			this.ChatOpen(this.auth),
+			this.CheckOrder(this.auth.id, this.auth.username)
 		},
 
 		methods: {
@@ -75,6 +109,18 @@
 		    EditProfile(id){
 		    	this.$router.push({
 		    		path: `${this.$route.path}/edit/${id}`
+		    	})
+		    },
+		    CheckOrder(id, username){
+		    	this.loadig=true
+		    	this.$axios.get(`${process.env.BASEURL}/check-order-customer/${id}/${process.env.APITOKEN}`)
+		    	.then(res => {
+		    		this.loadig=false
+		    		this.user_order=res.data.user_order
+		    		this.orders = res.data.data.order_users
+			    })
+		    	.catch(err => {
+		    		console.log(err.message)
 		    	})
 		    }
 		},

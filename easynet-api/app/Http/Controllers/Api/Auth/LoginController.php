@@ -28,6 +28,7 @@ class LoginController extends Controller
                 return response()->json($validator->errors(), 400);
             }
             $user = User::where('email', $request->email)->first();
+            // var_dump($user->roles);  die;
 
             if(!$user){
                 return response()->json([
@@ -89,7 +90,7 @@ class LoginController extends Controller
 
                     // var_dump($user->roles); die;
 
-                    if(!in_array("ADMIN", json_decode($user->roles)) && !in_array("SALES", json_decode($user->roles)) && !in_array("SUPPORT", json_decode($user->roles))){
+                    if(in_array("CUSTOMER", json_decode($user->roles))){
                         $new_notification = new Notification;
                         $new_notification->name = "login";
                         $new_notification->content = $event_context['message'];
@@ -154,7 +155,7 @@ class LoginController extends Controller
                 "name" => "logout",
                 "route" => "/logs"
             ];
-            if(!in_array("ADMIN", json_decode($user->roles)) && !in_array("SALES", json_decode($user->roles)) && !in_array("SUPPORT", json_decode($user->roles))){
+            if(in_array("CUSTOMER", json_decode($user->roles))){
                 $new_notification = new Notification;
                 $new_notification->name = "logout";
                 $new_notification->content = $event_context['message'];

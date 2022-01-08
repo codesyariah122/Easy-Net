@@ -45,8 +45,8 @@ class RegisterController extends Controller
 
         $user = new User;
         $format_telp = new MyHelper;
-        $user->name = $request->name;
-        $user->email = $request->email;
+        $user->name = strip_tags($request->name);
+        $user->email = strip_tags($request->email);
         $user->phone= $format_telp->format_phone($request->phone);
         $user->roles = json_encode($request->roles);
         $user->status = $request->status;
@@ -98,6 +98,9 @@ class RegisterController extends Controller
         $order->package_id = $package_user->package_id;
         $order->total_price = $order_price->price;
         $order->invoice_number = Str::random(10);
+        $order->address = $request->address;
+        $order->post_code = $request->post_code;
+        // $order->invoice_number = rand((int)$user->id,99);
         $order->status = $request->order_status;
         $order->save();
         $order->products()->sync($product_user->product_id);

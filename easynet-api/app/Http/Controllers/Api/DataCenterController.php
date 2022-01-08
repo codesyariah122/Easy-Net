@@ -86,8 +86,8 @@ class DataCenterController extends Controller
             }
 
             $new_message = new Contact;
-            $new_message->fullname=$request->fullname;
-            $new_message->email=$request->email;
+            $new_message->fullname=strip_tags($request->fullname);
+            $new_message->email=strip_tags($request->email);
             $contact_categories = $request->contact_categories;
             $category_contact = ContactCategory::where('id', $contact_categories[0])->get();
             // echo $category_contact[0]['category_contact_name'];
@@ -110,8 +110,8 @@ class DataCenterController extends Controller
             // var_dump($admin[0]->email);die;
             $format_telp = new MyHelper;
             $new_message->phone=$format_telp->format_phone($request->phone);
-            $new_message->message=$request->message;
-            $new_message->address=$request->address;
+            $new_message->message=htmlspecialchars($request->message);
+            $new_message->address=htmlspecialchars($request->address);
             $new_message->ip=$request->ip;
             $new_message->city=$request->city;
             $new_message->province=$request->province;
@@ -173,7 +173,7 @@ class DataCenterController extends Controller
     // {
     //     try{
     //         $context="Broadcasting Events using web sockets";
-    //         $data = broadcast(new NotificationWeb($context));
+    //         $data = broadcast(new TestingEvent($context));
     //         return response()->json([
     //             'message'=>"New event broadcast !",
     //             'data'=>$context
@@ -504,8 +504,8 @@ class DataCenterController extends Controller
         if($token[0]['token'] === $apiKey){
             $user =  User::with('order_users')->findOrFail($id);
             $order = Order::with('products')
-            ->with('packages')
-            ->findOrFail($user->order_users[0]->id);
+                    ->with('packages')
+                    ->findOrFail($user->order_users[0]->id);
             if($user->status === "INACTIVE"):
                 try{
                     return response()->json([
@@ -647,7 +647,47 @@ class DataCenterController extends Controller
                 'message' => 'Error fetch data '.$e->getMessage()
             ], 401);
         }
+    }
 
+    public function CheckOrderUser($id, $apiKey)
+    {
+        $token = ApiKeys::join('users', 'api_keys.user_id', '=', 'users.id')->get();
+        try{
+            if($token[0]['token'] === $apiKey){
+                $check_user_order = User::with('order_users')
+                                    ->findOrFail($id);
+
+                // echo count($check_user_order->order_users);
+                // die;
+                if(count($check_user_order->order_users) % 2 === 1){
+                    $order_users = Order::with('products')
+                                ->with('packages')
+                                ->findOrFail($check_user_order->order_users[0]->id);
+
+                    return response()->json([
+                        'order' => true,
+                        'message' => 'Fetch Check User Order',
+                        'data' => $check_user_order,
+                        'user_order' => $order_users
+                    ]);
+                }else{
+                    return response()->json([
+                        'order' => false,
+                        'message' => 'No order'
+                    ]);
+                }
+
+            }else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Error Fetch Check User Order'
+                ]);
+            }
+        }catch(Exception $e){
+            return response()->json([
+                'message' => 'Error fetch data '.$e->getMessage()
+            ], 401);
+        }
     }
 
 }

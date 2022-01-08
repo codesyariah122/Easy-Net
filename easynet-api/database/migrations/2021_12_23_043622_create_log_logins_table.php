@@ -15,9 +15,9 @@ class CreateLogLoginsTable extends Migration
     {
         Schema::create('log_logins', function (Blueprint $table) {
             $table->id();
-            $table->string('ip');
-            $table->string('city');
-            $table->string('province');
+            $table->string('ip')->nullable();
+            $table->string('city')->nullable();
+            $table->string('province')->nullable();
             $table->timestamps();
         });
     }

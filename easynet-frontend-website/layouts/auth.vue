@@ -38,11 +38,7 @@
 		      	{
 		      		src:'/assets/auth/vendor/jquery/jquery.min.js',
 		      		type: 'text/javascript'
-		      	},
-		      	{
-		      		src: '/assets/auth/js/main.js',
-		      		type: 'text/javascript'
-		      	},
+		      	}
 	      	],
 		},
 		mounted(){

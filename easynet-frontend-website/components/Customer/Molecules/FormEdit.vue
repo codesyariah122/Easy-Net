@@ -77,10 +77,15 @@
 				<div class="d-grid gap-2 mt-5 mb-2">
 					<button type="submit" class="btn2 btn-submit">Submit</button>
 				</div>
+
 				<div class="d-grid gap-2 mt-5">
 					<button @click="RefreshForm" type="submit" class="btn2 btn-reset">Reset Form</button>
 				</div>
 
+				<div class="d-grid gap-2 mt-5">
+					<button @click="CancelEdit" type="submit" class="btn2 btn-submit">Cancel Edit</button>
+				</div>
+				
 			</form>
 		</div>
 	</div>
@@ -88,7 +93,7 @@
 
 <script>
 	export default {
-		props: ['id'],
+		props: ['id', 'auth'],
 		data(){
 			return {
 				loading: null,
@@ -111,6 +116,11 @@
 			this.getProvinsi()
 		},
 		methods: {
+			CancelEdit(){
+				this.$router.push({
+					path: `/profile/customer/${this.auth.username}`
+				})
+			},
 			RefreshForm(){
 				location.reload()
 			},
@@ -119,16 +129,17 @@
 				const config = {
 					baseurl: process.env.BASEURL
 				}
-				this.$axios.get(`${config.baseurl}/user-manage/${id}`)
+				this.$axios.defaults.headers.common.Authorization = `Bearer ${this.auth.token}`
+				this.$axios.get(`${config.baseurl}/edit-profile-customer/${id}`)
 				.then((res) => {
 					this.loading = false
 					this.user = res.data.data
 					this.profile = res.data.data.profiles ? res.data.data.profiles[0] : ''
-					this.product = res.data.data.products ? res.data.data.products[0] : ''
-					this.package = res.data.data.packages ? res.data.data.packages[0] : ''
+					this.product = res.data.order_user.products ? res.data.order_user.products[0] : ''
+					this.package = res.data.order_user.packages ? res.data.order_user.packages[0] : ''
 				})
 				.catch(err => {
-					console.log(err.message)
+					console.log(err.response)
 				})
 			},
 			EditUser(e){

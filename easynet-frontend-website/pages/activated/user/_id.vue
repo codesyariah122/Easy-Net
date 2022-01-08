@@ -65,7 +65,6 @@ export default {
         .get(`${config.baseurl}/check-activated/${id}/${config.token}`)
         .then((res) => {
           this.loading = true;
-          console.log(res.data);
           if (res.data.ready) {
             this.$swal({
               position: "center",
@@ -82,6 +81,17 @@ export default {
             // 	window.close() ? window.close : this.$router.push({path: '/'})
             // },1500)
           } else {
+            // console.log(res.data.data.order_users)
+            const order_users = res.data.data.order_users
+            if(order_users){
+              const data_order =  {
+                status: true,
+                message: 'Order ready to proccess',
+                order_users: order_users[0],
+                data: res.data.order
+              }
+              localStorage.setItem('order-user', JSON.stringify(data_order))
+            }
             this.Activation(this.field.id, this.field.status);
           }
 

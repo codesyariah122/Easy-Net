@@ -22,6 +22,8 @@ class CreateOrdersTable extends Migration
                 'CANCEL'])->nullable();
             $table->float("total_price")->unsigned()->defaults(0)->nullable();
             $table->string("invoice_number")->nullable();
+            $table->longText('address')->nullable();
+            $table->string('post_code')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade')->onUpdate('cascade');

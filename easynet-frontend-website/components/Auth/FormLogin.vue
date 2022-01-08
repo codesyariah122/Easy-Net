@@ -22,10 +22,10 @@
               <h2 class="form-title">Login</h2>
               
               <!-- <pre>
-                {{ip}}
+                {{order_user.data}}
               </pre> -->
 
-              <div v-if="register.message" class="alert alert-success" v-html="register.message">s
+              <div v-if="register.message" class="alert alert-success" v-html="register.message">
               </div>
               
               <div v-if="error_login">
@@ -110,6 +110,9 @@
                   <label for="agree-term" class="label-agree-term"
                     ><span><span></span></span>Remember Me</label
                   >
+                </div>
+                <div class="form-group">
+                    <nuxt-link to="/auth/forgot">Forgot Password</nuxt-link>
                 </div>
                 <div class="form-group form-button">
                   <div class="d-grid gap-2">
@@ -204,22 +207,16 @@ export default {
       haslogin:{
         status: null,
         message: ''
-      }
-    };
+      },
+      order_user:{}
+    }
   },
   beforeRouteEnter(to, from, next) {
     console.log(from)
     next()
   },
   beforeMount(){
-    this.$axios.get('https://api.ipify.org/?format=json')
-    .then(res => {
-      // console.log(res.data.ip)
-      this.ip = res.data.ip
-    })
-    .catch(err => {
-      console.log(err.message)
-    }),
+    this.getIp(),  
     this.checkAuth()
   },
 
@@ -231,6 +228,36 @@ export default {
   },
 
   methods: {
+    CheckOrder(id, username){
+      this.$axios.get(`${process.env.BASEURL}/check-order-customer/${id}/${process.env.APITOKEN}`)
+      .then(res => {
+        this.order_user=res.data.user_order
+        // console.log(this.order_user.status)
+        // console.log(res)
+        if(res.data.order){
+          this.$router.push({
+            path: `/profile/customer/${username}/order`
+          })
+        }else{
+          this.$router.push({
+            path: `/profile/customer/${username}`
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err.response)
+      })
+    },
+    getIp(){
+      this.$axios.get('https://api.ipify.org/?format=json')
+      .then(res => {
+        console.log(res.data.ip)
+        this.ip = res.data.ip
+      })
+      .catch(err => {
+        console.log(err.response)
+      })
+    },
     Location(){
       this.$axios.get(`https://ipapi.co/${this.ip}/json`)
       .then(res => {
@@ -324,6 +351,7 @@ export default {
           province: user.province
         })
         .then((res) => {
+          // console.log(res)
           this.error_login = "";
           this.data_error_login = "";
           this.loginFailed = "";
@@ -378,11 +406,14 @@ export default {
                   path: `/dashboard/admin/${this.checked.username}`
                 });
               } else if (this.checked.roles === "CUSTOMER") {
-                this.$router.push({
-                  path: `/profile/customer/${this.checked.username}`,
-                  // name: 'profile',
-                  // params: {username: this.checked.username}
-                });
+                // if(this.order_user.data){
+                //   this.$router.push({
+                //     path: `/profile/customer/${this.checked.username}/order`
+                //   })
+                // }else{
+                // }
+                this.CheckOrder(this.checked.id, this.checked.username)
+                
               } else if(this.checked.roles === "SALES"){
                 this.$router.push({
                   // path: "/dashboard/admin",
@@ -408,7 +439,7 @@ export default {
             title: 'Oops...',
             text: 'Something went wrong!'
           })
-          console.log(err.message)
+          // console.log(err.response)
           this.loading = false;
           this.loginFailed = false;
           this.error_login = false;
