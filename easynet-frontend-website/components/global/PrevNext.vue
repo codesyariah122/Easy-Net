@@ -2,7 +2,7 @@
 	<div>
 		<h5 class="text-secondary text-center">Article Lainnya</h5>
 		<div class="d-flex justify-content-center">
-			<div class="col-md-4">	
+			<div class="col-md-4 col-xs-12 col-sm-12">	
 				<div v-if="prev" class="card card-prev-next mx-auto mt-3 mb-3" style="width: 18rem;">
 					<NuxtLink :to="{ name: `blog-slug`, params: { slug: prev.slug } }">
 						<div class="image">
@@ -24,7 +24,7 @@
 				<span v-else>&nbsp;</span>
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-md-4 col-xs-12 col-sm-12">
 				<div v-if="next" class="card card-prev-next ml-5 mt-3 mb-3" style="width: 18rem;">
 					<NuxtLink :to="{ name: `blog-slug`, params: { slug: next.slug } }">
 						<div class="image">
