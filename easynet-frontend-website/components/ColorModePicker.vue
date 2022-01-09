@@ -1,5 +1,6 @@
 <template>
   <div>
+    <small>Gunakan mode baca ... <span style="font-size:31px;">&#127957;</span></small>
     <ul>
       <li v-for="color of colors" :key="color">
       	<component :is="`icon-${color}`"

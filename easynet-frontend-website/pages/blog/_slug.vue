@@ -8,57 +8,58 @@
 		<div class="row justify-content-center mt-5">
 			<div :class="`col-lg-12 col-xs-12 col-sm-12 ${isDevice ? 'mb-0' : 'mb-5'}`">
 				<div class="d-grid gap-2">
-					<a href="/#blog" class="btn btn-primary rounded-pill" type="button">Back Homepage</a>
+					<a @click="$colorMode.preference = 'light'" href="/#blog" class="btn btn-primary rounded-pill" type="button">
+						<i class="lni lni-angle-double-left"></i> Back Homepage
+					</a>
+					</div>
 				</div>
-			</div>
-			<div class="col-lg-12 col-xs-12 col-sm-12">
-				<div class="float-right">
-					<ColorModePicker/>
-				</div>
-			</div>
-		</div>
-
-		<div class="row justify-content-center">
-			<div class="col-lg-12 col-xs-12 col-sm-12">
-				<div :style="`${$isMobile ? 'margin-left: -.3rem;' : ''}`" class="post-thumbnils">
-					<img :src="require(`~/assets/blog/images/${blog.slug}/${blog.img}`)" alt="#">
-					<div class="author">
-						<!-- <img :src="blog.author.img" alt="#">  -->
-						<span>
-							By {{blog.author.name}}
-						</span>
+				<div class="col-lg-12 col-xs-12 col-sm-12">
+					<div class="float-right">
+						<ColorModePicker/>
 					</div>
 				</div>
 			</div>
 
-			<div class="post-content col-lg-12 col-xs-12 col-sm-12">
-				<div class="post-details">
-					<div class="detail-inner">
-						<div class="row justify-content-center">
-							<div class="col-lg-12 col-xs-12 col-sm-12">
-								<h2 class="post-title text-center">
-									<a href="#">
-										{{blog.title}}
-									</a>
-								</h2>
-							</div>
+			<div class="row justify-content-center">
+				<div class="single-news wow fadeInUp col-lg-12 col-xs-12 col-sm-12">
+					<div class="image">
+						<img class="thumb img-fluid" :src="require(`~/assets/blog/images/${blog.slug}/${blog.img}`)" alt="#">
+						<div class="meta-details text-capitalize">
+							<!-- <img :src="blog.author.img" alt="#">  -->
+							<span>BY {{blog.author.name}}</span>
+						</div>
+					</div>
 
-							<div class="col-md-10 col-xs-10 col-sm-10">
-								<ul class="custom-flex post-meta">
-									<li>
+				</div>
+
+				<div class="post-content col-lg-12 col-xs-12 col-sm-12">
+					<div class="post-details">
+						<div class="detail-inner">
+							<div class="row justify-content-center">
+								<div class="col-lg-12 col-xs-12 col-sm-12">
+									<h2 class="post-title text-center">
 										<a href="#">
-											<i class="lni lni-calendar"></i>
-											{{$moment(blog.createdAt).format("LLLL")}}
+											{{blog.title}}
 										</a>
-									</li>
+									</h2>
+								</div>
 
-								</ul>
-								<p>{{blog.detail}}</p>
+								<div class="col-md-10 col-xs-10 col-sm-10">
+									<ul class="custom-flex post-meta">
+										<li>
+											<a href="#">
+												<i class="lni lni-calendar"></i>
+												{{$moment(blog.createdAt).format("LLLL")}}
+											</a>
+										</li>
 
-								<nuxt-content :document="blog" style="text-align: justify; font-size: 18px;"/>
+									</ul>
+									<p>{{blog.detail}}</p>
 
-										<div class="post-tags-media mt-5 mb-5">
-											<div class="post-tags popular-tag-widget mb-xl-40">
+									<nuxt-content :document="blog" style="text-align: justify; font-size: 18px;"/>
+
+									<div class="post-tags-media mt-5 mb-5">
+										<div class="post-tags popular-tag-widget mb-xl-40">
 											<!-- <pre>
 												{{tags}}
 											</pre> -->
@@ -137,5 +138,20 @@
 				tags
 			}
 		},
+
+		methods: {
+			BackHome(){
+				const color_mode = document.querySelector('.dark-mode')
+				this.$swal(color_mode)
+			}
+		}
 	}
 </script>
+
+<style>
+	.nuxt-content{
+		width: 90%;
+		margin-left: 1rem;
+		align-content: center;
+	}
+</style>
