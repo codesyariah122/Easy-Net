@@ -50,6 +50,8 @@ Sebelum kamu menentukan provider internet wifi apa yang cocok untuk rumah kamu, 
 
 <img src="https://s3.us-west-2.amazonaws.com/wakegov.com.if-us-west-2/prod/styles/max_1300x1300/s3/images/2020-10/ISPs_iStock-1198401598_resized.jpg?itok=Uzxwxe_O" class="img-fluid">  
 
-Selain ketiga faktor di atas, budget adalah hal yang harus kamu perhatikan. Pilihlah provider internet dengan biaya yang sesuai dengan kantongmu! Tidak hanya itu, carilah juga provider yang menawarkan banyak diskon dan potongan.
+Selain ketiga faktor di atas, budget adalah hal yang harus kamu perhatikan. Pilihlah provider internet dengan biaya yang sesuai dengan kantongmu! Tidak hanya itu, carilah juga provider yang menawarkan banyak diskon dan potongan.  
+
+<img src="https://raw.githubusercontent.com/codesyariah122/Easy-Net/main/assets/content/easy-net-solution.jpg" class="img-fluid">  
 
 Easy Net menawarkan berbagai promo menarik bagi kamu pelanggan baru, mulai dari bonus speed upgrade dan juga hemat hingga 1 Juta Rupiah. Mulai dari 100Ribuan saja, kamu sudah bisa mendapatkan internet yang cepat, handal dan beneran tanpa batas.
