@@ -38,8 +38,8 @@
               </small>
               <br />
               <img
-                :src="require('~/assets/marker-custom/tower.png')"
-                width="35"
+                :src="require('~/assets/marker-custom/tower-wifi.gif')"
+                width="180" class="mb-2"
               />
               <br />
               <a :href="central.external_link" target="_blank" class="text-white btn btn-primary btn-sm rounded-pill">View Location</a>
@@ -64,7 +64,7 @@
                     {{ coordinate.region }}
                   </small>
                   <br>
-                  <img :src="icons[4]" width="75">
+                  <img :src="icons[7]" width="180">
                   <br><br>
                   <a v-if="coordinate.external_link" :href="coordinate.external_link" class="btn btn-primary btn-sm text-white rounded-pill">View Location</a>
                 </center>
@@ -122,7 +122,10 @@ export default {
         2: require("assets/marker-custom/tower.png"),
         3: require("assets/marker-custom/marker-shadow.png"),
         4: require("assets/marker-custom/tower-5.png"),
-        5: require("assets/marker-custom/tower-3.png"),
+        5: require("assets/marker-custom/tower-2.png"),
+        6: require("assets/marker-custom/tower-wifi.gif"),
+        7: require("assets/marker-custom/tower-wifi-2.gif"),
+        8: require("assets/marker-custom/tower-wifi-3.gif")
       },
       staticAnchor: [10, 15],
       iconSize: [90, 90],

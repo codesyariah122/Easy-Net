@@ -28,7 +28,7 @@
                   {{ map.serverdata.region }}
                 </small>
                 <br>
-                <img :src="map.icons[4]" width="75">
+                <img :src="map.icons[13]" width="195">
                 <br><br>
                 <a :href="map.serverdata.external_link" class="btn btn-primary btn-sm text-white rounded-pill">View Location</a>
               </center>
@@ -45,24 +45,30 @@
                   </address>
                   <strong class="text-primary">EasyNet</strong> </span>
                   <br>
-                  <img :src="map.icons[2]" class="img-fluid" width="40">
+                  <img :src="map.icons[12]" class="img-fluid" width="195">
               </center>
             </l-popup>
           </l-layer-group>
           <l-marker :lat-lng="map.markerLatLng" @click="openPopUp(map.markerLatLng, 'marker')">
+            
             <l-icon
             :icon-size="map.iconClient.iconSize"
             :icon-anchor="map.iconClient.staticAnchor"
-            :icon-url="map.icons[1]"
+            :icon-url="map.icons[9]"
             :shadow-url="map.icons[3]"
             />
             <l-popup>
               <center class="container">
-                <span class="font-weight-bold bd-highlight">
+                <small>
+                   <span class="weather badge rounded-pill bg-light text-dark mt-3">{{city}}  - {{weather.main}} / {{weather.description}} <cite>{{getCelcius(temp)}} <sup>°C</sup></cite>  
+                    <img :src="`http://openweathermap.org/img/wn/${weather.icon}@2x.png`" width="50">
+                  </span>
+                </small>
+                <span class="font-weight-bold bd-highlight mt-2">
                  Your Location  : {{location.data.city}}  - {{ location.data.region }}
                </span><br>
                <br>
-               <img :src="map.icons[6]" width="75">
+               <img :src="map.icons[10]" width="175">
              </center>
            </l-popup>
          </l-marker>
@@ -80,18 +86,48 @@
 
 <script>
 export default {
-  props: ['location', 'map', 'loading_map'],
+  props: ['location', 'map', 'loading_map', 'city'],
   data(){
     return {
-      isMobile: this.$device.isMobile
+      isMobile: this.$device.isMobile,
+      loading: null,
+      weather:{},
+      dt: ''
     }
+  },
+  beforeMount(){
+    this.WeatherCityLocator(this.city)
   },
   methods: {
     openPopUp (latLng, caller) {
       this.caller = caller;
       this.$refs.features.mapObject.openPopup(latLng);
     },
-    
+    WeatherCityLocator(city){
+        console.log(city)
+        this.loading=true
+        this.$axios.get(`${process.env.BASEURL}/weather-city/${city}/${process.env.APITOKEN}`)
+        .then(res=>{
+          // console.log(res.data)
+          setTimeout(() => {
+            this.loading=false
+            this.temp=res.data.data.main.temp
+            this.weather=res.data.data.weather[0]
+            // const date = new Date(res.data.data.dt*1000).toLocaleString()
+            this.dt = this.$moment(res.data.data.dt*1000).format("LLLL")
+          }, 1000)
+        })
+      },
+      getCelcius(num){
+        num = parseFloat(num)
+        return Math.ceil((num - 32) / 1.8)
+      }
   }
 }
 </script>
+
+<style>
+  .weather img{
+    filter: drop-shadow(13px 13px 18px black);
+  }
+</style>

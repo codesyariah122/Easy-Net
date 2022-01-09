@@ -42,8 +42,8 @@
 		data(){
 			return{
 				content:{
-					summary: 'High Speed Internet Services',
-					heading: 'Segera pasang easynet sebagai partner provider handal anda',
+					summary: 'High Speed Internet Services Provider',
+					heading: 'Segera pasang easynet sebagai partner provider handal yang dapat memenuhi kebutuhan internet anda',
 					paragraph: 'Rasakan pengalaman  menakjubkan dengan berlangganan paket HighSpeed internet dari <span class="text-info">Easy Net</span>.',
 					videoSection: `${process.env.APPURL}public/video/video2.mp4` 
 				}

@@ -53,14 +53,30 @@ a {
   color: var(--color-primary);
 }
 
-.float-right ul li{
+.float-end ul li{
   color: var(--color);
 }
-.float-right p,small{
+.float-end p,small{
   color: var(--color);
 }
 .post-content .post-details{
   background: var(--bg);
+}
+
+.nuxt-content h5{
+  color: var(--color-primary);
+}
+
+.nuxt-content h3{
+  color: var(--color-secondary);
+}
+
+.nuxt-content h4{
+  color: var(--color-secondary);
+}
+
+.card-prev-next{
+  background: var(--bg-card);
 }
 
 .post-content .post-details .detail-inner{

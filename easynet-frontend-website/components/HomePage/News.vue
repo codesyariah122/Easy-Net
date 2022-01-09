@@ -17,28 +17,49 @@
 					</div>
 				</div>
 				<div class="row  mb-5">
-					<div v-for="(item, index) in blogs" class="col-lg-6 col-md-6 col-12 mb-5">
+
+					<!-- <div v-if="postIndex < blogs.length" v-for="postIndex in postToShow">
+						{{blogs[postIndex-1].title}}
+					</div> -->
+
+					<div v-if="postIndex <= blogs.length" v-for="postIndex in postToShow" class="col-lg-6 col-md-6 col-12">
+
 						<div class="single-news wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
 								<div class="image">
-									<img class="thumb" :src="require(`~/assets/blog/images/${item.slug}/${item.img}`)" alt="#">
+									<img class="thumb" :src="require(`~/assets/blog/images/${blogs[postIndex-1].slug}/${blogs[postIndex-1].img}`)" alt="#">
 									<div class="meta-details">
-										<img :src="item.author.img" alt="#"> <span>BY {{item.author.name}}</span>
+										<img :src="blogs[postIndex-1].author.img" alt="#"> <span>BY {{blogs[postIndex-1].author.name}}</span>
 									</div>
 								</div>
 								<div class="content-body">
 									<h4 class="title">
-										<nuxt-link :to="{name: `blog-slug`, params: {slug: item.slug}}">{{item.title}}</nuxt-link>
+										<nuxt-link :to="{name: `blog-slug`, params: {slug: blogs[postIndex-1].slug}}">{{blogs[postIndex-1].title}}</nuxt-link>
 									</h4>
-									<p>{{item.description}}</p>
+									<p>{{blogs[postIndex-1].description}}</p>
+								</div>
+							</div>
+						</div>
+						<div v-if="loading">
+							<div class="text-center">
+								<div style="width: 3rem; height: 3rem;" class="spinner-grow text-primary" role="status">
+									<span class="visually-hidden">Loading...</span>
 								</div>
 							</div>
 						</div>
 					</div>
 					<br><br>
-					<div class="row justify-content-center mt-5 mb-2">
+					<div v-if="postToShow <= blogs.length || blogs.length > postToShow" class="row justify-content-center mb-2">
 						<div class="col-lg-12 col-xs-12 col-sm-12">
 							<div class="d-grid gap-2">
-								<button class="btn btn-primary rounded-pill btn-sm" type="button">Load More</button>
+								<button @click="ShowPost" class="btn btn-primary rounded-pill btn-sm" type="button">
+									<div v-if="loading">
+										<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+										Loading...
+									</div>
+									<span v-else>
+										Load More ...
+									</span>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -52,6 +73,24 @@
 
 <script>
 	export default{
-		props: ['blogs']
+		props: ['blogs'],
+		data(){
+			return {
+				postToShow:2,
+				loading: null
+			}
+		},
+
+		methods:{
+			ShowPost(){
+				this.loading=true
+
+				setTimeout(() => {
+					this.loading=false
+					this.postToShow+=2
+				},1500)
+
+			}
+		}
 	}
 </script>

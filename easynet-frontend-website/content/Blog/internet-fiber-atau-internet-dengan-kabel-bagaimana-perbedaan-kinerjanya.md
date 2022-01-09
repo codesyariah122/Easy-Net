@@ -21,8 +21,9 @@ Satelit internet saat ini terlalu mahal dan kadangkala bermasalah, terutama mere
 
 ##### Bagaimana Internet Kabel Bekerja  
 Internet kabel menggunakan teknologi yang sama dengan televisi kabel: Data perjalanan melalui kabel Coaxial, sering disebut “Coax” singkatnya. Isi dari kabel ini adalah tembaga inti yang dikelilingi oleh isolator dielektrik, perisai tembaga anyaman, dan lapisan luar plastik.  
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/IOZjdDHYB0g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>   
+<div class="ratio ratio-16x9">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/IOZjdDHYB0g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>  
 
 **Internet kabel** membutuhkan kabel modem di rumah atau kantor dan sistem terminasi kabel modem di lokasi operator anda. Yang terakhir adalah yang menghubungkan modem Anda ke internet.
 

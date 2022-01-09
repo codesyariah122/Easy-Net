@@ -12,7 +12,7 @@
                             <div class="home-slider">
                                 <div class="hero-text">
                                     <h1 class="wow fadeInUp" data-wow-delay=".2s"  v-html="herodata.headerText"></h1>
-                                    <p class="wow fadeInUp mt-2" data-wow-delay=".3s" v-html="herodata.headerParagraph"></p>
+                                    <!-- <p class="wow fadeInUp mt-2" data-wow-delay=".3s" v-html="herodata.headerParagraph"></p> -->
                                     <div class="button wow fadeInUp" data-wow-delay=".4s">
                     
                                         <a href="#" @click="$emit('open-chat')" class="btn btn-chat btn-scroll">

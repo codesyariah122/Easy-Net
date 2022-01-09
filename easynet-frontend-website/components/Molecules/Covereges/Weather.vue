@@ -13,7 +13,7 @@
 				<p><strong>Weather : </strong></p>
 
 				<p>
-					{{dt}}  <br> <span class="badge rounded-pill bg-primary mt-3">{{city}}  - {{weather.main}} / {{weather.description}} <cite>{{getCelcius(temp)}} <sup>°C</sup></cite>  
+					{{dt}}  <br> <span class="weather badge rounded-pill bg-light text-dark mt-3">{{city}}  - {{weather.main}} / {{weather.description}} <cite>{{getCelcius(temp)}} <sup>°C</sup></cite>  
 						<img :src="`http://openweathermap.org/img/wn/${weather.icon}@2x.png`" width="50">
 					</span>
 				</p>
@@ -62,3 +62,9 @@
 		}
 	}
 </script>
+
+<style>
+	.weather img{
+		filter: drop-shadow(13px 13px 18px black);
+	}
+</style>

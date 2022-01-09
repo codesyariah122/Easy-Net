@@ -14,7 +14,7 @@
 					</div>
 				</div>
 				<div class="col-lg-12 col-xs-12 col-sm-12">
-					<div class="float-right">
+					<div class="float-end">
 						<ColorModePicker/>
 					</div>
 				</div>
@@ -24,12 +24,15 @@
 				<div class="single-news wow fadeInUp col-lg-12 col-xs-12 col-sm-12">
 					<div class="image">
 						<img class="thumb img-fluid" :src="require(`~/assets/blog/images/${blog.slug}/${blog.img}`)" alt="#">
+						
 						<div class="meta-details text-capitalize">
-							<!-- <img :src="blog.author.img" alt="#">  -->
-							<span>BY {{blog.author.name}}</span>
+							<span class="badge bg-primary rounded-pill">
+								<img :src="blog.author.img" alt="#" class="rounded-pill circle img-fluid" width="30"> 
+								<span>BY {{blog.author.name}}</span>
+							</span>
+							
 						</div>
 					</div>
-
 				</div>
 
 				<div class="post-content col-lg-12 col-xs-12 col-sm-12">
@@ -63,13 +66,18 @@
 											<!-- <pre>
 												{{tags}}
 											</pre> -->
+											
 											<h5 class="tag-title">Related Tags</h5>
 											<div v-for="(item,index) in tags" class="tags">
 												<a href="#" class="text-primary">
 													#{{item.name}}
 												</a>
 											</div>
+
+												
 										</div>
+
+
 										<div class="post-social-media">
 											<h5 class="share-title">Social Share</h5>
 											<ul class="custom-flex">
@@ -92,6 +100,11 @@
 										</div>
 									</div>
 								</div>
+
+								
+								
+								<PrevNext :prev="prev" :next="next"  />
+
 
 								<div class="post-comments  mt-3 mb-5">
 									<h3 class="comment-title">Post comments</h3>
@@ -126,6 +139,11 @@
 		head:{
 			titleTemplate: `EasyNet::Blog `
 		},
+
+		mounted(){
+			$crisp.push(['do', 'chat:hide'])
+		},
+
 		async asyncData({ $content, params }) {
 			const blog = await $content('Blog', params.slug).fetch();
 			const tagsList = await $content('tags')
@@ -133,18 +151,19 @@
 			.where({ name: { $containsAny: blog.tags } })
 			.fetch()
 			const tags = Object.assign({}, ...tagsList.map((s) => ({ [s.name]: s })))
+			const [prev, next] = await $content('Blog')
+			.only(['title', 'slug', 'author', 'img', 'categories'])
+			.sortBy('createdAt', 'asc')
+			.surround(params.slug)
+			.fetch()
 			return {
 				blog,
-				tags
+				tags,
+				prev,
+				next
 			}
 		},
 
-		methods: {
-			BackHome(){
-				const color_mode = document.querySelector('.dark-mode')
-				this.$swal(color_mode)
-			}
-		}
 	}
 </script>
 
@@ -153,5 +172,8 @@
 		width: 90%;
 		margin-left: 1rem;
 		align-content: center;
+	}
+	.meta-details{
+		margin-top: -3rem;
 	}
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<div style="height: 350px; width: 100%">
+	<div style="height: 450px; width: 100%">
 		<client-only>
 			<l-map
 			ref="myMap"
@@ -30,7 +30,10 @@
 									{{ coordinate.region }}
 								</small>
 								<br>
-								<img :src="(icons[coordinate.id] === 1) ? icons[4] : icons[coordinate.id]" width="35">
+								<!-- <pre>
+									{{coordinate.id}}
+								</pre> -->
+								<img :src="(coordinate.id === 1) ? icons[4] : icons[7]" width="155">
 								<br><br>
 								<a :href="coordinate.external_link" class="btn btn-primary btn-sm text-white rounded-pill">View Location</a>
 							</center>
@@ -79,7 +82,11 @@
 					1: require('assets/marker-custom/building-icon-3.png'),
 					2: require('assets/marker-custom/tower.png'),
 					3: require('assets/marker-custom/marker-shadow.png'),
-					4: require('assets/marker-custom/building-icon-3.png')
+					4: require('assets/marker-custom/smart-office.gif'),
+					5: require("assets/marker-custom/connect-wifi.gif"),
+					6: require("assets/marker-custom/tower-wifi.gif"),
+					7: require("assets/marker-custom/tower-wifi-2.gif"),
+					8: require("assets/marker-custom/tower-wifi-3.gif")
 				},
 				staticAnchor: [10, 15],
 				iconSize: [70,80]

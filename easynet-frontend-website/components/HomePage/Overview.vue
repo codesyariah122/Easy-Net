@@ -39,7 +39,7 @@
 											<!-- <pre>
 												{{polyline.latlngs}}
 											</pre> -->
-											<Locator :location="location" :map="map" :loading_map="loading_map"/>
+											<Locator :city="location.data.city" :location="location" :map="map" :loading_map="loading_map"/>
 											<ul class="list-group list-group-flush mb-5">
 												<li class="list-group-item">
 													<Weather :city="location.data.city"/>
@@ -129,7 +129,12 @@
 				    	5: require("assets/marker-custom/tower-3.png"),
 				    	6: require("assets/marker-custom/home.png"),
 				    	7: require("assets/marker-custom/server.png"),
-				    	8: require('assets/marker-custom/building-icon-3.png')
+				    	8: require('assets/marker-custom/building-icon-3.png'),
+				    	9: require("assets/marker-custom/home2.png"),
+				    	10: require("assets/marker-custom/connect-wifi.gif"),
+				    	11: require("assets/marker-custom/tower-wifi.gif"),
+				    	12: require("assets/marker-custom/tower-wifi-2.gif"),
+				    	13: require("assets/marker-custom/tower-wifi-3.gif")
 				    },
 				    iconServer: {
 				    	staticAnchor: [10, 15],
@@ -137,7 +142,7 @@
 				    },
 				    iconClient: {
 				    	staticAnchor: [10, 15],
-				    	iconSize: [50, 50],
+				    	iconSize: [70, 70],
 				    },
 				    coordinates: [],
 				    server: {
