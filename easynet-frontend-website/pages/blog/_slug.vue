@@ -5,8 +5,8 @@
 			{{blog}}
 		</pre> -->
 		
-		<div class="row justify-content-center mt-5">
-			<div :class="`col-lg-12 col-xs-12 col-sm-12 ${isDevice ? 'mb-0' : 'mb-5'}`">
+		<div class="row justify-content-center mt-5 mb-2">
+			<div :class="`col-lg-8 col-xs-6 col-sm-6 ${isDevice ? 'mb-0' : 'mb-5'}`">
 				<div class="d-grid gap-2">
 					<a @click="$colorMode.preference = 'light'" href="/#blog" class="btn btn-primary rounded-pill" type="button">
 						<i class="lni lni-angle-double-left"></i> Back Homepage
