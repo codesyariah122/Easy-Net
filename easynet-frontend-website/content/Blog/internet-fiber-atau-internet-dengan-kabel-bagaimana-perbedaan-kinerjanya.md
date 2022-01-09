@@ -60,6 +60,8 @@ Kita juga harus tidak mengabaikan majunya **LTE** dan **internet seluler**. Sema
 ### Mana yang Tepat untuk Anda?  
 Kabel memberikan kecepatan yang besar dan kemungkinan masih akan hadir sekitar selama beberapa tahun yang akan datang. Namun ini bukan teknologi pilihan terbaik, tapi lebih dari cukup untuk mendapatkan pekerjaan yang dilakukan. Namun, **Fiber bisa menjadi pilihan kuat yang terjangkau** bagi jutaan orang.
 Tunggu apalagi jangan sampai  kantong anda jebol karena provider abal-abal, yuk langsung daftar dan pasang **EasyNet High Performance** ada dua pilihan package terbaik  untuk  kebutuhan internet anda, dan soo... pasti tidak akan menguras  budget anda.  
+<img src="https://raw.githubusercontent.com/codesyariah122/Easy-Net/main/assets/content/easy-net-solution.jpg" class="img-fluid">  
+
 - <a href="/packages/ftth/fiber-to-the-home">Fiber To The Home</a>  
 - <a href="/packages/bwa/broadband-wireless-access">Broadband Wireless Access</a>  
 <span class="badge bg-primary">

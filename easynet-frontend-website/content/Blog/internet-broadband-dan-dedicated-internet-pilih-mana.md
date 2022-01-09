@@ -33,6 +33,8 @@ Berikut penjelasan perbedaan “Internet Broadband” dan “Dedicated Internet�
 
 Jika kamu sudah mengetahui kedua perbedaan diatas, maka kamu bisa menilai sendiri kebutuhan internet yang kamu butuhkan. Jika kamu seorang pelaku bisnis, maka penggunaan Dedicated Internet sangat disarankan agar bisnis dapat berkembang dengan penggunaan internet yang handal. Easy Net menyediakan layanan Dedicated Internet yang sudah terbukti handal dan telah melayani lebih dari 2.500 perusahaan. Layanan Dedicated Internet dari Easy Net juga mencakup keunggulan Symetrical Bandwidth, Committed Service, Network Security, dan Flexibility.  Silakan <a target="_blank" href="https://api.whatsapp.com/send?phone=6285322799975&text=Halo+%21%21++easy+net%2C+saya+ingin+order+layanan+internet+BWA+-+100+Mbps">hubungi kami</a> untuk informasi lebih lanjut.
 
-Namun, jika jenis internet yang kamu butuhkan hanya mencakup penggunaan di rumah / apartemen tempat tinggal, kamu bisa menggunakan layanan Paket Internet Tanpa Batas Kuota dari Easy Net. Kami menyediakan promo khusus bagi kamu pengguna kartu kredit. Silakan cek informasi selengkapnya <a href="/#packages">di sini.</a>
+Namun, jika jenis internet yang kamu butuhkan hanya mencakup penggunaan di rumah / apartemen tempat tinggal, kamu bisa menggunakan layanan Paket Internet Tanpa Batas Kuota dari Easy Net. Kami menyediakan promo khusus bagi kamu pengguna kartu kredit. Silakan cek informasi selengkapnya <a href="/#packages">di sini.</a>  
+
+<img src="https://raw.githubusercontent.com/codesyariah122/Easy-Net/main/assets/content/easy-net-solution.jpg" class="img-fluid">
 
 

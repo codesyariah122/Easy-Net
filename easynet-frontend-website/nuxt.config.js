@@ -104,6 +104,11 @@ export default {
       {
         src: '/assets/venobox/dist/venobox.min.js',
         type: 'text/javascript'
+      },
+      {
+        src: 'https://cdn.popt.in/pixel.js?id=01cb56fa6fd77',
+        id: 'pixel-script-poptin',
+        async: 'true'
       }
     ],
   },
