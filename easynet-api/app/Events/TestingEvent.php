@@ -32,8 +32,8 @@ class TestingEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        // return new Channel('notification');
-        return new PrivateChannel('synchronized');
+        return new Channel('notification');
+        // return new PrivateChannel('synchronized');
     }
 
     // public function broadcastWith()

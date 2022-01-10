@@ -74,7 +74,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="left">
-                                    <p>Designed and Developed by<a href="https://easynet.id/" rel="nofollow" target="_blank">{{dev}}</a></p>
+                                    <p>Designed and Developed by<a href="https://api-easy-net.easynet.id/" rel="nofollow" target="_blank">{{dev}}</a></p>
                                 </div>
                             </div>
                         </div>

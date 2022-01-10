@@ -43,6 +43,6 @@ class HeloEvent implements ShouldBroadcast
     public function broadcastOn()
     {
         return new Channel('mychannel');
-        // return new PrivateChannel('channel-name');
+        // return new PrivateChannel('mychannel');
     }
 }

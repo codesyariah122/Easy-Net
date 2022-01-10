@@ -58,7 +58,10 @@ Route::prefix('v1')->group(function () {
 // My Helper Api
 	Route::get('/test-helper', [DataCenterController::class, 'test_helper']);
 
-
+// Visitor Web IpAddress
+	Route::get('/ip-addr/{apiKey}', [DataCenterController::class, 'IpAddress']);
+	Route::post('/store/visitor/{apiKey}', [DataCenterController::class, 'StoreVisitor']);
+	Route::get('/get/visitor/{ip}/{apiKey}', [DataCenterController::class, 'GetVisitorData']);
 
 // Weather api
 	Route::get('/weather-city/{city}/{apiKey}', [DataCenterController::class, 'WeatherCity']);

@@ -19,6 +19,7 @@ use App\Models\Order;
 use App\Models\Chat;
 use App\Models\Map;
 use App\Models\MapCategory;
+use App\Models\Visitor;
 use App\Models\Contact;
 use App\Models\ContactCategory;
 use App\Models\LogLogin;
@@ -686,7 +687,98 @@ class DataCenterController extends Controller
         }catch(Exception $e){
             return response()->json([
                 'message' => 'Error fetch data '.$e->getMessage()
-            ], 401);
+            ], 400);
+        }
+    }
+
+    public function IpAddress(Request $request, $apiKey)
+    {
+        $ip = $request->getClientIp();
+        try{
+            return response()->json([
+                'success' => true,
+                'message' => 'Fetch ip address',
+                'ip' => $ip
+            ], 201);
+        }catch(Exception $e){
+            return response()->json([
+                'success' => false,
+                'message' => 'Error fetch data '.$e->getMessage()
+            ], 400);
+        }
+    }
+
+    public function StoreVisitor(Request $request, $apiKey)
+    {
+        $ip = $request->ip;
+        $device = $request->header('user-agent');
+        
+        $check_visitor = Visitor::whereIp($ip)->first();
+        if($check_visitor){
+            return response()->json([
+                'ready' => true,
+                'message' => 'Your Data Is Ready in database',
+                'data' => $check_visitor
+            ], 201);
+        }else{
+            try{
+                $fetchs = Http::get("https://ipapi.co/{$ip}/json");
+                $location = $fetchs->json();
+            // echo $location['ip']; die;
+                $data_location = [
+                    'ip' => $location['ip'],
+                    'code' => $location['country'],
+                    'city' => $location['city'],
+                    'province' => $location['region'],
+                    'device' => $device
+                ];
+                $new_visitor = new Visitor;
+                $new_visitor->ip = $data_location['ip'];
+                $new_visitor->country_code = $data_location['code'];
+                $new_visitor->city = $data_location['city'];
+                $new_visitor->province = $data_location['province'];
+                $new_visitor->device = $data_location['device'];
+                $new_visitor->save();
+
+                $event_context = [
+                    "notif"  => true,
+                    "message" => $data_location['device']." sedang berkunjung !",
+                    "name" => "visitor",
+                    "route" => "/visitors"
+                ];
+
+                $data_event = broadcast(new NotificationEvent($event_context));
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Fetch Location',
+                    'data' => $data_location
+                ], 201);
+            }catch(Exception $e){
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Error fetch data '.$e->getMessage()
+                ], 400);
+            }
+        }
+    }
+
+    public function GetVisitorData($ip,$apiKey)
+    {
+        $allvisitor = Visitor::all();
+        $you = Visitor::whereIp($ip)->first();
+        try{
+            return response()->json([
+                'success' => true,
+                'message' => 'Fetch Visitor',
+                'all' => $allvisitor,
+                'you' => $you 
+            ], 201);
+        }catch(Exception $e){
+            return response()->json([
+                'success' => false,
+                'message' => 'Error fetch data '.$e->getMessage()
+            ], 400);
         }
     }
 
