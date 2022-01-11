@@ -21,7 +21,8 @@
 			<home><home/>
 		</div>
     
-	<script src="{{mix('/js/app.js')}}"></script>
+	<script src="{{ mix('js/app.js') }}"></script>
+    {{-- <script src="{{asset('js/app.js')}}"></script> --}}
 	<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.min.js" defer></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">

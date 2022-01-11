@@ -20,11 +20,37 @@
 					<div class="col-md-3 text-left"> <a :href="repo" class="btn btn-sm btn-primary btn-rounded">Free Download</a> </div>
 				</div>
 				<div class="row p-lg-4">
-					<h1 class="mb-2 mt-3">Introduction</h1>
+					<div v-if="loading">
+						<div class="d-flex justify-content-center">
+							<div class="spinner-grow text-primary" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
+						</div>
+					</div>
 
-					<pre>
-						{{ip}}
-					</pre>
+					<div v-else class="card mb-5" style="width: 18rem;">
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">
+								<img
+								:src="`https://flagcdn.com/20x15/${you.code.toLowerCase()}.png`"
+								width="20"
+								height="15"
+								:alt="you.country"> {{you.city}} - {{you.province}}
+							</li>
+							<li class="list-group-item">
+								<strong>Device : </strong>  {{you.device}}
+							</li>
+						</ul>
+					</div>
+					
+					<h1 class="mb-2 mt-3">Introduction</h1>
+					<!-- <pre>
+						{{event.notifdata}}
+					</pre> -->
+
+					<!-- <pre>
+						{{you}}
+					</pre> -->
 
 					<article class="main-content col-md-9 pr-lg-5">
 						<cite>Database Seeder </cite> <br>
@@ -62,7 +88,7 @@
 
 <script>
 	export default {
-		props: ['event', 'ip'],
+		props: ['event', 'you', 'loading'],
 		data(){
 			return {
 				repo: 'https://github.com/codesyariah122/Easy-Net'

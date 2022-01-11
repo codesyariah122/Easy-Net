@@ -5305,8 +5305,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['event', 'ip'],
+  props: ['event', 'you', 'loading'],
   data: function data() {
     return {
       repo: 'https://github.com/codesyariah122/Easy-Net'
@@ -5423,7 +5449,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['appName'],
   components: {
     Navigation: _components_Partials_Navigation__WEBPACK_IMPORTED_MODULE_0__["default"],
     MainContent: _components_Contents_MainContent__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -5433,25 +5458,53 @@ __webpack_require__.r(__webpack_exports__);
       ip: '',
       event: {
         notifdata: {}
-      }
+      },
+      you: {},
+      loading: null
     };
   },
   beforeMount: function beforeMount() {
     this.getIp();
   },
+  mounted: function mounted() {
+    this.storeVisitor(this.ip), this.notification();
+  },
   methods: {
     getIp: function getIp() {
-      this.axios('https://api.ipify.org/?format=json').then(function (res) {
-        console.log(res);
+      var _this = this;
+
+      this.axios.get('https://api.ipify.org/?format=json').then(function (res) {
+        _this.ip = res.data.ip;
+      })["catch"](function (err) {
+        console.log(err.message);
+      });
+    },
+    storeVisitor: function storeVisitor(ip) {
+      var _this2 = this;
+
+      this.loading = true;
+      var config = {
+        api_url: "http://localhost:8000/api/v1",
+        api_key: "6TbQPFZ5TGFuqvSz0O5TtK4X4oJlBehd"
+      };
+      this.axios.post("".concat(config.api_url, "/store/visitor/").concat(config.api_key), {
+        ip: ip
+      }).then(function (res) {
+        // console.log(res.data)
+        _this2.loading = false;
+        _this2.you = res.data.data;
+      })["catch"](function (err) {
+        _this2.loading = false;
+        console.log(err.message);
       });
     },
     notification: function notification() {
-      var _this = this;
+      var _this3 = this;
 
       this.$echo.channel('notification').listen('NotificationEvent', function (payload) {
         // alert("Subscribe success")
-        console.log(payload.data);
-        _this.event.notifdata = payload.data;
+        // console.log(payload.data);
+        _this3.event.notifdata = payload.data;
       });
     }
   }
@@ -5467,11 +5520,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var pusher_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 /* harmony import */ var pusher_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(pusher_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_echo_laravel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-echo-laravel */ "./node_modules/vue-echo-laravel/dist/build.js");
 /* harmony import */ var vue_echo_laravel__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_echo_laravel__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vue_axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-axios */ "./node_modules/vue-axios/dist/vue-axios.esm.min.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
@@ -33265,11 +33318,45 @@ var render = function () {
         ),
         _vm._v(" "),
         _c("div", { staticClass: "row p-lg-4" }, [
+          _vm.loading
+            ? _c("div", [_vm._m(2)])
+            : _c(
+                "div",
+                { staticClass: "card mb-5", staticStyle: { width: "18rem" } },
+                [
+                  _c("ul", { staticClass: "list-group list-group-flush" }, [
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c("img", {
+                        attrs: {
+                          src:
+                            "https://flagcdn.com/20x15/" +
+                            _vm.you.code.toLowerCase() +
+                            ".png",
+                          width: "20",
+                          height: "15",
+                          alt: _vm.you.country,
+                        },
+                      }),
+                      _vm._v(
+                        " " +
+                          _vm._s(_vm.you.city) +
+                          " - " +
+                          _vm._s(_vm.you.province) +
+                          "\n\t\t\t\t\t\t"
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c("strong", [_vm._v("Device : ")]),
+                      _vm._v("  " + _vm._s(_vm.you.device) + "\n\t\t\t\t\t\t"),
+                    ]),
+                  ]),
+                ]
+              ),
+          _vm._v(" "),
           _c("h1", { staticClass: "mb-2 mt-3" }, [_vm._v("Introduction")]),
           _vm._v(" "),
-          _c("pre", [_vm._v("\t\t\t\t\t" + _vm._s(_vm.ip) + "\n\t\t\t\t")]),
-          _vm._v(" "),
-          _vm._m(2),
+          _vm._m(3),
         ]),
       ]),
     ]),
@@ -33323,6 +33410,18 @@ var staticRenderFns = [
             ),
           ]),
         ]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex justify-content-center" }, [
+      _c(
+        "div",
+        { staticClass: "spinner-grow text-primary", attrs: { role: "status" } },
+        [_c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])]
       ),
     ])
   },
@@ -33549,7 +33648,9 @@ var render = function () {
     [
       _c("Navigation"),
       _vm._v(" "),
-      _c("MainContent", { attrs: { event: _vm.event, ip: _vm.ip } }),
+      _c("MainContent", {
+        attrs: { event: _vm.event, you: _vm.you, loading: _vm.loading },
+      }),
     ],
     1
   )
@@ -45725,7 +45826,7 @@ Vue.compile = compileToFunctions;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.21","name":"axios","escapedName":"axios","rawSpec":"^0.21","saveSpec":null,"fetchSpec":"^0.21"},"_requiredBy":["#DEV:/","#USER"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_shasum":"c67b90dc0568e5c1cf2b0b858c43ba28e2eda575","_spec":"axios@^0.21","_where":"D:\\\\Easy-Net\\\\easynet-api","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
+module.exports = JSON.parse('{"_args":[["axios@0.21.4","D:\\\\Easy-Net\\\\easynet-api"]],"_development":true,"_from":"axios@0.21.4","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.4","name":"axios","escapedName":"axios","rawSpec":"0.21.4","saveSpec":null,"fetchSpec":"0.21.4"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_spec":"0.21.4","_where":"D:\\\\Easy-Net\\\\easynet-api","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
 
 /***/ })
 

@@ -714,6 +714,9 @@ class DataCenterController extends Controller
         $device = $request->header('user-agent');
         
         $check_visitor = Visitor::whereIp($ip)->first();
+
+        // echo $check_visitor->ip; die;
+
         if($check_visitor){
             return response()->json([
                 'ready' => true,

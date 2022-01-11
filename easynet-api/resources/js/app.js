@@ -1,7 +1,7 @@
 require('./bootstrap');
+import Vue from 'vue'
 import Pusher from "pusher-js"
 import VueEcho from "vue-echo-laravel";
-import Vue from 'vue'
 import VueAxios from 'vue-axios'
 import axios from 'axios'
 import Home from './views/home/index'
