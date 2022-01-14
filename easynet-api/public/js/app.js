@@ -5484,7 +5484,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.loading = true;
       var config = {
-        api_url: "http://localhost:8000/api/v1",
+        api_url: "https://api-easy-net.easynet.id/api/v1",
         api_key: "6TbQPFZ5TGFuqvSz0O5TtK4X4oJlBehd"
       };
       this.axios.post("".concat(config.api_url, "/store/visitor/").concat(config.api_key), {
