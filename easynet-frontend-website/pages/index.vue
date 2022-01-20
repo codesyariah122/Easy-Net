@@ -60,7 +60,8 @@
       .sortBy('createdAt', 'desc')
       .where({categories: 'blog'})
       .fetch();
-
+      console.log(ip)
+      console.log(location)
       return {
         data_packages,
         location,

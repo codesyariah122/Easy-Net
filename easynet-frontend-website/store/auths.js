@@ -23,6 +23,7 @@ export const actions = {
       axios
       .get(`${url}/user`)
       .then((res) => {
+        // console.log(res.data.data[0])
         commit('USER_DATA', res.data.data[0])
       })
       .catch((err) => {

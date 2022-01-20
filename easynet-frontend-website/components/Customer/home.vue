@@ -115,9 +115,14 @@
 		    	this.loadig=true
 		    	this.$axios.get(`${process.env.BASEURL}/check-order-customer/${id}/${process.env.APITOKEN}`)
 		    	.then(res => {
+		    		// console.log(res.data.order)
+		    		if(res.data.order){
+		    			this.user_order=res.data.user_order
+		    			this.orders = res.data.data.order_users
+		    		}
+		    		this.user_order=''
+		    		this.orders=''
 		    		this.loadig=false
-		    		this.user_order=res.data.user_order
-		    		this.orders = res.data.data.order_users
 			    })
 		    	.catch(err => {
 		    		console.log(err.message)
